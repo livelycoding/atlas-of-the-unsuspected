@@ -37,16 +37,28 @@ export function DetailPanel({ location, onClose, onNavigate }: Props) {
         {location.onArrival.length > 0 && (
           <Section title="On Arrival">
             <ul className={styles.list}>
-              {location.onArrival.map((f, i) => (
-                <li key={i}>
-                  {f}
-                  {location.ally && location.ally.name === f && (
-                    <div className={styles.detail}>
-                      <span className={styles.meta}>Aspect: {location.ally.aspect}</span>
-                    </div>
-                  )}
-                </li>
-              ))}
+              {location.onArrival.map((f, i) => {
+                const isLigeian = location.ligeian && location.ligeian.name.includes(f);
+                const isAlly = location.ally && location.ally.name === f;
+                return (
+                  <li key={i}>
+                    {isLigeian ? `Ligeian: ${location.ligeian!.name}` : isAlly ? `Ally: ${f}` : f}
+                    {isAlly && (
+                      <div className={styles.detail}>
+                        <span className={styles.meta}>Aspect: {location.ally!.aspect}</span>
+                      </div>
+                    )}
+                    {isLigeian && (
+                      <div className={styles.detail}>
+                        <span className={styles.meta}>{location.ligeian!.howToObtain}</span>
+                        <ul className={styles.list}>
+                          {location.ligeian!.abilities.map((a, j) => <li key={j}>{a}</li>)}
+                        </ul>
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </Section>
         )}

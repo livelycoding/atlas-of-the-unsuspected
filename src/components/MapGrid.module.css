@@ -1,0 +1,89 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.edgeTop {
+  display: flex;
+  width: 100%;
+  padding: 0 120px;
+  justify-content: center;
+  gap: 120px;
+}
+
+.edgeTopLeft {
+  display: flex;
+  justify-content: center;
+}
+
+.edgeTopRight {
+  display: flex;
+  justify-content: center;
+}
+
+.edgeBottom {
+  display: flex;
+  width: 100%;
+  padding: 0 120px;
+  justify-content: center;
+  gap: 200px;
+}
+
+.edgeBottomLeft {
+  display: flex;
+  justify-content: center;
+}
+
+.edgeBottomRight {
+  display: flex;
+  justify-content: center;
+}
+
+.middleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.edgeLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 110px;
+  align-items: center;
+}
+
+.edgeRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 110px;
+  align-items: center;
+  gap: 40px;
+  padding: 20px 0;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.row {
+  display: flex;
+  gap: 2px;
+}
+
+.cellSlot {
+  width: 120px;
+  height: 72px;
+  flex-shrink: 0;
+}
+
+.emptyCell {
+  width: 100%;
+  height: 100%;
+}

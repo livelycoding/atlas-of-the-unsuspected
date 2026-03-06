@@ -110,8 +110,8 @@ export default function App() {
         <span className={styles.subtitle}>Cultist Simulator: Exile DLC Explorer</span>
       </header>
       <div className={styles.toolbar}>
-        <button className={styles.toolbarBtn} onClick={handleExport}>Export Current Run Data</button>
-        <button className={styles.toolbarBtn} onClick={() => fileInputRef.current?.click()}>Import Run Data</button>
+        <button className={styles.toolbarBtn} onClick={handleExport}>Export Removed Cities</button>
+        <button className={styles.toolbarBtn} onClick={() => fileInputRef.current?.click()}>Import Removed Cities</button>
         <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} hidden />
       </div>
       <div className={styles.viewToggleRow}>

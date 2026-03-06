@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { locations } from '../data/locations';
+import { mapPositions } from '../data/mapPositions';
 import { LocationCell } from './LocationCell';
 import { EdgeLocation } from './EdgeLocation';
 import { ConnectionLines } from './ConnectionLines';
@@ -11,12 +12,14 @@ interface Props {
   removedIds: Set<string>;
   onSelect: (id: string) => void;
   onToggleRemoved: (id: string) => void;
+  mapMode: boolean;
 }
 
 const GRID_ROWS = 6;
 const GRID_COLS = 7;
 
 const regularLocations = locations.filter(l => !l.isMapEdge);
+const edgeLocations = locations.filter(l => l.isMapEdge);
 
 function renderEdge(
   id: string,
@@ -41,7 +44,7 @@ function renderEdge(
   );
 }
 
-export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggleRemoved }: Props) {
+export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggleRemoved, mapMode }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [cellPositions, setCellPositions] = useState<Map<string, { x: number; y: number }>>(new Map());
 
@@ -71,7 +74,62 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
       window.removeEventListener('resize', updatePositions);
       clearTimeout(timer);
     };
-  }, []);
+  }, [mapMode]);
+
+  // --- Map mode rendering ---
+  if (mapMode) {
+    return (
+      <div className={styles.mapWrapper} ref={wrapperRef}>
+        {/* Regular locations */}
+        {regularLocations.map(loc => {
+          const pos = mapPositions[loc.id];
+          if (!pos) return null;
+          return (
+            <div
+              key={loc.id}
+              className={styles.mapCell}
+              style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+            >
+              <LocationCell
+                location={loc}
+                isSelected={selectedId === loc.id}
+                isDimmed={filteredIds !== null && !filteredIds.has(loc.id)}
+                isRemoved={removedIds.has(loc.id)}
+                onSelect={onSelect}
+                onToggleRemoved={onToggleRemoved}
+              />
+            </div>
+          );
+        })}
+
+        {/* Edge locations */}
+        {edgeLocations.map(loc => {
+          const pos = mapPositions[loc.id];
+          if (!pos) return null;
+          return (
+            <div
+              key={loc.id}
+              className={styles.mapCell}
+              style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+            >
+              <EdgeLocation
+                location={loc}
+                isSelected={selectedId === loc.id}
+                isDimmed={filteredIds !== null && !filteredIds.has(loc.id)}
+                isRemoved={removedIds.has(loc.id)}
+                onSelect={onSelect}
+                onToggleRemoved={onToggleRemoved}
+              />
+            </div>
+          );
+        })}
+
+        <ConnectionLines cellPositions={cellPositions} selectedId={selectedId} removedIds={removedIds} />
+      </div>
+    );
+  }
+
+  // --- Grid mode rendering (original) ---
 
   // Build grid cells array
   const grid: (typeof regularLocations[0] | null)[][] = [];

@@ -65,6 +65,12 @@ body {
   border-color: #c9a830;
 }
 
+.toolbarBtnActive {
+  background: rgba(201, 168, 48, 0.25);
+  border-color: #c9a830;
+  box-shadow: 0 0 4px rgba(201, 168, 48, 0.3);
+}
+
 .content {
   display: flex;
   flex: 1;

@@ -10,6 +10,7 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [activeFilters, setActiveFilters] = useState<Set<string>>(new Set());
   const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
+  const [mapMode, setMapMode] = useState(false);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(prev => (prev === id ? null : id));
@@ -112,6 +113,12 @@ export default function App() {
         <button className={styles.toolbarBtn} onClick={handleExport}>Export Current Run Data</button>
         <button className={styles.toolbarBtn} onClick={() => fileInputRef.current?.click()}>Import Run Data</button>
         <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} hidden />
+        <button
+          className={`${styles.toolbarBtn} ${mapMode ? styles.toolbarBtnActive : ''}`}
+          onClick={() => setMapMode(m => !m)}
+        >
+          Map View
+        </button>
       </div>
       <div className={styles.content}>
         <div className={styles.mapArea}>
@@ -122,6 +129,7 @@ export default function App() {
             removedIds={removedIds}
             onSelect={handleSelect}
             onToggleRemoved={handleToggleRemoved}
+            mapMode={mapMode}
           />
           <Legend
             activeFilters={activeFilters}

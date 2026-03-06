@@ -58,7 +58,7 @@ export function HelpPanel({ onClose }: Props) {
           <p>
             The search bar above the filters lets you find locations by their reconnoitre
             opportunities. Type to filter, click to select. You can combine up to
-            3 terms — locations must have <strong>all</strong> selected opportunities (AND logic).
+            3 terms. Highlighted locations must have <strong>all</strong> selected opportunities (AND logic).
             Remove chips to relax the filter.
           </p>
         </Section>

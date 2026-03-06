@@ -98,7 +98,7 @@ export function OpportunitySearch({ terms, onSearch }: Props) {
           <input
             ref={inputRef}
             className={styles.input}
-            placeholder="Search opportunities..."
+            placeholder="Search for Opportunities and Weaknesses..."
             value={input}
             onChange={e => { setInput(e.target.value); setOpen(true); }}
             onFocus={() => setOpen(true)}

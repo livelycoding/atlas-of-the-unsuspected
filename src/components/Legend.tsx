@@ -36,11 +36,11 @@ const peopleItems = [
 ];
 
 const stuffItems = [
+  { id: 'pentiment', label: 'Pentiment', badge: 'P', color: '#2e8b57' },
   { id: 'weapon-biedde', label: "Biedde's Blade", badge: 'W1', color: '#708090' },
   { id: 'weapon-lionhunter', label: "Lionhunter's Rifle", badge: 'W2', color: '#5a6a5a' },
   { id: 'weapon-ebrehel', label: 'Ebrehel (vault)', badge: 'W3', color: '#8b4513' },
   { id: 'weapon-imhullune', label: 'Imhullune Tectrix (vault)', badge: 'W4', color: '#4a5568' },
-  { id: 'pentiment', label: 'Pentiment', badge: 'P', color: '#2e8b57' },
   { id: 'book-of-suns-1', label: 'Book of Suns p.1', badge: 'B1', color: '#daa520' },
   { id: 'book-of-suns-2', label: 'Book of Suns p.2', badge: 'B2', color: '#daa520' },
   { id: 'book-of-suns-3', label: 'Book of Suns p.3', badge: 'B3', color: '#daa520' },

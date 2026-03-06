@@ -205,6 +205,9 @@ export default function App() {
           />
         )}
       </div>
+      <footer className={styles.footer}>
+        Unofficial fan tool, not associated with Weather Factory. For speedrunners and anyone who loves the Exile DLC.
+      </footer>
     </div>
   );
 }

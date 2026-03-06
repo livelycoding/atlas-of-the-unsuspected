@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Location } from '../data/types';
 import { locationsById } from '../data/locations';
+import { opportunityDetails } from '../data/opportunities';
 import styles from './DetailPanel.module.css';
 
 interface Props {
@@ -213,11 +215,45 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 function OpSubsection({ label, items }: { label: string; items: string[] }) {
+  const [expanded, setExpanded] = useState<Set<number>>(new Set());
+
+  const toggle = (i: number) => {
+    setExpanded(prev => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+  };
+
   return (
     <div className={styles.opGroup}>
       <span className={styles.opLabel}>{label}</span>
       <ul className={styles.list}>
-        {items.map((item, i) => <li key={i}>{item}</li>)}
+        {items.map((item, i) => {
+          const detail = opportunityDetails[item];
+          const isOpen = expanded.has(i);
+          return (
+            <li key={i} className={styles.opItem}>
+              {detail ? (
+                <>
+                  <button className={styles.opToggle} onClick={() => toggle(i)}>
+                    <span className={styles.opChevron}>{isOpen ? '\u25BE' : '\u25B8'}</span>
+                    {item}
+                  </button>
+                  {isOpen && (
+                    <div className={styles.opDetail}>
+                      <strong>{detail.result}</strong>
+                      <span className={styles.meta}>{detail.aspects}</span>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <span>{item}</span>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

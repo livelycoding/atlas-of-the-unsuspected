@@ -20,22 +20,28 @@ const regionItems = [
   { id: 'south-med', label: 'South Mediterranean', color: '#e88a6a' },
 ];
 
-const badgeItems = [
+const placeItems = [
   { id: 'shrine-colonel', label: 'Colonel Shrine', badge: 'Z', color: '#8b0000' },
   { id: 'shrine-lionsmith', label: 'Lionsmith Shrine', badge: 'S', color: '#b8860b' },
-  { id: 'pentiment', label: 'Pentiment', badge: 'P', color: '#2e8b57' },
-  { id: 'ligeian', label: 'Ligeian', badge: 'L', color: '#4169e1' },
-  { id: 'ally', label: 'Ally', badge: 'A', color: '#ff6347' },
+  { id: 'special-event', label: 'Special Event', badge: 'E', color: '#20b2aa' },
+  { id: 'caper', label: 'Caper', badge: 'C', color: '#e06030' },
   { id: 'troubled', label: 'Troubled', badge: 'T', color: '#ff4500' },
   { id: 'remote', label: 'Remote', badge: 'R', color: '#6a5acd' },
+  { id: 'map-edge', label: 'Map\'s Edge', badge: '\u2606', color: '#c9a830' },
+];
+
+const peopleItems = [
+  { id: 'ally', label: 'Ally', badge: 'A', color: '#ff6347' },
+  { id: 'ligeian', label: 'Ligeian', badge: 'L', color: '#4169e1' },
+];
+
+const stuffItems = [
   { id: 'weapon-biedde', label: "Biedde's Blade", badge: 'W1', color: '#708090' },
   { id: 'weapon-lionhunter', label: "Lionhunter's Rifle", badge: 'W2', color: '#5a6a5a' },
   { id: 'weapon-ebrehel', label: 'Ebrehel (vault)', badge: 'W3', color: '#8b4513' },
   { id: 'weapon-imhullune', label: 'Imhullune Tectrix (vault)', badge: 'W4', color: '#4a5568' },
-  { id: 'special-event', label: 'Special Event', badge: 'E', color: '#20b2aa' },
-  { id: 'caper', label: 'Caper', badge: 'C', color: '#e06030' },
+  { id: 'pentiment', label: 'Pentiment', badge: 'P', color: '#2e8b57' },
   { id: 'book-of-suns', label: 'Book of Suns', badge: 'B', color: '#daa520' },
-  { id: 'map-edge', label: 'Map\'s Edge', badge: '\u2606', color: '#c9a830' },
 ];
 
 export function Legend({ activeFilters, onToggleFilter, opportunityTerms, onOpportunitySearch }: Props) {
@@ -59,9 +65,45 @@ export function Legend({ activeFilters, onToggleFilter, opportunityTerms, onOppo
       </div>
       <div className={styles.divider} />
       <div className={styles.group}>
-        <h4 className={styles.groupTitle}>Features</h4>
+        <h4 className={styles.groupTitle}>Places</h4>
         <div className={styles.items}>
-          {badgeItems.map(item => (
+          {placeItems.map(item => (
+            <button
+              key={item.id}
+              className={`${styles.item} ${activeFilters.has(item.id) ? styles.active : ''}`}
+              onClick={() => onToggleFilter(item.id)}
+            >
+              <span className={styles.badgeIcon} style={{ backgroundColor: item.color }}>
+                {item.badge}
+              </span>
+              <span className={styles.label}>{item.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className={styles.divider} />
+      <div className={styles.group}>
+        <h4 className={styles.groupTitle}>People</h4>
+        <div className={styles.items}>
+          {peopleItems.map(item => (
+            <button
+              key={item.id}
+              className={`${styles.item} ${activeFilters.has(item.id) ? styles.active : ''}`}
+              onClick={() => onToggleFilter(item.id)}
+            >
+              <span className={styles.badgeIcon} style={{ backgroundColor: item.color }}>
+                {item.badge}
+              </span>
+              <span className={styles.label}>{item.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className={styles.divider} />
+      <div className={styles.group}>
+        <h4 className={styles.groupTitle}>Weapons & Key Items</h4>
+        <div className={styles.items}>
+          {stuffItems.map(item => (
             <button
               key={item.id}
               className={`${styles.item} ${activeFilters.has(item.id) ? styles.active : ''}`}

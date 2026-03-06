@@ -19,9 +19,43 @@
   align-items: flex-start;
 }
 
-.weaknessHeader {
+.weaknessToggle {
   width: 100%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #8899aa;
+  padding: 2px 0;
+}
+
+.weaknessToggle:hover {
+  color: #b0b8c0;
+}
+
+.weaknessArrow {
+  font-size: 0.5rem;
+  transition: transform 0.15s ease;
+  display: inline-block;
+}
+
+.weaknessArrowOpen {
+  transform: rotate(90deg);
+}
+
+.weaknessContent {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 
 .legend {

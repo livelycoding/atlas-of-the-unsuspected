@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { OpportunitySearch } from './OpportunitySearch';
 import styles from './Legend.module.css';
 
@@ -57,6 +57,7 @@ const stuffItems = [
 ];
 
 export function Legend({ activeFilters, onToggleFilter, opportunityTerms, onOpportunitySearch, eliminatedWeaknesses, onToggleWeakness, onEliminateOthers }: Props) {
+  const [weaknessOpen, setWeaknessOpen] = useState(false);
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const didLongPress = useRef(false);
 
@@ -78,39 +79,46 @@ export function Legend({ activeFilters, onToggleFilter, opportunityTerms, onOppo
   return (
     <div className={styles.wrapper}>
       <div className={styles.weaknessRow}>
-        <div className={styles.weaknessHeader}>
-          <h4 className={styles.groupTitle}>Remaining Weaknesses</h4>
-          <p className={styles.weaknessHint}>Click to eliminate. Right-click or long-press to keep only that weakness.</p>
-        </div>
-        {weaknessPools.map((pool, i) => (
-          <React.Fragment key={pool.title}>
-            {i > 0 && <div className={styles.divider} />}
-            <div className={styles.group}>
-              <h4 className={styles.groupTitle}>{pool.title}</h4>
-              <div className={styles.items}>
-                {pool.items.map(name => {
-                  const isEliminated = eliminatedWeaknesses.has(name);
-                  const remaining = pool.items.filter(n => !eliminatedWeaknesses.has(n));
-                  const isSoleSurvivor = !isEliminated && remaining.length === 1;
-                  return (
-                    <button
-                      key={name}
-                      className={`${styles.item} ${isEliminated ? styles.eliminated : ''} ${isSoleSurvivor ? styles.soleSurvivor : ''}`}
-                      title="Click to eliminate. Right-click or long-press to keep only this one."
-                      onClick={() => { if (!didLongPress.current) onToggleWeakness(name); }}
-                      onContextMenu={(e) => { e.preventDefault(); onEliminateOthers(name); }}
-                      onTouchStart={() => handleTouchStart(name)}
-                      onTouchEnd={handleTouchEnd}
-                      onTouchCancel={handleTouchEnd}
-                    >
-                      <span className={styles.label}>{name}</span>
-                    </button>
-                  );
-                })}
-              </div>
+        <button className={styles.weaknessToggle} onClick={() => setWeaknessOpen(v => !v)}>
+          <span className={`${styles.weaknessArrow} ${weaknessOpen ? styles.weaknessArrowOpen : ''}`}>&#9654;</span>
+          <span>Remaining Weaknesses</span>
+        </button>
+        {weaknessOpen && (
+          <>
+            <p className={styles.weaknessHint}>Click to eliminate. Right-click or long-press to keep only that weakness.</p>
+            <div className={styles.weaknessContent}>
+              {weaknessPools.map((pool, i) => (
+                <React.Fragment key={pool.title}>
+                  {i > 0 && <div className={styles.divider} />}
+                  <div className={styles.group}>
+                    <h4 className={styles.groupTitle}>{pool.title}</h4>
+                    <div className={styles.items}>
+                      {pool.items.map(name => {
+                        const isEliminated = eliminatedWeaknesses.has(name);
+                        const remaining = pool.items.filter(n => !eliminatedWeaknesses.has(n));
+                        const isSoleSurvivor = !isEliminated && remaining.length === 1;
+                        return (
+                          <button
+                            key={name}
+                            className={`${styles.item} ${isEliminated ? styles.eliminated : ''} ${isSoleSurvivor ? styles.soleSurvivor : ''}`}
+                            title="Click to eliminate. Right-click or long-press to keep only this one."
+                            onClick={() => { if (!didLongPress.current) onToggleWeakness(name); }}
+                            onContextMenu={(e) => { e.preventDefault(); onEliminateOthers(name); }}
+                            onTouchStart={() => handleTouchStart(name)}
+                            onTouchEnd={handleTouchEnd}
+                            onTouchCancel={handleTouchEnd}
+                          >
+                            <span className={styles.label}>{name}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </React.Fragment>
+              ))}
             </div>
-          </React.Fragment>
-        ))}
+          </>
+        )}
       </div>
       <div className={styles.legend}>
       <OpportunitySearch terms={opportunityTerms} onSearch={onOpportunitySearch} />

@@ -75,3 +75,27 @@
 .section p strong {
   color: #e0e0e0;
 }
+
+.quote {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-left: 2px solid rgba(201, 168, 48, 0.4);
+  background: rgba(201, 168, 48, 0.05);
+  border-radius: 0 4px 4px 0;
+}
+
+.quote p {
+  font-size: 0.76rem;
+  color: #9aa0a8;
+  line-height: 1.5;
+  margin: 0;
+  font-style: italic;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.68rem;
+  color: #c9a830;
+  font-style: normal;
+}

@@ -90,6 +90,15 @@ export function HelpPanel({ onClose }: Props) {
             <strong> Reset Cities</strong> clears all removals (requires a confirmation click).
           </p>
         </Section>
+
+        <blockquote className={styles.quote}>
+          <p>
+            "This began life as an atlas of the cities of Europe. Over decades it's been
+            extended and annotated by a dozen hands - adepts, burglars, soldiers, spies -
+            to show secret routes and hiding-nooks."
+          </p>
+          <cite>~ Rarity: Atlas of the Unsuspected</cite>
+        </blockquote>
       </div>
     </div>
   );

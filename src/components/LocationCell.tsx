@@ -1,3 +1,4 @@
+import { useRef, useCallback } from 'react';
 import { Location, RegionColor } from '../data/types';
 import styles from './LocationCell.module.css';
 
@@ -25,6 +26,23 @@ const regionColors: Record<RegionColor, string> = {
 
 export function LocationCell({ location, isSelected, isDimmed, isRemoved, onSelect, onToggleRemoved }: Props) {
   const bgColor = regionColors[location.region];
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const didLongPress = useRef(false);
+
+  const onTouchStart = useCallback(() => {
+    didLongPress.current = false;
+    longPressTimer.current = setTimeout(() => {
+      didLongPress.current = true;
+      onToggleRemoved(location.id);
+    }, 500);
+  }, [location.id, onToggleRemoved]);
+
+  const onTouchEnd = useCallback(() => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  }, []);
 
   const badges: string[] = [];
   if (location.shrine) {
@@ -47,8 +65,11 @@ export function LocationCell({ location, isSelected, isDimmed, isRemoved, onSele
     <button
       className={`${styles.cell} ${isSelected ? styles.selected : ''} ${isDimmed ? styles.dimmed : ''} ${isRemoved && !isSelected ? styles.removed : ''}`}
       style={{ backgroundColor: bgColor }}
-      onClick={() => onSelect(location.id)}
+      onClick={() => { if (!didLongPress.current) onSelect(location.id); }}
       onContextMenu={(e) => { e.preventDefault(); onToggleRemoved(location.id); }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onTouchCancel={onTouchEnd}
       data-location-id={location.id}
       title={buildTooltip(location)}
     >

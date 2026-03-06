@@ -136,7 +136,7 @@ export default function App() {
   return (
     <div className={styles.app}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Exile Map</h1>
+        <h1 className={styles.title}>Atlas of the Unsuspected</h1>
         <span className={styles.subtitle}>Cultist Simulator: Exile DLC Explorer</span>
       </header>
       <div className={styles.toolbar}>

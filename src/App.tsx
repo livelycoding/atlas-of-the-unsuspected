@@ -11,6 +11,7 @@ export default function App() {
   const [activeFilters, setActiveFilters] = useState<Set<string>>(new Set());
   const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
   const [mapMode, setMapMode] = useState(true);
+  const [confirmReset, setConfirmReset] = useState(false);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(prev => (prev === id ? null : id));
@@ -113,6 +114,20 @@ export default function App() {
         <button className={styles.toolbarBtn} onClick={handleExport}>Export Removed Cities</button>
         <button className={styles.toolbarBtn} onClick={() => fileInputRef.current?.click()}>Import Removed Cities</button>
         <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} hidden />
+        <button
+          className={`${styles.toolbarBtn} ${confirmReset ? styles.toolbarBtnDanger : ''}`}
+          onClick={() => {
+            if (confirmReset) {
+              setRemovedIds(new Set());
+              setConfirmReset(false);
+            } else {
+              setConfirmReset(true);
+              setTimeout(() => setConfirmReset(false), 3000);
+            }
+          }}
+        >
+          {confirmReset ? 'Click again to confirm' : 'Reset Cities'}
+        </button>
       </div>
       <div className={styles.viewToggleRow}>
         <button

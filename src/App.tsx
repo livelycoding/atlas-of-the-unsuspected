@@ -92,6 +92,7 @@ export default function App() {
     const data = JSON.stringify({
       removedIds: [...removedIds],
       eliminatedWeaknesses: [...eliminatedWeaknesses],
+      mapMode,
     });
     const blob = new Blob([data], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -100,7 +101,7 @@ export default function App() {
     a.download = 'exile-map-run.json';
     a.click();
     URL.revokeObjectURL(url);
-  }, [removedIds, eliminatedWeaknesses]);
+  }, [removedIds, eliminatedWeaknesses, mapMode]);
 
   const handleImport = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -115,6 +116,7 @@ export default function App() {
         } else {
           setRemovedIds(new Set(parsed.removedIds ?? []));
           setEliminatedWeaknesses(new Set(parsed.eliminatedWeaknesses ?? []));
+          if (parsed.mapMode !== undefined) setMapMode(parsed.mapMode);
         }
       } catch { /* ignore invalid files */ }
     };
@@ -229,8 +231,8 @@ export default function App() {
         </button>
       </header>
       <div className={styles.toolbar}>
-        <button className={styles.toolbarBtn} onClick={handleExport}>Export Removed Cities</button>
-        <button className={styles.toolbarBtn} onClick={() => fileInputRef.current?.click()}>Import Removed Cities</button>
+        <button className={styles.toolbarBtn} onClick={handleExport}>Export Run Data</button>
+        <button className={styles.toolbarBtn} onClick={() => fileInputRef.current?.click()}>Import Run Data</button>
         <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} hidden />
         <button
           className={`${styles.toolbarBtn} ${confirmReset ? styles.toolbarBtnDanger : ''}`}

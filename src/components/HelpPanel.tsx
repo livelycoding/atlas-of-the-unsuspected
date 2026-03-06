@@ -74,6 +74,11 @@ export function HelpPanel({ onClose }: Props) {
             Click again to restore it.
             <strong> Right-click</strong> (or long-press on mobile) a weakness to keep only
             that one and eliminate the other two in its pool.
+          </p>
+          <p>
+            When you narrow a pool to a single confirmed weakness, locations that offer
+            that weakness show a <strong>gold count badge</strong> on the map. Open a
+            location's detail panel to see a callout listing the matched weakness names.
             Weakness state is saved with Export and restored with Import.
           </p>
         </Section>
@@ -99,10 +104,11 @@ export function HelpPanel({ onClose }: Props) {
 
         <Section title="Save & Load Your Run">
           <p>
-            <strong>Export Removed Cities</strong> saves your removed cities to a JSON file.
-            <strong> Import Removed Cities</strong> loads them back. Use this to save your
-            progress between sessions or share a run state.
-            <strong> Reset Cities</strong> clears all removals (requires a confirmation click).
+            <strong>Export Run Data</strong> saves your removed cities and weakness tracker
+            state to a JSON file. <strong>Import Run Data</strong> loads them back. Use this
+            to save your progress between sessions or share a run state.
+            <strong> Reset Cities</strong> clears all removals and resets the weakness tracker
+            (requires a confirmation click).
           </p>
         </Section>
 

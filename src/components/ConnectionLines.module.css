@@ -37,3 +37,19 @@
 .directedLine {
   stroke-dasharray: 4 3;
 }
+
+.mapDim.outline {
+  stroke: rgba(0, 0, 0, 0.2);
+}
+
+.mapDim.line {
+  stroke: rgba(140, 30, 35, 0.22);
+}
+
+.mapHighlight.line {
+  stroke: rgba(160, 35, 40, 0.7);
+}
+
+.mapHighlight.outline {
+  stroke: rgba(0, 0, 0, 0.5);
+}

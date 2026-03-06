@@ -70,12 +70,12 @@ export function ConnectionLines({ cellPositions, selectedId, removedIds, mapMode
             {/* Dark outline for contrast */}
             <line
               x1={sx1} y1={sy1} x2={sx2} y2={sy2}
-              className={`${styles.outline} ${isEdge ? styles.edgeLine : ''} ${isDirected ? styles.directedLine : ''}`}
+              className={`${styles.outline} ${isEdge ? styles.edgeLine : ''} ${isDirected ? styles.directedLine : ''} ${mapMode && !isHighlighted ? styles.mapDim : ''} ${mapMode && isHighlighted ? styles.mapHighlight : ''}`}
             />
             {/* Visible line */}
             <line
               x1={sx1} y1={sy1} x2={sx2} y2={sy2}
-              className={`${styles.line} ${isHighlighted ? styles.highlighted : ''} ${isEdge ? styles.edgeLine : ''} ${isDirected ? styles.directedLine : ''}`}
+              className={`${styles.line} ${isHighlighted ? styles.highlighted : ''} ${isEdge ? styles.edgeLine : ''} ${isDirected ? styles.directedLine : ''} ${mapMode && !isHighlighted ? styles.mapDim : ''} ${mapMode && isHighlighted ? styles.mapHighlight : ''}`}
               markerEnd={isDirected ? `url(#arrowhead${isHighlighted ? '-highlighted' : ''})` : undefined}
             />
           </g>

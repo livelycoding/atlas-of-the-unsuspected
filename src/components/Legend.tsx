@@ -1,8 +1,11 @@
+import { OpportunitySearch } from './OpportunitySearch';
 import styles from './Legend.module.css';
 
 interface Props {
   activeFilters: Set<string>;
   onToggleFilter: (filter: string) => void;
+  opportunityTerms: string[];
+  onOpportunitySearch: (terms: string[]) => void;
 }
 
 const regionItems = [
@@ -35,9 +38,10 @@ const badgeItems = [
   { id: 'map-edge', label: 'Map\'s Edge', badge: '\u2606', color: '#c9a830' },
 ];
 
-export function Legend({ activeFilters, onToggleFilter }: Props) {
+export function Legend({ activeFilters, onToggleFilter, opportunityTerms, onOpportunitySearch }: Props) {
   return (
     <div className={styles.legend}>
+      <OpportunitySearch terms={opportunityTerms} onSearch={onOpportunitySearch} />
       <div className={styles.group}>
         <h4 className={styles.groupTitle}>Regions</h4>
         <div className={styles.items}>

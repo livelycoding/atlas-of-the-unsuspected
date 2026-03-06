@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useMemo } from 'react';
 import { MapGrid } from './components/MapGrid';
 import { DetailPanel } from './components/DetailPanel';
 import { Legend } from './components/Legend';
@@ -12,6 +12,7 @@ export default function App() {
   const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
   const [mapMode, setMapMode] = useState(true);
   const [confirmReset, setConfirmReset] = useState(false);
+  const [opportunityTerms, setOpportunityTerms] = useState<string[]>([]);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(prev => (prev === id ? null : id));
@@ -74,9 +75,9 @@ export default function App() {
 
   const selectedLocation = selectedId ? locationsById.get(selectedId) ?? null : null;
 
-  // Determine which locations pass the active filters
-  const filteredIds = activeFilters.size === 0
-    ? null // null = show all
+  // Determine which locations pass the active legend filters
+  const legendFilteredIds = activeFilters.size === 0
+    ? null
     : new Set(
         locations
           .filter(loc => {
@@ -96,13 +97,39 @@ export default function App() {
               if (f === 'special-event' && loc.specialEvent) return true;
               if (f === 'caper' && loc.caper) return true;
               if (f === 'book-of-suns' && loc.bookOfSunsPage !== null) return true;
-              // Region filters
               if (f === loc.region as RegionColor) return true;
             }
             return false;
           })
           .map(loc => loc.id)
       );
+
+  // Determine which locations match all opportunity search terms (AND logic)
+  const opportunityMatchIds = useMemo(() => {
+    if (opportunityTerms.length === 0) return null;
+    return new Set(
+      locations
+        .filter(loc => {
+          const all = [
+            ...loc.opportunities.connections,
+            ...loc.opportunities.property,
+            ...loc.opportunities.items,
+            ...loc.opportunities.times,
+            ...loc.opportunities.distractions,
+          ];
+          return opportunityTerms.every(term => all.includes(term));
+        })
+        .map(loc => loc.id)
+    );
+  }, [opportunityTerms]);
+
+  // Merge legend filters and opportunity search: intersect if both active
+  const filteredIds = useMemo(() => {
+    if (!legendFilteredIds && !opportunityMatchIds) return null;
+    if (!legendFilteredIds) return opportunityMatchIds;
+    if (!opportunityMatchIds) return legendFilteredIds;
+    return new Set([...legendFilteredIds].filter(id => opportunityMatchIds.has(id)));
+  }, [legendFilteredIds, opportunityMatchIds]);
 
   return (
     <div className={styles.app}>
@@ -151,6 +178,8 @@ export default function App() {
           <Legend
             activeFilters={activeFilters}
             onToggleFilter={handleToggleFilter}
+            opportunityTerms={opportunityTerms}
+            onOpportunitySearch={setOpportunityTerms}
           />
         </div>
         {selectedLocation && (

@@ -61,7 +61,7 @@ export function ConnectionLines({ cellPositions, selectedId, removedIds, mapMode
         const isEdge = edgeConnections.includes(conn);
         const isDirected = directedConnections.includes(conn);
         const ratio = mapMode
-          ? (isEdge ? 0.1 : isDirected ? 0.12 : 0.1)
+          ? (isEdge ? 0.1 : isDirected ? 0.15 : 0.1)
           : (isEdge ? 0.2 : isDirected ? 0.35 : 0.45);
         const [sx1, sy1, sx2, sy2] = shorten(from.x, from.y, to.x, to.y, ratio);
 

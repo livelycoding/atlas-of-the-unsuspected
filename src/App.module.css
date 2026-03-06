@@ -71,6 +71,34 @@ body {
   box-shadow: 0 0 4px rgba(201, 168, 48, 0.3);
 }
 
+.viewToggleRow {
+  display: flex;
+  padding: 6px 24px;
+  background: #16213e;
+  border-bottom: 1px solid rgba(201, 168, 48, 0.15);
+}
+
+.viewToggleBtn {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(201, 168, 48, 0.15) 0%, rgba(201, 168, 48, 0.25) 100%);
+  border: 2px solid #c9a830;
+  color: #c9a830;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+}
+
+.viewToggleBtn:hover {
+  background: linear-gradient(135deg, rgba(201, 168, 48, 0.3) 0%, rgba(201, 168, 48, 0.45) 100%);
+  box-shadow: 0 0 12px rgba(201, 168, 48, 0.4);
+}
+
 .content {
   display: flex;
   flex: 1;

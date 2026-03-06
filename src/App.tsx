@@ -2,6 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import { MapGrid } from './components/MapGrid';
 import { DetailPanel } from './components/DetailPanel';
 import { Legend } from './components/Legend';
+import { CollisionResolver } from './components/CollisionResolver';
 import { locations, locationsById } from './data/locations';
 import { RegionColor } from './data/types';
 import styles from './App.module.css';
@@ -10,7 +11,8 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [activeFilters, setActiveFilters] = useState<Set<string>>(new Set());
   const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
-  const [mapMode, setMapMode] = useState(false);
+  const [mapMode, setMapMode] = useState(true);
+  const [resolving, setResolving] = useState(false);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(prev => (prev === id ? null : id));
@@ -114,12 +116,23 @@ export default function App() {
         <button className={styles.toolbarBtn} onClick={() => fileInputRef.current?.click()}>Import Run Data</button>
         <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} hidden />
         <button
-          className={`${styles.toolbarBtn} ${mapMode ? styles.toolbarBtnActive : ''}`}
-          onClick={() => setMapMode(m => !m)}
+          className={`${styles.toolbarBtn} ${resolving ? styles.toolbarBtnActive : ''}`}
+          onClick={() => setResolving(r => !r)}
         >
-          Map View
+          Resolve Overlaps
         </button>
       </div>
+      <div className={styles.viewToggleRow}>
+        <button
+          className={styles.viewToggleBtn}
+          onClick={() => setMapMode(m => !m)}
+        >
+          {mapMode ? 'Switch to Grid View' : 'Switch to Map View'}
+        </button>
+      </div>
+      {resolving ? (
+        <CollisionResolver onDone={() => setResolving(false)} />
+      ) : (
       <div className={styles.content}>
         <div className={styles.mapArea}>
           <p className={styles.hint}>Right-click a city to remove it from the pool</p>
@@ -147,6 +160,7 @@ export default function App() {
           />
         )}
       </div>
+      )}
     </div>
   );
 }

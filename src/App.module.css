@@ -40,6 +40,31 @@ body {
   font-style: italic;
 }
 
+.toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 6px 24px;
+  background: #16213e;
+  border-bottom: 1px solid rgba(201, 168, 48, 0.15);
+}
+
+.toolbarBtn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(201, 168, 48, 0.3);
+  color: #c9a830;
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.1s ease;
+}
+
+.toolbarBtn:hover {
+  background: rgba(201, 168, 48, 0.15);
+  border-color: #c9a830;
+}
+
 .content {
   display: flex;
   flex: 1;

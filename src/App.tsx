@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { MapGrid } from './components/MapGrid';
 import { DetailPanel } from './components/DetailPanel';
 import { Legend } from './components/Legend';
@@ -43,6 +43,33 @@ export default function App() {
     });
   }, []);
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleExport = useCallback(() => {
+    const data = JSON.stringify([...removedIds]);
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'exile-map-run.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [removedIds]);
+
+  const handleImport = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const ids: string[] = JSON.parse(reader.result as string);
+        setRemovedIds(new Set(ids));
+      } catch { /* ignore invalid files */ }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  }, []);
+
   const selectedLocation = selectedId ? locationsById.get(selectedId) ?? null : null;
 
   // Determine which locations pass the active filters
@@ -81,6 +108,11 @@ export default function App() {
         <h1 className={styles.title}>Exile Map</h1>
         <span className={styles.subtitle}>Cultist Simulator: Exile DLC Explorer</span>
       </header>
+      <div className={styles.toolbar}>
+        <button className={styles.toolbarBtn} onClick={handleExport}>Export Current Run Data</button>
+        <button className={styles.toolbarBtn} onClick={() => fileInputRef.current?.click()}>Import Run Data</button>
+        <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} hidden />
+      </div>
       <div className={styles.content}>
         <div className={styles.mapArea}>
           <p className={styles.hint}>Right-click a city to remove it from the pool</p>

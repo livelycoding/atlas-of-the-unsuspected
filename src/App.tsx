@@ -124,6 +124,39 @@ export default function App() {
 
   const selectedLocation = selectedId ? locationsById.get(selectedId) ?? null : null;
 
+  // Determine which weaknesses are confirmed (final) — the remaining one when 2 of 3 in a pool are eliminated
+  const finalWeaknesses = useMemo(() => {
+    const finals = new Set<string>();
+    for (const pool of Object.values(weaknessPools)) {
+      const eliminated = pool.filter(w => eliminatedWeaknesses.has(w));
+      if (eliminated.length === 2) {
+        const remaining = pool.find(w => !eliminatedWeaknesses.has(w))!;
+        finals.add(remaining);
+      }
+    }
+    return finals;
+  }, [eliminatedWeaknesses]);
+
+  // Map location id → list of final weakness names found in that location's distractions
+  const nameNormalization: Record<string, string> = { 'Sea': 'The Sea' };
+  const locationWeaknessMap = useMemo(() => {
+    const map = new Map<string, string[]>();
+    if (finalWeaknesses.size === 0) return map;
+    for (const loc of locations) {
+      const matched: string[] = [];
+      for (const d of loc.opportunities.distractions) {
+        const normalized = nameNormalization[d] ?? d;
+        if (finalWeaknesses.has(normalized)) {
+          matched.push(normalized);
+        }
+      }
+      if (matched.length > 0) {
+        map.set(loc.id, matched);
+      }
+    }
+    return map;
+  }, [finalWeaknesses]);
+
   // Determine which locations pass the active legend filters
   const legendFilteredIds = activeFilters.size === 0
     ? null
@@ -240,6 +273,7 @@ export default function App() {
             onSelect={handleSelect}
             onToggleRemoved={handleToggleRemoved}
             mapMode={mapMode}
+            locationWeaknessCount={new Map([...locationWeaknessMap].map(([id, ws]) => [id, ws.length]))}
           />
           <Legend
             activeFilters={activeFilters}
@@ -265,6 +299,7 @@ export default function App() {
             isRemoved={removedIds.has(selectedLocation.id)}
             onToggleRemoved={handleToggleRemoved}
             removedIds={removedIds}
+            foeWeaknesses={locationWeaknessMap.get(selectedLocation.id) ?? []}
           />
         )}
       </div>

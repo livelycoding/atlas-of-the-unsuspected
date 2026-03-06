@@ -12,9 +12,10 @@ interface Props {
   isRemoved: boolean;
   onToggleRemoved: (id: string) => void;
   removedIds: Set<string>;
+  foeWeaknesses: string[];
 }
 
-export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds }: Props) {
+export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds, foeWeaknesses }: Props) {
   const outgoingDirectedIds = location.isMapEdge ? [] : directedConnections
     .filter(c => c.from === location.id)
     .map(c => c.to);
@@ -54,6 +55,12 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
         {location.cult === 'colonel' && <span className={`${styles.tag} ${styles.tagColonel}`}>Colonel</span>}
         {location.cult === 'lionsmith' && <span className={`${styles.tag} ${styles.tagLionsmith}`}>Lionsmith</span>}
       </div>
+
+      {foeWeaknesses.length > 0 && (
+        <div className={styles.weaknessCallout}>
+          {foeWeaknesses.length} foe weakness{foeWeaknesses.length !== 1 ? 'es' : ''} here: {foeWeaknesses.join(', ')}
+        </div>
+      )}
 
       <div className={styles.sections}>
         {/* Connections */}

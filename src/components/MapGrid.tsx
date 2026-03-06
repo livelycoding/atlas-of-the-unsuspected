@@ -13,6 +13,7 @@ interface Props {
   onSelect: (id: string) => void;
   onToggleRemoved: (id: string) => void;
   mapMode: boolean;
+  locationWeaknessCount: Map<string, number>;
 }
 
 const GRID_ROWS = 6;
@@ -28,6 +29,7 @@ function renderEdge(
   removedIds: Set<string>,
   onSelect: (id: string) => void,
   onToggleRemoved: (id: string) => void,
+  locationWeaknessCount: Map<string, number>,
 ) {
   const loc = locations.find(l => l.id === id);
   if (!loc) return null;
@@ -40,11 +42,12 @@ function renderEdge(
       isRemoved={removedIds.has(loc.id)}
       onSelect={onSelect}
       onToggleRemoved={onToggleRemoved}
+      weaknessCount={locationWeaknessCount.get(loc.id) ?? 0}
     />
   );
 }
 
-export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggleRemoved, mapMode }: Props) {
+export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggleRemoved, mapMode, locationWeaknessCount }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [cellPositions, setCellPositions] = useState<Map<string, { x: number; y: number }>>(new Map());
 
@@ -97,6 +100,7 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
                 isRemoved={removedIds.has(loc.id)}
                 onSelect={onSelect}
                 onToggleRemoved={onToggleRemoved}
+                weaknessCount={locationWeaknessCount.get(loc.id) ?? 0}
               />
             </div>
           );
@@ -119,6 +123,7 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
                 isRemoved={removedIds.has(loc.id)}
                 onSelect={onSelect}
                 onToggleRemoved={onToggleRemoved}
+                weaknessCount={locationWeaknessCount.get(loc.id) ?? 0}
               />
             </div>
           );
@@ -140,7 +145,7 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
     }
   }
 
-  const e = (id: string) => renderEdge(id, selectedId, filteredIds, removedIds, onSelect, onToggleRemoved);
+  const e = (id: string) => renderEdge(id, selectedId, filteredIds, removedIds, onSelect, onToggleRemoved, locationWeaknessCount);
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
@@ -170,6 +175,7 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
                       isRemoved={removedIds.has(loc.id)}
                       onSelect={onSelect}
                       onToggleRemoved={onToggleRemoved}
+                      weaknessCount={locationWeaknessCount.get(loc.id) ?? 0}
                     />
                   ) : (
                     <div className={styles.emptyCell} />

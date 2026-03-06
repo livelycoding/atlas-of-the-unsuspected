@@ -14,6 +14,7 @@
   min-width: 90px;
   user-select: none;
   -webkit-user-select: none;
+  position: relative;
 }
 
 .edge:hover {
@@ -52,4 +53,22 @@
   opacity: 0.7;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.weaknessCount {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  background: #c9a830;
+  color: #1a1a2e;
+  font-weight: 900;
+  font-size: 0.6rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 6px rgba(201, 168, 48, 0.7);
+  z-index: 2;
 }

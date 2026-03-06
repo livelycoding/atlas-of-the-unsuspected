@@ -12,6 +12,8 @@
   font-family: inherit;
   color: #c9a830;
   min-width: 90px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .edge:hover {

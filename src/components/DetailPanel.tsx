@@ -75,6 +75,33 @@ export function DetailPanel({ location, onClose, onNavigate }: Props) {
           </Section>
         )}
 
+        {/* Special Event */}
+        {location.specialEvent && (
+          <Section title="Special Event">
+            <strong className={styles.eventName}>{location.specialEvent.name}</strong>
+            <span className={styles.description}>{location.specialEvent.description}</span>
+            <div className={styles.eventTrigger}>
+              <span className={styles.eventTriggerLabel}>How to start:</span>
+              <span className={styles.eventTriggerValue}>{location.specialEvent.trigger}</span>
+            </div>
+            <ol className={styles.eventSteps}>
+              {location.specialEvent.steps.map((s, i) => <li key={i}>{s}</li>)}
+            </ol>
+            <div className={styles.eventRewards}>
+              <div className={styles.eventReward}>
+                <span className={styles.eventRewardLabel}>Reward</span>
+                <span className={styles.eventRewardValue}>{location.specialEvent.reward}</span>
+              </div>
+              {location.specialEvent.rewardAlt && (
+                <div className={styles.eventReward}>
+                  <span className={styles.eventRewardLabel}>Alt</span>
+                  <span className={styles.eventRewardValue}>{location.specialEvent.rewardAlt}</span>
+                </div>
+              )}
+            </div>
+          </Section>
+        )}
+
         {/* Caper */}
         {location.caper && (
           <Section title="Caper">

@@ -31,7 +31,11 @@ export function LocationCell({ location, isSelected, isDimmed, onSelect }: Props
   if (location.pentiment) badges.push('P');
   if (location.ligeian) badges.push('L');
   if (location.ally) badges.push('A');
-  if (location.weapons.some(w => !w.includes('Profane'))) badges.push('W');
+  if (location.weapons.some(w => w.includes("Biedde"))) badges.push('W1');
+  if (location.weapons.some(w => w.includes("Lionhunter"))) badges.push('W2');
+  if (location.weapons.some(w => w.includes("Ebrehel"))) badges.push('W3');
+  if (location.weapons.some(w => w.includes("Imhullune"))) badges.push('W4');
+  if (location.specialEvent) badges.push('E');
   if (location.caper) badges.push('C');
   if (location.isTroubled) badges.push('T');
   if (location.isRemote && !location.isMapEdge) badges.push('R');
@@ -67,6 +71,7 @@ function buildTooltip(loc: Location): string {
   if (loc.pentiment) parts.push(`Pentiment: ${loc.pentiment.name}`);
   if (loc.ligeian) parts.push(`Ligeian: ${loc.ligeian.name}`);
   if (loc.ally) parts.push(`Ally: ${loc.ally.name} (${loc.ally.aspect})`);
+  if (loc.specialEvent) parts.push(`Special Event: ${loc.specialEvent.name}`);
   if (loc.caper) parts.push(`Caper: ${loc.caper.name}`);
   if (loc.bookOfSunsPage) parts.push(`Book of Suns: Page ${loc.bookOfSunsPage}`);
   return parts.join('\n');

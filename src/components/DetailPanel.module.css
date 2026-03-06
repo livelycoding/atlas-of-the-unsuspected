@@ -259,3 +259,74 @@
   color: #8899aa;
   white-space: pre-line;
 }
+
+.eventName {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.eventTrigger {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 6px;
+}
+
+.eventTriggerLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #c9a830;
+}
+
+.eventTriggerValue {
+  font-size: 0.78rem;
+  color: #b0b8c0;
+}
+
+.eventSteps {
+  padding: 0 0 0 20px;
+  margin: 6px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eventSteps li {
+  font-size: 0.78rem;
+  color: #b0b8c0;
+}
+
+.eventSteps li::marker {
+  color: #c9a830;
+}
+
+.eventRewards {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.eventReward {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.eventRewardLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #c9a830;
+  flex-shrink: 0;
+}
+
+.eventRewardValue {
+  font-size: 0.78rem;
+  color: #b0b8c0;
+}

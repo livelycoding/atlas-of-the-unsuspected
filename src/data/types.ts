@@ -49,6 +49,15 @@ export interface Rarity {
   aspect: string;
 }
 
+export interface SpecialEvent {
+  name: string;
+  description: string;
+  trigger: string;
+  steps: string[];
+  reward: string;
+  rewardAlt?: string;
+}
+
 export interface OpportunityDetail {
   result: string;       // Item name produced, e.g. "Discreet Office"
   aspects: string;      // e.g. "Comfort 1, Space 1, Worth 1, Heart 2"
@@ -84,6 +93,7 @@ export interface Location {
   opportunities: Opportunities;
   caper: Caper | null;
   specialFeatures: string[];
+  specialEvent: SpecialEvent | null;
   connections: string[];
   edgeConnections: string[];
 }

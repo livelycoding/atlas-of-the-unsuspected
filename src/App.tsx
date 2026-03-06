@@ -51,6 +51,7 @@ export default function App() {
               if (f === 'weapon-lionhunter' && loc.weapons.some(w => w.includes("Lionhunter"))) return true;
               if (f === 'weapon-ebrehel' && loc.weapons.some(w => w.includes("Ebrehel"))) return true;
               if (f === 'weapon-imhullune' && loc.weapons.some(w => w.includes("Imhullune"))) return true;
+              if (f === 'special-event' && loc.specialEvent) return true;
               if (f === 'caper' && loc.caper) return true;
               if (f === 'book-of-suns' && loc.bookOfSunsPage !== null) return true;
               // Region filters

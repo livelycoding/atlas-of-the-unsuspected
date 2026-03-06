@@ -85,8 +85,28 @@
   background: #ff6347;
 }
 
-.badgeW {
+.badgeW1, .badgeW2, .badgeW3, .badgeW4 {
+  font-size: 0.38rem;
+}
+
+.badgeW1 {
   background: #708090;
+}
+
+.badgeW2 {
+  background: #5a6a5a;
+}
+
+.badgeW3 {
+  background: #8b4513;
+}
+
+.badgeW4 {
+  background: #4a5568;
+}
+
+.badgeE {
+  background: #20b2aa;
 }
 
 .badgeC {

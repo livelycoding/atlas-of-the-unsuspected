@@ -15,7 +15,7 @@ interface Props {
 
 export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds }: Props) {
   const allConnectedIds = [...location.connections, ...location.edgeConnections];
-  const [nextClickTravels, setNextClickTravels] = useState(false);
+  const [clickMode, setClickMode] = useState<'none' | 'travels' | 'removes'>('none');
   const ops = location.opportunities;
   const hasOpportunities = ops.connections.length > 0 || ops.property.length > 0
     || ops.items.length > 0 || ops.times.length > 0 || ops.distractions.length > 0;
@@ -49,14 +49,24 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
       <div className={styles.sections}>
         {/* Connections */}
         <Section title="Connections">
-          <label className={styles.travelCheckbox}>
-            <input
-              type="checkbox"
-              checked={nextClickTravels}
-              onChange={() => setNextClickTravels(prev => !prev)}
-            />
-            Next click travels
-          </label>
+          <div className={styles.clickModes}>
+            <label className={styles.travelCheckbox}>
+              <input
+                type="checkbox"
+                checked={clickMode === 'travels'}
+                onChange={() => setClickMode(prev => prev === 'travels' ? 'none' : 'travels')}
+              />
+              Touch Connection = Travel
+            </label>
+            <label className={styles.travelCheckbox}>
+              <input
+                type="checkbox"
+                checked={clickMode === 'removes'}
+                onChange={() => setClickMode(prev => prev === 'removes' ? 'none' : 'removes')}
+              />
+              Touch Connection = Remove it
+            </label>
+          </div>
           <div className={styles.connectionList}>
             {allConnectedIds.map(id => {
               const conn = locationsById.get(id);
@@ -67,10 +77,14 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
                   key={id}
                   className={`${styles.connectionBtn} ${conn.isMapEdge ? styles.connectionEdge : ''} ${targetRemoved ? styles.connectionRemoved : ''}`}
                   onClick={() => {
-                    if (nextClickTravels) {
+                    if (clickMode === 'travels') {
                       onToggleRemoved(location.id);
+                      onNavigate(id);
+                    } else if (clickMode === 'removes') {
+                      onToggleRemoved(id);
+                    } else {
+                      onNavigate(id);
                     }
-                    onNavigate(id);
                   }}
                 >
                   {conn.name}

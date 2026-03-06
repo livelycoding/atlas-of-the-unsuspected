@@ -211,13 +211,18 @@
   accent-color: #c9a830;
 }
 
+.clickModes {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
 .travelCheckbox {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 0.7rem;
   color: #8899aa;
-  margin-bottom: 6px;
   cursor: pointer;
 }
 

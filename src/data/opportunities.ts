@@ -182,4 +182,64 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
     result: 'Echidna',
     aspects: 'Ligeian Presence, Unique',
   },
+
+  // --- Weapons ---
+  'Profane Weapon': {
+    result: 'Profane Weapon',
+    aspects: 'Worth 1, Edge 2, Weapon, Portable, Asset',
+  },
+  "Lionhunter's Rifle": {
+    result: "Lionhunter's Rifle",
+    aspects: 'Worth 2, Edge 4, Weapon, Portable, Asset',
+  },
+  'Ebrehel, the Ragged Sword': {
+    result: 'Ebrehel, the Ragged Sword',
+    aspects: 'Worth 3, Edge 6, Forge 6, Knock 6, Pentiment, Weapon, Portable, Asset',
+  },
+  "Biedde's Blade": {
+    result: "Biedde's Blade",
+    aspects: 'Weapon, Edge, Portable, Unstaunchable wounds',
+  },
+  'Imhullune Tectrix': {
+    result: 'Imhullune Tectrix',
+    aspects: 'Worth 4, Edge 10, Weapon, Portable, Asset',
+  },
+
+  // --- Caper Rewards ---
+  "The Merry Feaster's Carcass": {
+    result: "The Merry Feaster's Carcass",
+    aspects: 'Asset, Decays in 300s',
+  },
+  'Maggot-Spice?': {
+    result: 'Maggot-Spice?',
+    aspects: 'Worth 1, Winter 12, Supplies, Portable, Asset',
+  },
+  'Mamurren Scar': {
+    result: 'Mamurren Scar',
+    aspects: 'Winter 2, Heart 2',
+  },
+  'Fluttering Goo': {
+    result: 'Fluttering Goo',
+    aspects: 'Worth 1, Moth 12, Supplies, Portable, Asset',
+  },
+  'Percussigant Pelt!': {
+    result: 'Percussigant Pelt!',
+    aspects: 'Worth 2, Heart 4, Portable, Asset',
+  },
+  'Tarrasquine Relic, Beguiling Curio, and Cash': {
+    result: 'Tarrasquine Relic + Beguiling Curio + Cash',
+    aspects: 'Relic: Worth 1, Grail 2, Winter 4\nCurio: Comfort 1, Worth 1, Grail 2',
+  },
+  "Hokobald's Alchemical Substance": {
+    result: "Hokobald's Alchemical Substance",
+    aspects: 'Worth 1, Forge 12, Supplies, Portable, Asset',
+  },
+  'A Snoozing Undergoer': {
+    result: 'A Snoozing Undergoer',
+    aspects: 'Asset, Decays in 300s',
+  },
+  'Serapeum Peristasis': {
+    result: 'Serapeum Peristasis',
+    aspects: 'Location',
+  },
 };

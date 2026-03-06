@@ -257,4 +257,5 @@
 .opDetail .meta {
   font-size: 0.72rem;
   color: #8899aa;
+  white-space: pre-line;
 }

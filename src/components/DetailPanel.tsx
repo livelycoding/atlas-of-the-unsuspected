@@ -42,9 +42,10 @@ export function DetailPanel({ location, onClose, onNavigate }: Props) {
               {location.onArrival.map((f, i) => {
                 const isLigeian = location.ligeian && location.ligeian.name.includes(f);
                 const isAlly = location.ally && location.ally.name === f;
+                const isCaper = location.caper && location.caper.name === f;
                 return (
                   <li key={i}>
-                    {isLigeian ? `Ligeian: ${location.ligeian!.name}` : isAlly ? `Ally: ${f}` : f}
+                    {isLigeian ? `Ligeian: ${location.ligeian!.name}` : isAlly ? `Ally: ${f}` : isCaper ? `Caper: ${f}` : f}
                     {isAlly && (
                       <div className={styles.detail}>
                         <span className={styles.meta}>Aspect: {location.ally!.aspect}</span>
@@ -84,7 +85,10 @@ export function DetailPanel({ location, onClose, onNavigate }: Props) {
                   <span className={styles.meta}>{c.name}: {c.checks.join(', ')}</span>
                 </div>
               ))}
-              <span className={styles.meta}>Reward: {location.caper.reward}</span>
+            </div>
+            <div className={styles.opGroup}>
+              <span className={styles.opLabel}>Reward</span>
+              <ExpandableList items={[location.caper.reward]} />
             </div>
           </Section>
         )}
@@ -176,9 +180,7 @@ export function DetailPanel({ location, onClose, onNavigate }: Props) {
         {/* Weapons */}
         {location.weapons.length > 0 && (
           <Section title="Weapons Available">
-            <ul className={styles.list}>
-              {location.weapons.map((w, i) => <li key={i}>{w}</li>)}
-            </ul>
+            <ExpandableList items={location.weapons} />
           </Section>
         )}
 
@@ -214,7 +216,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function OpSubsection({ label, items }: { label: string; items: string[] }) {
+function ExpandableList({ items }: { items: string[] }) {
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
 
   const toggle = (i: number) => {
@@ -227,34 +229,40 @@ function OpSubsection({ label, items }: { label: string; items: string[] }) {
   };
 
   return (
+    <ul className={styles.list}>
+      {items.map((item, i) => {
+        const detail = opportunityDetails[item];
+        const isOpen = expanded.has(i);
+        return (
+          <li key={i} className={styles.opItem}>
+            {detail ? (
+              <>
+                <button className={styles.opToggle} onClick={() => toggle(i)}>
+                  <span className={styles.opChevron}>{isOpen ? '\u25BE' : '\u25B8'}</span>
+                  {item}
+                </button>
+                {isOpen && (
+                  <div className={styles.opDetail}>
+                    <strong>{detail.result}</strong>
+                    <span className={styles.meta}>{detail.aspects}</span>
+                  </div>
+                )}
+              </>
+            ) : (
+              <span>{item}</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function OpSubsection({ label, items }: { label: string; items: string[] }) {
+  return (
     <div className={styles.opGroup}>
       <span className={styles.opLabel}>{label}</span>
-      <ul className={styles.list}>
-        {items.map((item, i) => {
-          const detail = opportunityDetails[item];
-          const isOpen = expanded.has(i);
-          return (
-            <li key={i} className={styles.opItem}>
-              {detail ? (
-                <>
-                  <button className={styles.opToggle} onClick={() => toggle(i)}>
-                    <span className={styles.opChevron}>{isOpen ? '\u25BE' : '\u25B8'}</span>
-                    {item}
-                  </button>
-                  {isOpen && (
-                    <div className={styles.opDetail}>
-                      <strong>{detail.result}</strong>
-                      <span className={styles.meta}>{detail.aspects}</span>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <span>{item}</span>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+      <ExpandableList items={items} />
     </div>
   );
 }

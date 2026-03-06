@@ -5,14 +5,17 @@ interface Props {
   location: Location;
   isSelected: boolean;
   isDimmed: boolean;
+  isRemoved: boolean;
   onSelect: (id: string) => void;
+  onToggleRemoved: (id: string) => void;
 }
 
-export function EdgeLocation({ location, isSelected, isDimmed, onSelect }: Props) {
+export function EdgeLocation({ location, isSelected, isDimmed, isRemoved, onSelect, onToggleRemoved }: Props) {
   return (
     <button
-      className={`${styles.edge} ${isSelected ? styles.selected : ''} ${isDimmed ? styles.dimmed : ''}`}
+      className={`${styles.edge} ${isSelected ? styles.selected : ''} ${isDimmed ? styles.dimmed : ''} ${isRemoved && !isSelected ? styles.removed : ''}`}
       onClick={() => onSelect(location.id)}
+      onContextMenu={(e) => { e.preventDefault(); onToggleRemoved(location.id); }}
       data-location-id={location.id}
       title={`${location.name} — Map's Edge\nCannot leave once entered\n${location.specialFeatures.join('\n')}`}
     >

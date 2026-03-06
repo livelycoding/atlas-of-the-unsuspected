@@ -5,7 +5,9 @@ interface Props {
   location: Location;
   isSelected: boolean;
   isDimmed: boolean;
+  isRemoved: boolean;
   onSelect: (id: string) => void;
+  onToggleRemoved: (id: string) => void;
 }
 
 const regionColors: Record<RegionColor, string> = {
@@ -21,7 +23,7 @@ const regionColors: Record<RegionColor, string> = {
   'map-edge': '#c9a830',
 };
 
-export function LocationCell({ location, isSelected, isDimmed, onSelect }: Props) {
+export function LocationCell({ location, isSelected, isDimmed, isRemoved, onSelect, onToggleRemoved }: Props) {
   const bgColor = regionColors[location.region];
 
   const badges: string[] = [];
@@ -43,9 +45,10 @@ export function LocationCell({ location, isSelected, isDimmed, onSelect }: Props
 
   return (
     <button
-      className={`${styles.cell} ${isSelected ? styles.selected : ''} ${isDimmed ? styles.dimmed : ''}`}
+      className={`${styles.cell} ${isSelected ? styles.selected : ''} ${isDimmed ? styles.dimmed : ''} ${isRemoved && !isSelected ? styles.removed : ''}`}
       style={{ backgroundColor: bgColor }}
       onClick={() => onSelect(location.id)}
+      onContextMenu={(e) => { e.preventDefault(); onToggleRemoved(location.id); }}
       data-location-id={location.id}
       title={buildTooltip(location)}
     >

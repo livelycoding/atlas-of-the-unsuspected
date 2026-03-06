@@ -8,10 +8,14 @@ interface Props {
   location: Location;
   onClose: () => void;
   onNavigate: (id: string) => void;
+  isRemoved: boolean;
+  onToggleRemoved: (id: string) => void;
+  removedIds: Set<string>;
 }
 
-export function DetailPanel({ location, onClose, onNavigate }: Props) {
+export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds }: Props) {
   const allConnectedIds = [...location.connections, ...location.edgeConnections];
+  const [nextClickTravels, setNextClickTravels] = useState(false);
   const ops = location.opportunities;
   const hasOpportunities = ops.connections.length > 0 || ops.property.length > 0
     || ops.items.length > 0 || ops.times.length > 0 || ops.distractions.length > 0;
@@ -22,6 +26,14 @@ export function DetailPanel({ location, onClose, onNavigate }: Props) {
         <div>
           <h2 className={styles.title}>{location.name}</h2>
           <span className={styles.country}>{location.country}</span>
+          <label className={styles.removedCheckbox}>
+            <input
+              type="checkbox"
+              checked={isRemoved}
+              onChange={() => onToggleRemoved(location.id)}
+            />
+            Removed from pool
+          </label>
         </div>
         <button className={styles.closeBtn} onClick={onClose}>&times;</button>
       </div>
@@ -37,15 +49,29 @@ export function DetailPanel({ location, onClose, onNavigate }: Props) {
       <div className={styles.sections}>
         {/* Connections */}
         <Section title="Connections">
+          <label className={styles.travelCheckbox}>
+            <input
+              type="checkbox"
+              checked={nextClickTravels}
+              onChange={() => setNextClickTravels(prev => !prev)}
+            />
+            Next click travels
+          </label>
           <div className={styles.connectionList}>
             {allConnectedIds.map(id => {
               const conn = locationsById.get(id);
               if (!conn) return null;
+              const targetRemoved = removedIds.has(id);
               return (
                 <button
                   key={id}
-                  className={`${styles.connectionBtn} ${conn.isMapEdge ? styles.connectionEdge : ''}`}
-                  onClick={() => onNavigate(id)}
+                  className={`${styles.connectionBtn} ${conn.isMapEdge ? styles.connectionEdge : ''} ${targetRemoved ? styles.connectionRemoved : ''}`}
+                  onClick={() => {
+                    if (nextClickTravels) {
+                      onToggleRemoved(location.id);
+                    }
+                    onNavigate(id);
+                  }}
                 >
                   {conn.name}
                 </button>

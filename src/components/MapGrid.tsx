@@ -8,7 +8,9 @@ import styles from './MapGrid.module.css';
 interface Props {
   selectedId: string | null;
   filteredIds: Set<string> | null;
+  removedIds: Set<string>;
   onSelect: (id: string) => void;
+  onToggleRemoved: (id: string) => void;
 }
 
 const GRID_ROWS = 6;
@@ -20,7 +22,9 @@ function renderEdge(
   id: string,
   selectedId: string | null,
   filteredIds: Set<string> | null,
+  removedIds: Set<string>,
   onSelect: (id: string) => void,
+  onToggleRemoved: (id: string) => void,
 ) {
   const loc = locations.find(l => l.id === id);
   if (!loc) return null;
@@ -30,12 +34,14 @@ function renderEdge(
       location={loc}
       isSelected={selectedId === loc.id}
       isDimmed={filteredIds !== null && !filteredIds.has(loc.id)}
+      isRemoved={removedIds.has(loc.id)}
       onSelect={onSelect}
+      onToggleRemoved={onToggleRemoved}
     />
   );
 }
 
-export function MapGrid({ selectedId, filteredIds, onSelect }: Props) {
+export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggleRemoved }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [cellPositions, setCellPositions] = useState<Map<string, { x: number; y: number }>>(new Map());
 
@@ -76,13 +82,10 @@ export function MapGrid({ selectedId, filteredIds, onSelect }: Props) {
     }
   }
 
-  const e = (id: string) => renderEdge(id, selectedId, filteredIds, onSelect);
+  const e = (id: string) => renderEdge(id, selectedId, filteredIds, removedIds, onSelect, onToggleRemoved);
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
-      {/* SVG connection lines overlay the entire wrapper */}
-      <ConnectionLines cellPositions={cellPositions} selectedId={selectedId} />
-
       {/* Top edge: Sunshine Island (center-left), Fogfire Point (center-right) */}
       <div className={styles.edgeTop}>
         <div className={styles.edgeTopLeft}>{e('sunshine-island')}</div>
@@ -106,7 +109,9 @@ export function MapGrid({ selectedId, filteredIds, onSelect }: Props) {
                       location={loc}
                       isSelected={selectedId === loc.id}
                       isDimmed={filteredIds !== null && !filteredIds.has(loc.id)}
+                      isRemoved={removedIds.has(loc.id)}
                       onSelect={onSelect}
+                      onToggleRemoved={onToggleRemoved}
                     />
                   ) : (
                     <div className={styles.emptyCell} />
@@ -129,6 +134,9 @@ export function MapGrid({ selectedId, filteredIds, onSelect }: Props) {
         <div className={styles.edgeBottomLeft}>{e('pentapolis')}</div>
         <div className={styles.edgeBottomRight}>{e('hermitage-of-the-scythe')}</div>
       </div>
+
+      {/* SVG connection lines overlay — rendered last so it paints on top */}
+      <ConnectionLines cellPositions={cellPositions} selectedId={selectedId} removedIds={removedIds} />
     </div>
   );
 }

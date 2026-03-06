@@ -4,6 +4,7 @@ import styles from './ConnectionLines.module.css';
 interface Props {
   cellPositions: Map<string, { x: number; y: number }>;
   selectedId: string | null;
+  removedIds: Set<string>;
 }
 
 // Shorten a line by a percentage from each end (0.15 = 15% trimmed from each side)
@@ -20,7 +21,7 @@ function shorten(
   ];
 }
 
-export function ConnectionLines({ cellPositions, selectedId }: Props) {
+export function ConnectionLines({ cellPositions, selectedId, removedIds }: Props) {
   if (cellPositions.size === 0) return null;
 
   const allConnections = [...connections, ...edgeConnections];
@@ -31,12 +32,13 @@ export function ConnectionLines({ cellPositions, selectedId }: Props) {
         const from = cellPositions.get(conn.from);
         const to = cellPositions.get(conn.to);
         if (!from || !to) return null;
+        if (removedIds.has(conn.from) || removedIds.has(conn.to)) return null;
 
         const isHighlighted = selectedId === conn.from || selectedId === conn.to;
         const isEdge = edgeConnections.includes(conn);
         const [sx1, sy1, sx2, sy2] = isEdge
           ? shorten(from.x, from.y, to.x, to.y, 0.2)
-          : shorten(from.x, from.y, to.x, to.y, 0.5);
+          : shorten(from.x, from.y, to.x, to.y, 0.45);
 
         return (
           <g key={`${conn.from}-${conn.to}`}>

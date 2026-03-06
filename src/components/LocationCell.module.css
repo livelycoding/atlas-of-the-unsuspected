@@ -34,6 +34,11 @@
   opacity: 0.3;
 }
 
+.removed {
+  opacity: 0.15;
+  filter: grayscale(1);
+}
+
 .name {
   font-size: 0.65rem;
   font-weight: 700;

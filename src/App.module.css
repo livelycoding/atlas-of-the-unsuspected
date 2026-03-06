@@ -51,3 +51,11 @@ body {
   overflow: auto;
   padding: 20px;
 }
+
+.hint {
+  font-size: 0.72rem;
+  color: #8899aa;
+  text-align: center;
+  margin-bottom: 8px;
+  font-style: italic;
+}

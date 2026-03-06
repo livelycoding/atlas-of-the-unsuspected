@@ -9,6 +9,7 @@ import styles from './App.module.css';
 export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [activeFilters, setActiveFilters] = useState<Set<string>>(new Set());
+  const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(prev => (prev === id ? null : id));
@@ -16,6 +17,18 @@ export default function App() {
 
   const handleClose = useCallback(() => {
     setSelectedId(null);
+  }, []);
+
+  const handleToggleRemoved = useCallback((id: string) => {
+    setRemovedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
   }, []);
 
   const handleToggleFilter = useCallback((filter: string) => {
@@ -70,10 +83,13 @@ export default function App() {
       </header>
       <div className={styles.content}>
         <div className={styles.mapArea}>
+          <p className={styles.hint}>Right-click a city to remove it from the pool</p>
           <MapGrid
             selectedId={selectedId}
             filteredIds={filteredIds}
+            removedIds={removedIds}
             onSelect={handleSelect}
+            onToggleRemoved={handleToggleRemoved}
           />
           <Legend
             activeFilters={activeFilters}
@@ -85,6 +101,9 @@ export default function App() {
             location={selectedLocation}
             onClose={handleClose}
             onNavigate={handleSelect}
+            isRemoved={removedIds.has(selectedLocation.id)}
+            onToggleRemoved={handleToggleRemoved}
+            removedIds={removedIds}
           />
         )}
       </div>

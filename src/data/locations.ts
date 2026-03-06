@@ -1234,7 +1234,7 @@ export const locations: Location[] = [
     weapons: [],
     rarities: [],
     bookOfSunsPage: null,
-    onArrival: ['Obscurity'],
+    onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
       connections: [],
       property: [],
@@ -1251,7 +1251,7 @@ export const locations: Location[] = [
   {
     id: 'fogfire-point',
     name: 'Fogfire Point',
-    country: 'Baltic Coast',
+    country: 'Norway',
     gridRow: -1,
     gridCol: 3.5,
     region: 'map-edge',
@@ -1266,7 +1266,7 @@ export const locations: Location[] = [
     weapons: [],
     rarities: [],
     bookOfSunsPage: null,
-    onArrival: ['Obscurity'],
+    onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
       connections: [],
       property: [],
@@ -1298,7 +1298,7 @@ export const locations: Location[] = [
     weapons: [],
     rarities: [],
     bookOfSunsPage: null,
-    onArrival: ['Obscurity'],
+    onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
       connections: [],
       property: [],
@@ -1330,7 +1330,7 @@ export const locations: Location[] = [
     weapons: [],
     rarities: [],
     bookOfSunsPage: null,
-    onArrival: ['Obscurity'],
+    onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
       connections: [],
       property: [],
@@ -1362,7 +1362,7 @@ export const locations: Location[] = [
     weapons: [],
     rarities: [],
     bookOfSunsPage: null,
-    onArrival: ['Obscurity'],
+    onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
       connections: [],
       property: [],
@@ -1394,7 +1394,7 @@ export const locations: Location[] = [
     weapons: [],
     rarities: [],
     bookOfSunsPage: null,
-    onArrival: ['Obscurity'],
+    onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
       connections: [],
       property: [],
@@ -1426,7 +1426,7 @@ export const locations: Location[] = [
     weapons: [],
     rarities: [],
     bookOfSunsPage: null,
-    onArrival: ['Obscurity'],
+    onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
       connections: [],
       property: [],

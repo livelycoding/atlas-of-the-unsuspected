@@ -22,7 +22,6 @@ export const connections: Connection[] = [
   // Row 1 → Row 2
   { from: 'paris', to: 'strasbourg' },
   { from: 'rhenish-aachen', to: 'munich' },
-  { from: 'rhenish-aachen', to: 'strasbourg' },
   { from: 'prague', to: 'vienna' },
   { from: 'kaunas', to: 'krakow' },
   { from: 'leningrad', to: 'kiev' },
@@ -38,7 +37,6 @@ export const connections: Connection[] = [
 
   // Row 2 → Row 3
   { from: 'strasbourg', to: 'granada' },
-  { from: 'strasbourg', to: 'munich' },
   { from: 'munich', to: 'avignon' },
   { from: 'vienna', to: 'venice' },
   { from: 'krakow', to: 'budapest' },
@@ -83,6 +81,12 @@ export const connections: Connection[] = [
 
   // Row 5 cross-connections
   { from: 'alexandria', to: 'baghdad' },
+];
+
+// One-way connections (source → destination only, no return)
+export const directedConnections: Connection[] = [
+  { from: 'munich', to: 'strasbourg' },
+  { from: 'strasbourg', to: 'rhenish-aachen' },
 ];
 
 // Edge connections (regular location → map's edge location)

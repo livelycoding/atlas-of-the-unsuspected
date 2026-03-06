@@ -1,4 +1,4 @@
-import { connections, edgeConnections } from '../data/connections';
+import { connections, edgeConnections, directedConnections } from '../data/connections';
 import styles from './ConnectionLines.module.css';
 
 interface Props {
@@ -24,10 +24,32 @@ function shorten(
 export function ConnectionLines({ cellPositions, selectedId, removedIds }: Props) {
   if (cellPositions.size === 0) return null;
 
-  const allConnections = [...connections, ...edgeConnections];
+  const allConnections = [...connections, ...directedConnections, ...edgeConnections];
 
   return (
     <svg className={styles.svg}>
+      <defs>
+        <marker
+          id="arrowhead"
+          markerWidth="8"
+          markerHeight="6"
+          refX="2"
+          refY="3"
+          orient="auto"
+        >
+          <polygon points="0 0, 8 3, 0 6" fill="rgba(201, 168, 48, 0.85)" />
+        </marker>
+        <marker
+          id="arrowhead-highlighted"
+          markerWidth="8"
+          markerHeight="6"
+          refX="2"
+          refY="3"
+          orient="auto"
+        >
+          <polygon points="0 0, 8 3, 0 6" fill="rgba(201, 168, 48, 0.9)" />
+        </marker>
+      </defs>
       {allConnections.map(conn => {
         const from = cellPositions.get(conn.from);
         const to = cellPositions.get(conn.to);
@@ -36,21 +58,22 @@ export function ConnectionLines({ cellPositions, selectedId, removedIds }: Props
 
         const isHighlighted = selectedId === conn.from || selectedId === conn.to;
         const isEdge = edgeConnections.includes(conn);
-        const [sx1, sy1, sx2, sy2] = isEdge
-          ? shorten(from.x, from.y, to.x, to.y, 0.2)
-          : shorten(from.x, from.y, to.x, to.y, 0.45);
+        const isDirected = directedConnections.includes(conn);
+        const ratio = isEdge ? 0.2 : isDirected ? 0.35 : 0.45;
+        const [sx1, sy1, sx2, sy2] = shorten(from.x, from.y, to.x, to.y, ratio);
 
         return (
           <g key={`${conn.from}-${conn.to}`}>
             {/* Dark outline for contrast */}
             <line
               x1={sx1} y1={sy1} x2={sx2} y2={sy2}
-              className={`${styles.outline} ${isEdge ? styles.edgeLine : ''}`}
+              className={`${styles.outline} ${isEdge ? styles.edgeLine : ''} ${isDirected ? styles.directedLine : ''}`}
             />
             {/* Visible line */}
             <line
               x1={sx1} y1={sy1} x2={sx2} y2={sy2}
-              className={`${styles.line} ${isHighlighted ? styles.highlighted : ''} ${isEdge ? styles.edgeLine : ''}`}
+              className={`${styles.line} ${isHighlighted ? styles.highlighted : ''} ${isEdge ? styles.edgeLine : ''} ${isDirected ? styles.directedLine : ''}`}
+              markerEnd={isDirected ? `url(#arrowhead${isHighlighted ? '-highlighted' : ''})` : undefined}
             />
           </g>
         );

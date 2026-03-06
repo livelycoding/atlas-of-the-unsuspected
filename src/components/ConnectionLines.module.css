@@ -33,3 +33,7 @@
 .edgeLine.highlighted {
   stroke: rgba(201, 168, 48, 0.7);
 }
+
+.directedLine {
+  stroke-dasharray: 4 3;
+}

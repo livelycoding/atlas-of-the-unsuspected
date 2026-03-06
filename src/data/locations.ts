@@ -182,7 +182,7 @@ export const locations: Location[] = [
     },
     specialFeatures: [],
     specialEvent: null,
-    connections: ['amsterdam', 'munich', 'paris', 'prague', 'strasbourg'],
+    connections: ['amsterdam', 'munich', 'paris', 'prague'],
     edgeConnections: [],
   },
   {
@@ -365,7 +365,7 @@ export const locations: Location[] = [
     caper: null,
     specialFeatures: [],
     specialEvent: null,
-    connections: ['granada', 'munich', 'paris', 'rhenish-aachen'],
+    connections: ['granada', 'paris', 'rhenish-aachen'],
     edgeConnections: ['priory-of-captains'],
   },
   {

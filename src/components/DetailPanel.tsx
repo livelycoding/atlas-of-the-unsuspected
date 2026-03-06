@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Location } from '../data/types';
 import { locationsById } from '../data/locations';
+import { directedConnections } from '../data/connections';
 import { opportunityDetails } from '../data/opportunities';
 import styles from './DetailPanel.module.css';
 
@@ -14,7 +15,15 @@ interface Props {
 }
 
 export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds }: Props) {
-  const allConnectedIds = [...location.connections, ...location.edgeConnections];
+  const outgoingDirectedIds = location.isMapEdge ? [] : directedConnections
+    .filter(c => c.from === location.id)
+    .map(c => c.to);
+  const outgoingDirectedSet = new Set(outgoingDirectedIds);
+  const allConnectedIds = location.isMapEdge ? [] : [
+    ...location.connections.filter(id => !outgoingDirectedSet.has(id)),
+    ...outgoingDirectedIds,
+    ...location.edgeConnections,
+  ];
   const [clickMode, setClickMode] = useState<'none' | 'travels' | 'removes'>('none');
   const ops = location.opportunities;
   const hasOpportunities = ops.connections.length > 0 || ops.property.length > 0
@@ -49,49 +58,56 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
       <div className={styles.sections}>
         {/* Connections */}
         <Section title="Connections">
-          <div className={styles.clickModes}>
-            <label className={styles.travelCheckbox}>
-              <input
-                type="checkbox"
-                checked={clickMode === 'travels'}
-                onChange={() => setClickMode(prev => prev === 'travels' ? 'none' : 'travels')}
-              />
-              Touch Connection = Travel
-            </label>
-            <label className={styles.travelCheckbox}>
-              <input
-                type="checkbox"
-                checked={clickMode === 'removes'}
-                onChange={() => setClickMode(prev => prev === 'removes' ? 'none' : 'removes')}
-              />
-              Touch Connection = Remove it
-            </label>
-          </div>
-          <div className={styles.connectionList}>
-            {allConnectedIds.map(id => {
-              const conn = locationsById.get(id);
-              if (!conn) return null;
-              const targetRemoved = removedIds.has(id);
-              return (
-                <button
-                  key={id}
-                  className={`${styles.connectionBtn} ${conn.isMapEdge ? styles.connectionEdge : ''} ${targetRemoved ? styles.connectionRemoved : ''}`}
-                  onClick={() => {
-                    if (clickMode === 'travels') {
-                      onToggleRemoved(location.id);
-                      onNavigate(id);
-                    } else if (clickMode === 'removes') {
-                      onToggleRemoved(id);
-                    } else {
-                      onNavigate(id);
-                    }
-                  }}
-                >
-                  {conn.name}
-                </button>
-              );
-            })}
-          </div>
+          {location.isMapEdge ? (
+            <span className={styles.endOfLine}>None. End of the line.</span>
+          ) : (
+            <>
+              <div className={styles.clickModes}>
+                <label className={styles.travelCheckbox}>
+                  <input
+                    type="checkbox"
+                    checked={clickMode === 'travels'}
+                    onChange={() => setClickMode(prev => prev === 'travels' ? 'none' : 'travels')}
+                  />
+                  Touch Connection = Travel
+                </label>
+                <label className={styles.travelCheckbox}>
+                  <input
+                    type="checkbox"
+                    checked={clickMode === 'removes'}
+                    onChange={() => setClickMode(prev => prev === 'removes' ? 'none' : 'removes')}
+                  />
+                  Touch Connection = Remove it
+                </label>
+              </div>
+              <div className={styles.connectionList}>
+                {allConnectedIds.map(id => {
+                  const conn = locationsById.get(id);
+                  if (!conn) return null;
+                  const targetRemoved = removedIds.has(id);
+                  const isOneWay = conn.isMapEdge || outgoingDirectedSet.has(id);
+                  return (
+                    <button
+                      key={id}
+                      className={`${styles.connectionBtn} ${conn.isMapEdge ? styles.connectionEdge : ''} ${targetRemoved ? styles.connectionRemoved : ''} ${isOneWay && !conn.isMapEdge ? styles.connectionDirected : ''}`}
+                      onClick={() => {
+                        if (clickMode === 'travels') {
+                          onToggleRemoved(location.id);
+                          onNavigate(id);
+                        } else if (clickMode === 'removes') {
+                          onToggleRemoved(id);
+                        } else {
+                          onNavigate(id);
+                        }
+                      }}
+                    >
+                      {conn.name}{isOneWay && <span className={styles.oneWayArrow}>{'\u2009\u2192'}</span>}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </Section>
 
         {/* On Arrival */}

@@ -36,7 +36,7 @@ export function ConnectionLines({ cellPositions, selectedId }: Props) {
         const isEdge = edgeConnections.includes(conn);
         const [sx1, sy1, sx2, sy2] = isEdge
           ? shorten(from.x, from.y, to.x, to.y, 0.2)
-          : shorten(from.x, from.y, to.x, to.y, 0.3);
+          : shorten(from.x, from.y, to.x, to.y, 0.5);
 
         return (
           <g key={`${conn.from}-${conn.to}`}>

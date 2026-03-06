@@ -142,10 +142,10 @@ export default function App() {
         <span className={styles.subtitle}>Cultist Simulator: Exile DLC Explorer</span>
         <div className={styles.headerSpacer} />
         <button
-          className={`${styles.helpBtn} ${showHelp ? styles.helpBtnActive : ''}`}
+          className={`${styles.toolbarBtn} ${showHelp ? styles.toolbarBtnActive : ''}`}
           onClick={() => setShowHelp(v => !v)}
         >
-          ?
+          How to Use
         </button>
       </header>
       <div className={styles.toolbar}>

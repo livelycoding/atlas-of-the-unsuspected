@@ -124,7 +124,7 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
           );
         })}
 
-        <ConnectionLines cellPositions={cellPositions} selectedId={selectedId} removedIds={removedIds} />
+        <ConnectionLines cellPositions={cellPositions} selectedId={selectedId} removedIds={removedIds} mapMode />
       </div>
     );
   }

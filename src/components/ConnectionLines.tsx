@@ -5,6 +5,7 @@ interface Props {
   cellPositions: Map<string, { x: number; y: number }>;
   selectedId: string | null;
   removedIds: Set<string>;
+  mapMode?: boolean;
 }
 
 // Shorten a line by a percentage from each end (0.15 = 15% trimmed from each side)
@@ -21,7 +22,7 @@ function shorten(
   ];
 }
 
-export function ConnectionLines({ cellPositions, selectedId, removedIds }: Props) {
+export function ConnectionLines({ cellPositions, selectedId, removedIds, mapMode }: Props) {
   if (cellPositions.size === 0) return null;
 
   const allConnections = [...connections, ...directedConnections, ...edgeConnections];
@@ -59,7 +60,9 @@ export function ConnectionLines({ cellPositions, selectedId, removedIds }: Props
         const isHighlighted = selectedId === conn.from || selectedId === conn.to;
         const isEdge = edgeConnections.includes(conn);
         const isDirected = directedConnections.includes(conn);
-        const ratio = isEdge ? 0.2 : isDirected ? 0.35 : 0.45;
+        const ratio = mapMode
+          ? (isEdge ? 0.1 : isDirected ? 0.12 : 0.1)
+          : (isEdge ? 0.2 : isDirected ? 0.35 : 0.45);
         const [sx1, sy1, sx2, sy2] = shorten(from.x, from.y, to.x, to.y, ratio);
 
         return (

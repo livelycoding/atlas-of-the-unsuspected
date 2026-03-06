@@ -180,7 +180,15 @@
   transition: all 0.1s ease;
 }
 
-.connectionBtn:hover {
+@media (hover: hover) {
+  .connectionBtn:hover {
+    background: rgba(201, 168, 48, 0.2);
+    border-color: #c9a830;
+    color: #c9a830;
+  }
+}
+
+.connectionBtn:active {
   background: rgba(201, 168, 48, 0.2);
   border-color: #c9a830;
   color: #c9a830;

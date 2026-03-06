@@ -59,7 +59,9 @@ export function LocationCell({ location, isSelected, isDimmed, isRemoved, onSele
   if (location.caper) badges.push('C');
   if (location.isTroubled) badges.push('T');
   if (location.isRemote && !location.isMapEdge) badges.push('R');
-  if (location.bookOfSunsPage !== null) badges.push('B');
+  if (location.bookOfSunsPage === 1) badges.push('B1');
+  if (location.bookOfSunsPage === 2) badges.push('B2');
+  if (location.bookOfSunsPage === 3) badges.push('B3');
 
   return (
     <button

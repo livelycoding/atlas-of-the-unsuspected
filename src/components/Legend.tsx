@@ -41,7 +41,9 @@ const stuffItems = [
   { id: 'weapon-ebrehel', label: 'Ebrehel (vault)', badge: 'W3', color: '#8b4513' },
   { id: 'weapon-imhullune', label: 'Imhullune Tectrix (vault)', badge: 'W4', color: '#4a5568' },
   { id: 'pentiment', label: 'Pentiment', badge: 'P', color: '#2e8b57' },
-  { id: 'book-of-suns', label: 'Book of Suns', badge: 'B', color: '#daa520' },
+  { id: 'book-of-suns-1', label: 'Book of Suns p.1', badge: 'B1', color: '#daa520' },
+  { id: 'book-of-suns-2', label: 'Book of Suns p.2', badge: 'B2', color: '#daa520' },
+  { id: 'book-of-suns-3', label: 'Book of Suns p.3', badge: 'B3', color: '#daa520' },
 ];
 
 export function Legend({ activeFilters, onToggleFilter, opportunityTerms, onOpportunitySearch }: Props) {

@@ -100,7 +100,9 @@ export default function App() {
               if (f === 'weapon-imhullune' && loc.weapons.some(w => w.includes("Imhullune"))) return true;
               if (f === 'special-event' && loc.specialEvent) return true;
               if (f === 'caper' && loc.caper) return true;
-              if (f === 'book-of-suns' && loc.bookOfSunsPage !== null) return true;
+              if (f === 'book-of-suns-1' && loc.bookOfSunsPage === 1) return true;
+              if (f === 'book-of-suns-2' && loc.bookOfSunsPage === 2) return true;
+              if (f === 'book-of-suns-3' && loc.bookOfSunsPage === 3) return true;
               if (f === loc.region as RegionColor) return true;
             }
             return false;

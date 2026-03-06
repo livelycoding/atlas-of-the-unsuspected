@@ -40,6 +40,39 @@ body {
   font-style: italic;
 }
 
+.headerSpacer {
+  flex: 1;
+}
+
+.helpBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 48, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  color: #c9a830;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+  flex-shrink: 0;
+}
+
+.helpBtn:hover {
+  background: rgba(201, 168, 48, 0.2);
+  border-color: #c9a830;
+}
+
+.helpBtnActive {
+  background: rgba(201, 168, 48, 0.25);
+  border-color: #c9a830;
+  box-shadow: 0 0 4px rgba(201, 168, 48, 0.3);
+}
+
 .toolbar {
   display: flex;
   gap: 8px;

@@ -3,6 +3,7 @@ import { MapGrid } from './components/MapGrid';
 import { DetailPanel } from './components/DetailPanel';
 import { Legend } from './components/Legend';
 import { OperationsPanel } from './components/OperationsPanel';
+import { HelpPanel } from './components/HelpPanel';
 import { locations, locationsById } from './data/locations';
 import { RegionColor } from './data/types';
 import styles from './App.module.css';
@@ -15,6 +16,7 @@ export default function App() {
   const [confirmReset, setConfirmReset] = useState(false);
   const [opportunityTerms, setOpportunityTerms] = useState<string[]>([]);
   const [showOperations, setShowOperations] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(prev => (prev === id ? null : id));
@@ -138,6 +140,13 @@ export default function App() {
       <header className={styles.header}>
         <h1 className={styles.title}>Atlas of the Unsuspected</h1>
         <span className={styles.subtitle}>Cultist Simulator: Exile DLC Explorer</span>
+        <div className={styles.headerSpacer} />
+        <button
+          className={`${styles.helpBtn} ${showHelp ? styles.helpBtnActive : ''}`}
+          onClick={() => setShowHelp(v => !v)}
+        >
+          ?
+        </button>
       </header>
       <div className={styles.toolbar}>
         <button className={styles.toolbarBtn} onClick={handleExport}>Export Removed Cities</button>
@@ -191,6 +200,9 @@ export default function App() {
             onOpportunitySearch={setOpportunityTerms}
           />
         </div>
+        {showHelp && !selectedLocation && !showOperations && (
+          <HelpPanel onClose={() => setShowHelp(false)} />
+        )}
         {showOperations && !selectedLocation && (
           <OperationsPanel onClose={() => setShowOperations(false)} />
         )}

@@ -82,6 +82,10 @@ body {
   box-shadow: 0 0 4px rgba(201, 168, 48, 0.3);
 }
 
+.toolbarSpacer {
+  flex: 1;
+}
+
 .viewToggleRow {
   display: flex;
   padding: 6px 24px;

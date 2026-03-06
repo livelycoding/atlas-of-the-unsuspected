@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useMemo } from 'react';
 import { MapGrid } from './components/MapGrid';
 import { DetailPanel } from './components/DetailPanel';
 import { Legend } from './components/Legend';
+import { OperationsPanel } from './components/OperationsPanel';
 import { locations, locationsById } from './data/locations';
 import { RegionColor } from './data/types';
 import styles from './App.module.css';
@@ -13,6 +14,7 @@ export default function App() {
   const [mapMode, setMapMode] = useState(true);
   const [confirmReset, setConfirmReset] = useState(false);
   const [opportunityTerms, setOpportunityTerms] = useState<string[]>([]);
+  const [showOperations, setShowOperations] = useState(false);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(prev => (prev === id ? null : id));
@@ -155,6 +157,13 @@ export default function App() {
         >
           {confirmReset ? 'Click again to confirm' : 'Reset Cities'}
         </button>
+        <div className={styles.toolbarSpacer} />
+        <button
+          className={`${styles.toolbarBtn} ${showOperations ? styles.toolbarBtnActive : ''}`}
+          onClick={() => setShowOperations(v => !v)}
+        >
+          Operations Reference
+        </button>
       </div>
       <div className={styles.viewToggleRow}>
         <button
@@ -182,6 +191,9 @@ export default function App() {
             onOpportunitySearch={setOpportunityTerms}
           />
         </div>
+        {showOperations && !selectedLocation && (
+          <OperationsPanel onClose={() => setShowOperations(false)} />
+        )}
         {selectedLocation && (
           <DetailPanel
             location={selectedLocation}

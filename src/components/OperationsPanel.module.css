@@ -1,0 +1,146 @@
+.panel {
+  width: 340px;
+  min-width: 340px;
+  background: #16213e;
+  border-left: 2px solid #c9a830;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 52px);
+  position: fixed;
+  right: 0;
+  top: 52px;
+  z-index: 20;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px;
+  border-bottom: 1px solid rgba(201, 168, 48, 0.3);
+  position: sticky;
+  top: 0;
+  background: #16213e;
+  z-index: 1;
+}
+
+.title {
+  font-size: 1.1rem;
+  color: #c9a830;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: #8899aa;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  font-family: inherit;
+}
+
+.closeBtn:hover {
+  color: #fff;
+}
+
+.operations {
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.operation {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.opHeader {
+  background: none;
+  border: none;
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.opHeader:hover {
+  color: #c9a830;
+}
+
+.chevron {
+  color: #c9a830;
+  font-size: 0.65rem;
+  width: 10px;
+  flex-shrink: 0;
+}
+
+.opBody {
+  margin-top: 6px;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #c9a830;
+  margin-bottom: 2px;
+  display: block;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.list li {
+  font-size: 0.78rem;
+  color: #b0b8c0;
+  padding-left: 12px;
+  position: relative;
+}
+
+.list li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  color: #c9a830;
+}
+
+.challenges {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.challenge {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #b0b8c0;
+}
+
+.challengeLevel {
+  font-weight: 700;
+  color: #8899aa;
+  font-size: 0.68rem;
+  min-width: 18px;
+}

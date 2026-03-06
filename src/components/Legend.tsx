@@ -1,3 +1,4 @@
+import React, { useRef, useCallback } from 'react';
 import { OpportunitySearch } from './OpportunitySearch';
 import styles from './Legend.module.css';
 
@@ -6,7 +7,16 @@ interface Props {
   onToggleFilter: (filter: string) => void;
   opportunityTerms: string[];
   onOpportunitySearch: (terms: string[]) => void;
+  eliminatedWeaknesses: Set<string>;
+  onToggleWeakness: (name: string) => void;
+  onEliminateOthers: (name: string) => void;
 }
+
+const weaknessPools = [
+  { title: 'Environment', items: ['Freezing Winds', 'Trembling Heat', 'The Sea'] },
+  { title: 'Quirks', items: ['Cats', 'Heights', 'Faith'] },
+  { title: 'Disfavor', items: ["The Wolf Divided's Shadow", "The Horned Axe's Shadow", "The Flowermaker's Shadow"] },
+];
 
 const regionItems = [
   { id: 'western-europe', label: 'Western Europe', color: '#4a90d9' },
@@ -46,9 +56,63 @@ const stuffItems = [
   { id: 'book-of-suns-3', label: 'Book of Suns p.3', badge: 'B3', color: '#daa520' },
 ];
 
-export function Legend({ activeFilters, onToggleFilter, opportunityTerms, onOpportunitySearch }: Props) {
+export function Legend({ activeFilters, onToggleFilter, opportunityTerms, onOpportunitySearch, eliminatedWeaknesses, onToggleWeakness, onEliminateOthers }: Props) {
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const didLongPress = useRef(false);
+
+  const handleTouchStart = useCallback((name: string) => {
+    didLongPress.current = false;
+    longPressTimer.current = setTimeout(() => {
+      didLongPress.current = true;
+      onEliminateOthers(name);
+    }, 500);
+  }, [onEliminateOthers]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  }, []);
+
   return (
-    <div className={styles.legend}>
+    <div className={styles.wrapper}>
+      <div className={styles.weaknessRow}>
+        <div className={styles.weaknessHeader}>
+          <h4 className={styles.groupTitle}>Remaining Weaknesses</h4>
+          <p className={styles.weaknessHint}>Click to eliminate. Right-click or long-press to keep only that weakness.</p>
+        </div>
+        {weaknessPools.map((pool, i) => (
+          <React.Fragment key={pool.title}>
+            {i > 0 && <div className={styles.divider} />}
+            <div className={styles.group}>
+              <h4 className={styles.groupTitle}>{pool.title}</h4>
+              <div className={styles.items}>
+                {pool.items.map(name => {
+                  const isEliminated = eliminatedWeaknesses.has(name);
+                  const remaining = pool.items.filter(n => !eliminatedWeaknesses.has(n));
+                  const isSoleSurvivor = !isEliminated && remaining.length === 1;
+                  return (
+                    <button
+                      key={name}
+                      className={`${styles.item} ${isEliminated ? styles.eliminated : ''} ${isSoleSurvivor ? styles.soleSurvivor : ''}`}
+                      title="Click to eliminate. Right-click or long-press to keep only this one."
+                      onClick={() => { if (!didLongPress.current) onToggleWeakness(name); }}
+                      onContextMenu={(e) => { e.preventDefault(); onEliminateOthers(name); }}
+                      onTouchStart={() => handleTouchStart(name)}
+                      onTouchEnd={handleTouchEnd}
+                      onTouchCancel={handleTouchEnd}
+                    >
+                      <span className={styles.label}>{name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
+      <div className={styles.legend}>
       <OpportunitySearch terms={opportunityTerms} onSearch={onOpportunitySearch} />
       <div className={styles.group}>
         <h4 className={styles.groupTitle}>Regions</h4>
@@ -119,6 +183,7 @@ export function Legend({ activeFilters, onToggleFilter, opportunityTerms, onOppo
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 }

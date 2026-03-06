@@ -1,3 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  margin: 24px auto 16px;
+  width: fit-content;
+}
+
+.weaknessRow {
+  display: flex;
+  gap: 16px;
+  background: rgba(22, 33, 62, 0.8);
+  border: 1px solid rgba(201, 168, 48, 0.2);
+  border-radius: 6px;
+  padding: 8px 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.weaknessHeader {
+  width: 100%;
+  text-align: center;
+}
+
 .legend {
   display: flex;
   gap: 16px;
@@ -7,8 +33,6 @@
   padding: 10px 16px;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 24px auto 16px;
-  width: fit-content;
 }
 
 .group {
@@ -84,4 +108,28 @@
 .label {
   font-size: 0.6rem;
   white-space: nowrap;
+}
+
+.eliminated {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+.weaknessRow button {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.soleSurvivor {
+  background: rgba(201, 168, 48, 0.15);
+  border-color: rgba(201, 168, 48, 0.5);
+  color: #c9a830;
+}
+
+.weaknessHint {
+  font-style: italic;
+  font-size: 0.6rem;
+  color: #8899aa;
+  text-align: center;
+  width: 100%;
 }

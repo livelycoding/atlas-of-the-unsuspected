@@ -63,6 +63,21 @@ export function HelpPanel({ onClose }: Props) {
           </p>
         </Section>
 
+        <Section title="Weakness Tracker">
+          <p>
+            The <strong>Remaining Weaknesses</strong> section at the top of the legend
+            helps you track the Foe's 3 possible weaknesses. There are 3 pools
+            (Environment, Quirks, Disfavor) each with 3 options.
+          </p>
+          <p>
+            <strong>Click</strong> a weakness to eliminate it (struck through and dimmed).
+            Click again to restore it.
+            <strong> Right-click</strong> (or long-press on mobile) a weakness to keep only
+            that one and eliminate the other two in its pool.
+            Weakness state is saved with Export and restored with Import.
+          </p>
+        </Section>
+
         <Section title="Region & Feature Filters">
           <p>
             The bottom legend bar has clickable filters. <strong>Regions</strong> highlight

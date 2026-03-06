@@ -17,6 +17,42 @@ export default function App() {
   const [opportunityTerms, setOpportunityTerms] = useState<string[]>([]);
   const [showOperations, setShowOperations] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+  const [eliminatedWeaknesses, setEliminatedWeaknesses] = useState<Set<string>>(new Set());
+
+  const weaknessPools: Record<string, string[]> = {
+    'Environment': ['Freezing Winds', 'Trembling Heat', 'The Sea'],
+    'Quirks': ['Cats', 'Heights', 'Faith'],
+    'Disfavor': ["The Wolf Divided's Shadow", "The Horned Axe's Shadow", "The Flowermaker's Shadow"],
+  };
+
+  const handleToggleWeakness = useCallback((name: string) => {
+    setEliminatedWeaknesses(prev => {
+      const next = new Set(prev);
+      if (next.has(name)) {
+        next.delete(name);
+      } else {
+        next.add(name);
+      }
+      return next;
+    });
+  }, []);
+
+  const handleEliminateOthers = useCallback((name: string) => {
+    const pool = Object.values(weaknessPools).find(p => p.includes(name));
+    if (!pool) return;
+    const others = pool.filter(n => n !== name);
+    setEliminatedWeaknesses(prev => {
+      const next = new Set(prev);
+      const allOthersEliminated = others.every(n => next.has(n));
+      if (allOthersEliminated) {
+        others.forEach(n => next.delete(n));
+      } else {
+        others.forEach(n => next.add(n));
+        next.delete(name);
+      }
+      return next;
+    });
+  }, []);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(prev => (prev === id ? null : id));
@@ -53,7 +89,10 @@ export default function App() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleExport = useCallback(() => {
-    const data = JSON.stringify([...removedIds]);
+    const data = JSON.stringify({
+      removedIds: [...removedIds],
+      eliminatedWeaknesses: [...eliminatedWeaknesses],
+    });
     const blob = new Blob([data], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -61,7 +100,7 @@ export default function App() {
     a.download = 'exile-map-run.json';
     a.click();
     URL.revokeObjectURL(url);
-  }, [removedIds]);
+  }, [removedIds, eliminatedWeaknesses]);
 
   const handleImport = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -69,8 +108,14 @@ export default function App() {
     const reader = new FileReader();
     reader.onload = () => {
       try {
-        const ids: string[] = JSON.parse(reader.result as string);
-        setRemovedIds(new Set(ids));
+        const parsed = JSON.parse(reader.result as string);
+        if (Array.isArray(parsed)) {
+          setRemovedIds(new Set(parsed));
+          setEliminatedWeaknesses(new Set());
+        } else {
+          setRemovedIds(new Set(parsed.removedIds ?? []));
+          setEliminatedWeaknesses(new Set(parsed.eliminatedWeaknesses ?? []));
+        }
       } catch { /* ignore invalid files */ }
     };
     reader.readAsText(file);
@@ -159,6 +204,7 @@ export default function App() {
           onClick={() => {
             if (confirmReset) {
               setRemovedIds(new Set());
+              setEliminatedWeaknesses(new Set());
               setConfirmReset(false);
             } else {
               setConfirmReset(true);
@@ -200,6 +246,9 @@ export default function App() {
             onToggleFilter={handleToggleFilter}
             opportunityTerms={opportunityTerms}
             onOpportunitySearch={setOpportunityTerms}
+            eliminatedWeaknesses={eliminatedWeaknesses}
+            onToggleWeakness={handleToggleWeakness}
+            onEliminateOthers={handleEliminateOthers}
           />
         </div>
         {showHelp && !selectedLocation && !showOperations && (

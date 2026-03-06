@@ -184,7 +184,7 @@ export default function App() {
       </div>
       <div className={styles.content}>
         <div className={styles.mapArea}>
-          <p className={styles.hint}>Right-click a city to remove it from the pool.</p>
+          <p className={styles.hint}>Right-click or long-press a city to remove it from the pool.</p>
           <MapGrid
             selectedId={selectedId}
             filteredIds={filteredIds}

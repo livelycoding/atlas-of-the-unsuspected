@@ -72,6 +72,10 @@
   margin: 0;
 }
 
+.section p + p {
+  margin-top: 6px;
+}
+
 .section p strong {
   color: #e0e0e0;
 }

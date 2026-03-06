@@ -35,6 +35,11 @@ export function HelpPanel({ onClose }: Props) {
             opportunities, shrines, pentiments, ligeians, allies, capers, special events,
             weapons, rarities, and Book of Suns pages.
           </p>
+          <p>
+            In the Reconnoitre Opportunities section, click any item to expand a
+            <strong> dropdown</strong> showing its result, aspects, and which weakness pool
+            it belongs to (if any).
+          </p>
         </Section>
 
         <Section title="Removing Cities">

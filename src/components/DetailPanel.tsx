@@ -35,6 +35,25 @@ export function DetailPanel({ location, onClose, onNavigate }: Props) {
       </div>
 
       <div className={styles.sections}>
+        {/* Connections */}
+        <Section title="Connections">
+          <div className={styles.connectionList}>
+            {allConnectedIds.map(id => {
+              const conn = locationsById.get(id);
+              if (!conn) return null;
+              return (
+                <button
+                  key={id}
+                  className={`${styles.connectionBtn} ${conn.isMapEdge ? styles.connectionEdge : ''}`}
+                  onClick={() => onNavigate(id)}
+                >
+                  {conn.name}
+                </button>
+              );
+            })}
+          </div>
+        </Section>
+
         {/* On Arrival */}
         {location.onArrival.length > 0 && (
           <Section title="On Arrival">
@@ -119,25 +138,6 @@ export function DetailPanel({ location, onClose, onNavigate }: Props) {
             </div>
           </Section>
         )}
-
-        {/* Connections */}
-        <Section title="Connections">
-          <div className={styles.connectionList}>
-            {allConnectedIds.map(id => {
-              const conn = locationsById.get(id);
-              if (!conn) return null;
-              return (
-                <button
-                  key={id}
-                  className={`${styles.connectionBtn} ${conn.isMapEdge ? styles.connectionEdge : ''}`}
-                  onClick={() => onNavigate(id)}
-                >
-                  {conn.name}
-                </button>
-              );
-            })}
-          </div>
-        </Section>
 
         {/* Opportunities */}
         {hasOpportunities && (

@@ -328,6 +328,11 @@ function ExpandableList({ items }: { items: string[] }) {
                   <div className={styles.opDetail}>
                     <strong>{detail.result}</strong>
                     <span className={styles.meta}>{detail.aspects}</span>
+                    {detail.weaknessPool && (
+                      <span className={styles.meta}>
+                        Part of the {detail.weaknessPool.name} weakness pool: {detail.weaknessPool.others.join(', ')}
+                      </span>
+                    )}
                   </div>
                 )}
               </>

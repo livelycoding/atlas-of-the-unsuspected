@@ -61,6 +61,7 @@ export interface SpecialEvent {
 export interface OpportunityDetail {
   result: string;       // Item name produced, e.g. "Discreet Office"
   aspects: string;      // e.g. "Comfort 1, Space 1, Worth 1, Heart 2"
+  weaknessPool?: { name: string; others: string[] };
 }
 
 export interface Opportunities {

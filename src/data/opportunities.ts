@@ -133,14 +133,17 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   'Freezing Winds': {
     result: 'Freezing Winds',
     aspects: 'Winter 2, Edge 2',
+    weaknessPool: { name: 'Environment', others: ['Trembling Heat', 'The Sea'] },
   },
   'The Sea': {
     result: 'The Sea',
     aspects: 'Winter 2, Moth 2',
+    weaknessPool: { name: 'Environment', others: ['Freezing Winds', 'Trembling Heat'] },
   },
   'Sea': {
     result: 'The Sea',
     aspects: 'Winter 2, Moth 2',
+    weaknessPool: { name: 'Environment', others: ['Freezing Winds', 'Trembling Heat'] },
   },
   'Sulochana Amavasya': {
     result: 'Sulochana Amavasya',
@@ -153,26 +156,37 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   'Heights': {
     result: 'Heights',
     aspects: 'Moth 2, Lantern 2',
+    weaknessPool: { name: 'Quirks', others: ['Cats', 'Faith'] },
   },
   "The Flowermaker's Shadow": {
     result: "The Flowermaker's Shadow",
     aspects: 'Grail 6, Lantern 6',
+    weaknessPool: { name: 'Disfavor', others: ["The Wolf Divided's Shadow", "The Horned Axe's Shadow"] },
   },
   'Faith': {
     result: 'Faith',
     aspects: 'Lantern 2, Heart 2',
+    weaknessPool: { name: 'Quirks', others: ['Cats', 'Heights'] },
   },
   "The Wolf Divided's Shadow": {
     result: "The Wolf Divided's Shadow",
     aspects: 'Winter 6, Edge 6',
+    weaknessPool: { name: 'Disfavor', others: ["The Horned Axe's Shadow", "The Flowermaker's Shadow"] },
   },
   'Cats': {
     result: 'Cats',
     aspects: 'Moth 2, Grail 2',
+    weaknessPool: { name: 'Quirks', others: ['Heights', 'Faith'] },
+  },
+  "The Horned Axe's Shadow": {
+    result: "The Horned Axe's Shadow",
+    aspects: 'Edge 6, Forge 6',
+    weaknessPool: { name: 'Disfavor', others: ["The Wolf Divided's Shadow", "The Flowermaker's Shadow"] },
   },
   'Trembling Heat': {
     result: 'Trembling Heat',
     aspects: 'Grail 2, Forge 2',
+    weaknessPool: { name: 'Environment', others: ['Freezing Winds', 'The Sea'] },
   },
   'What-Is-Not-Seen': {
     result: 'What-Is-Not-Seen',

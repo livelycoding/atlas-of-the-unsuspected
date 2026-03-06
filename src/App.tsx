@@ -2,7 +2,6 @@ import { useState, useCallback, useRef } from 'react';
 import { MapGrid } from './components/MapGrid';
 import { DetailPanel } from './components/DetailPanel';
 import { Legend } from './components/Legend';
-import { CollisionResolver } from './components/CollisionResolver';
 import { locations, locationsById } from './data/locations';
 import { RegionColor } from './data/types';
 import styles from './App.module.css';
@@ -12,7 +11,6 @@ export default function App() {
   const [activeFilters, setActiveFilters] = useState<Set<string>>(new Set());
   const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
   const [mapMode, setMapMode] = useState(true);
-  const [resolving, setResolving] = useState(false);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(prev => (prev === id ? null : id));
@@ -115,12 +113,6 @@ export default function App() {
         <button className={styles.toolbarBtn} onClick={handleExport}>Export Current Run Data</button>
         <button className={styles.toolbarBtn} onClick={() => fileInputRef.current?.click()}>Import Run Data</button>
         <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} hidden />
-        <button
-          className={`${styles.toolbarBtn} ${resolving ? styles.toolbarBtnActive : ''}`}
-          onClick={() => setResolving(r => !r)}
-        >
-          Resolve Overlaps
-        </button>
       </div>
       <div className={styles.viewToggleRow}>
         <button
@@ -130,12 +122,9 @@ export default function App() {
           {mapMode ? 'Switch to Grid View' : 'Switch to Map View'}
         </button>
       </div>
-      {resolving ? (
-        <CollisionResolver onDone={() => setResolving(false)} />
-      ) : (
       <div className={styles.content}>
         <div className={styles.mapArea}>
-          <p className={styles.hint}>Right-click a city to remove it from the pool</p>
+          <p className={styles.hint}>Right-click a city to remove it from the pool.</p>
           <MapGrid
             selectedId={selectedId}
             filteredIds={filteredIds}
@@ -160,7 +149,6 @@ export default function App() {
           />
         )}
       </div>
-      )}
     </div>
   );
 }

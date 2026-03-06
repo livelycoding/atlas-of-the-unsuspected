@@ -240,6 +240,6 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   },
   'Serapeum Peristasis': {
     result: 'Serapeum Peristasis',
-    aspects: 'Location',
+    aspects: 'Location (one-use). Dr Blackwood offers: heal up to 3 Wounds (give a Wound), purge up to 7 Traces + False Trail (give a Trace), gain 3 Obscurity (give Temptation: Escape), or show her the re-assembled Book of Suns for some lore',
   },
 };

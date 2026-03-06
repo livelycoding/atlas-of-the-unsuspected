@@ -1207,7 +1207,7 @@ export const locations: Location[] = [
         { name: 'Unwelcome Memories', checks: ['Winter 8', 'Moth 8', 'Lantern 8', 'Heart 8'] },
         { name: 'Ordeal: Enigma', checks: ['Moth 12', 'Lantern 12'] },
       ],
-      reward: 'Serapeum Peristasis',
+      reward: 'Serapeum Peristasis - a one-use location where Dr Blackwood offers: heal up to 3 Wounds (give a Wound), purge up to 7 Traces + gain False Trail (give a Trace), gain 3 Obscurity (give Temptation: Escape), or show her the re-assembled Book of Suns for some lore',
     },
     specialFeatures: [],
     specialEvent: null,

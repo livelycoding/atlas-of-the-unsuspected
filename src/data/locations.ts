@@ -64,14 +64,14 @@ export const locations: Location[] = [
     specialFeatures: [],
     specialEvent: {
       name: 'Audience with Mme Matutine',
-      description: 'Mme Matutine\'s yacht, the Sapphire, lies at anchor here. She has a lethal reputation — and a keen interest in Pentiments.',
+      description: 'One of two ways to win via Pentiments. Offer Mme Matutine 7 Pentiments for the Kinship ending. Also functions as a Ligeian Presence distraction.',
       trigger: 'Reconnoitre to find Mme Matutine, then offer Pentiments',
       steps: [
         'Reconnoitre Amsterdam to find Mme Matutine',
         'Offer her Pentiments to get her attention',
         'Offer 7 Pentiments to achieve the Kinship ending',
         'If fewer than 7, she returns them and gives the Flûte Matutine',
-        'Use the Flûte near the Sea to summon her again',
+        'Use the Flûte near the Sea to summon her again and retrigger this event.',
       ],
       reward: 'Endgame: a black and glinting jewel (Kinship ending)',
       rewardAlt: 'Curio: Flûte Matutine if fewer than 7 Pentiments offered',
@@ -255,7 +255,7 @@ export const locations: Location[] = [
     specialFeatures: [],
     specialEvent: {
       name: 'Esoteric Cult of the Wolf Divided',
-      description: 'Kaunas is the only location with both The Wolf Divided\'s Shadow and Connection: Holy Man, making it the sole place to found this cult.',
+      description: 'The only location where you can found a Wolf Divided cult. Requires both The Wolf Divided\'s Shadow and Connection: Holy Man, which only co-occur here.',
       trigger: 'Run a Faith-Healing Cult first (Connection: Holy Man + 1 Space + 1 Stolen Year) to earn "A New Faith?"',
       steps: [
         'Reconnoitre for Connection: Holy Man and The Wolf Divided\'s Shadow',
@@ -550,7 +550,7 @@ export const locations: Location[] = [
     specialFeatures: [],
     specialEvent: {
       name: 'Wolf Divided Uprising',
-      description: 'Stalingrad is both Troubled and home to The Wolf Divided\'s Shadow — the only combination that enables a Shadow-empowered Uprising.',
+      description: 'One of only two locations that is both Troubled (enabling Uprisings) and has The Wolf Divided\'s Shadow. Using the Shadow in an Uprising advances the Defiance ascension path.',
       trigger: 'Reconnoitre to find The Wolf Divided\'s Shadow, then launch an Uprising',
       steps: [
         'Reconnoitre to find The Wolf Divided\'s Shadow',
@@ -818,7 +818,7 @@ export const locations: Location[] = [
     specialFeatures: [],
     specialEvent: {
       name: 'Wolf Divided Uprising',
-      description: 'Tiflis is both Troubled and home to The Wolf Divided\'s Shadow — the only combination that enables a Shadow-empowered Uprising.',
+      description: 'One of only two locations that is both Troubled (enabling Uprisings) and has The Wolf Divided\'s Shadow. Using the Shadow in an Uprising advances the Defiance ascension path.',
       trigger: 'Reconnoitre to find The Wolf Divided\'s Shadow, then launch an Uprising',
       steps: [
         'Reconnoitre to find The Wolf Divided\'s Shadow',
@@ -1160,7 +1160,7 @@ export const locations: Location[] = [
     specialFeatures: [],
     specialEvent: {
       name: 'Fane of Owls',
-      description: 'Ruins of a Minoan Lodge of Doors on Mount Ida. A stranger waits beneath a hawthorn tree.',
+      description: 'Show any Pentiment you already own to receive the Half-Smoked Cigarette, a unique Pentiment with Heart and Knock aspects. Requires The Horned Axe\'s Shadow to access.',
       trigger: 'Employ The Horned Axe\'s Shadow while residing in Candia-Heraklion',
       steps: [
         'Reside in Candia-Heraklion',

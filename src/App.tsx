@@ -18,6 +18,7 @@ export default function App() {
   const [showOperations, setShowOperations] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [initialOperation, setInitialOperation] = useState<string | null>(null);
+  const [operationSourceId, setOperationSourceId] = useState<string | null>(null);
   const [eliminatedWeaknesses, setEliminatedWeaknesses] = useState<Set<string>>(new Set());
 
   const weaknessPools: Record<string, string[]> = {
@@ -293,9 +294,14 @@ export default function App() {
         )}
         {showOperations && !selectedLocation && (
           <OperationsPanel
-            onClose={() => setShowOperations(false)}
+            onClose={() => { setShowOperations(false); setOperationSourceId(null); }}
             initialOperation={initialOperation}
             onClearInitial={() => setInitialOperation(null)}
+            onBack={operationSourceId ? () => {
+              setShowOperations(false);
+              setSelectedId(operationSourceId);
+              setOperationSourceId(null);
+            } : undefined}
           />
         )}
         {selectedLocation && (
@@ -308,6 +314,7 @@ export default function App() {
             removedIds={removedIds}
             foeWeaknesses={locationWeaknessMap.get(selectedLocation.id) ?? []}
             onOpenOperation={(name) => {
+              setOperationSourceId(selectedLocation.id);
               setSelectedId(null);
               setInitialOperation(name);
               setShowOperations(true);

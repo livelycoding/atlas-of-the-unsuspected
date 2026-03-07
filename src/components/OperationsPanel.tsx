@@ -6,10 +6,12 @@ interface Props {
   onClose: () => void;
   initialOperation?: string | null;
   onClearInitial?: () => void;
+  onBack?: () => void;
 }
 
-export function OperationsPanel({ onClose, initialOperation, onClearInitial }: Props) {
+export function OperationsPanel({ onClose, initialOperation, onClearInitial, onBack }: Props) {
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
+  const [linkedIdx, setLinkedIdx] = useState<number | null>(null);
   const opRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const toggle = useCallback((i: number) => {
@@ -26,6 +28,7 @@ export function OperationsPanel({ onClose, initialOperation, onClearInitial }: P
     const idx = operations.findIndex(op => op.name === initialOperation);
     if (idx === -1) return;
     setExpanded(prev => new Set(prev).add(idx));
+    setLinkedIdx(idx);
     requestAnimationFrame(() => {
       opRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
@@ -35,7 +38,12 @@ export function OperationsPanel({ onClose, initialOperation, onClearInitial }: P
   return (
     <div className={styles.panel}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Operations Quick Reference</h2>
+        <div>
+          {onBack && (
+            <button className={styles.backBtn} onClick={onBack}>&larr; Back to City</button>
+          )}
+          <h2 className={styles.title}>Operations Quick Reference</h2>
+        </div>
         <button className={styles.closeBtn} onClick={onClose}>&times;</button>
       </div>
       <div className={styles.operations}>
@@ -49,6 +57,9 @@ export function OperationsPanel({ onClose, initialOperation, onClearInitial }: P
               </button>
               {isOpen && (
                 <div className={styles.opBody}>
+                  {onBack && i === linkedIdx && (
+                    <button className={styles.backBtnInline} onClick={onBack}>&larr; Back to City</button>
+                  )}
                   <div>
                     <span className={styles.subLabel}>Requirements</span>
                     <ul className={styles.list}>

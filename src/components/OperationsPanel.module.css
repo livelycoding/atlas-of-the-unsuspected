@@ -30,6 +30,45 @@
   color: #c9a830;
 }
 
+.backBtn {
+  background: rgba(201, 168, 48, 0.15);
+  border: 1px solid #c9a830;
+  color: #c9a830;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 12px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+}
+
+.backBtn:hover {
+  background: rgba(201, 168, 48, 0.3);
+  color: #fff;
+}
+
+.backBtnInline {
+  background: rgba(201, 168, 48, 0.15);
+  border: 1px solid #c9a830;
+  color: #c9a830;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+}
+
+.backBtnInline:hover {
+  background: rgba(201, 168, 48, 0.3);
+  color: #fff;
+}
+
 .closeBtn {
   background: none;
   border: none;

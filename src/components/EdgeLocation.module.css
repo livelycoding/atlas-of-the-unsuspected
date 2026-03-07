@@ -72,3 +72,8 @@
   box-shadow: 0 0 6px rgba(201, 168, 48, 0.7);
   z-index: 2;
 }
+
+.weaknessUncertain {
+  background: #8899aa;
+  box-shadow: 0 0 6px rgba(137, 153, 170, 0.5);
+}

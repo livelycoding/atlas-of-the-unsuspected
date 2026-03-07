@@ -60,7 +60,7 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
 
       {foeWeaknesses.length > 0 && (
         <div className={styles.weaknessCallout}>
-          {foeWeaknesses.length}{!foeWeaknessesCertain ? ' known' : ''} foe weakness{foeWeaknesses.length !== 1 ? 'es' : ''} here: {foeWeaknesses.join(', ')}
+          {foeWeaknesses.length}{!foeWeaknessesCertain ? <>{' known'}<span className={styles.uncertainHelp} title="This location has distractions from a weakness pool you haven't fully narrowed down yet. There may be additional foe weaknesses here.">?</span></> : ''} foe weakness{foeWeaknesses.length !== 1 ? 'es' : ''} here: {foeWeaknesses.join(', ')}
         </div>
       )}
 

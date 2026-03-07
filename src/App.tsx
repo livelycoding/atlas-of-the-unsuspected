@@ -331,6 +331,7 @@ export default function App() {
             onToggleRemoved={handleToggleRemoved}
             mapMode={mapMode}
             locationWeaknessCount={new Map([...locationWeaknessMap].map(([id, ws]) => [id, ws.length]))}
+            locationWeaknessCertain={locationWeaknessCertain}
           />
           <Legend
             activeFilters={activeFilters}

@@ -11,6 +11,7 @@ interface Props {
   onSelect: (id: string) => void;
   onToggleRemoved: (id: string) => void;
   weaknessCount: number;
+  weaknessCertain: boolean;
 }
 
 const regionColors: Record<RegionColor, string> = {
@@ -26,7 +27,7 @@ const regionColors: Record<RegionColor, string> = {
   'map-edge': '#c9a830',
 };
 
-export function LocationCell({ location, isSelected, isDimmed, isRemoved, onSelect, onToggleRemoved, weaknessCount }: Props) {
+export function LocationCell({ location, isSelected, isDimmed, isRemoved, onSelect, onToggleRemoved, weaknessCount, weaknessCertain }: Props) {
   const bgColor = regionColors[location.region];
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const didLongPress = useRef(false);
@@ -81,7 +82,7 @@ export function LocationCell({ location, isSelected, isDimmed, isRemoved, onSele
       title={buildTooltip(location)}
     >
       {weaknessCount > 0 && (
-        <span className={styles.weaknessCount}>{weaknessCount}</span>
+        <span className={`${styles.weaknessCount} ${weaknessCertain ? '' : styles.weaknessUncertain}`}>{weaknessCount}</span>
       )}
       <span className={styles.name}>{location.name}</span>
       {badges.length > 0 && (

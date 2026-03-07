@@ -10,9 +10,10 @@ interface Props {
   onSelect: (id: string) => void;
   onToggleRemoved: (id: string) => void;
   weaknessCount: number;
+  weaknessCertain: boolean;
 }
 
-export function EdgeLocation({ location, isSelected, isDimmed, isRemoved, onSelect, onToggleRemoved, weaknessCount }: Props) {
+export function EdgeLocation({ location, isSelected, isDimmed, isRemoved, onSelect, onToggleRemoved, weaknessCount, weaknessCertain }: Props) {
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const didLongPress = useRef(false);
 
@@ -43,7 +44,7 @@ export function EdgeLocation({ location, isSelected, isDimmed, isRemoved, onSele
       title={`${location.name} — Map's Edge\nCannot leave once entered\n${location.specialFeatures.join('\n')}`}
     >
       {weaknessCount > 0 && (
-        <span className={styles.weaknessCount}>{weaknessCount}</span>
+        <span className={`${styles.weaknessCount} ${weaknessCertain ? '' : styles.weaknessUncertain}`}>{weaknessCount}</span>
       )}
       <span className={styles.name}>{location.name}</span>
       <span className={styles.tag}>Map's Edge</span>

@@ -109,6 +109,22 @@
   line-height: 1.4;
 }
 
+.uncertainHelp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(201, 168, 48, 0.2);
+  color: #c9a830;
+  font-size: 0.6rem;
+  font-weight: 700;
+  margin-left: 3px;
+  cursor: help;
+  vertical-align: middle;
+}
+
 .sections {
   padding: 0 16px 16px;
   display: flex;

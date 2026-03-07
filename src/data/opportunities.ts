@@ -8,31 +8,31 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   // --- Connections & Licenses ---
   'An Official Connection?': {
     result: 'Official Connection',
-    aspects: 'Grail 6, Lantern 6, Asset, Connection, Assists Deception',
+    aspects: 'Grail 6, Lantern 6, Asset, Connection, Assists Deception. Consumed to obtain an Import Licence or Medical Credentials. Defends Assets against theft',
   },
   'An Underworld Connection?': {
     result: 'Connection: Underworld',
-    aspects: 'Moth 8, Knock 6, Edge 8, Asset, Connection, Assists Deception',
+    aspects: 'Moth 8, Knock 6, Edge 8, Asset, Connection, Assists Deception. Operations: Illegal Fights (+ Stolen Year), Counterfeiting (+ 6 Forge, 2 Space), Smuggling (+ Sea, 2 Space). Can relinquish Traces for Obscurity. Defends Assets against theft',
   },
   'A Connection with Radicals?': {
     result: 'Connection: Radicals',
-    aspects: 'Moth 8, Forge 6, Edge 8, Asset, Connection, Assists Deception',
+    aspects: 'Moth 8, Forge 6, Edge 8, Asset, Connection, Assists Deception. Operation: Uprising in troubled residences (+ Temptation: Defiance). Defends Assets against theft',
   },
   'a Connection with a Ruler?': {
     result: 'Connection: Ruler',
-    aspects: 'Grail 10, Knock 10, Edge 10, Asset, Connection, Assists Deception',
+    aspects: 'Grail 10, Knock 10, Edge 10, Asset, Connection, Assists Deception. Operation: Patronage (+ Stolen Year). Consumed to obtain an Import Licence or Medical Credentials. Defends Assets against theft',
   },
   'A Connection with a Holy Man?': {
     result: 'Connection: Holy Man',
-    aspects: 'Lantern 4, Heart 4, Asset, Connection, Assists Deception',
+    aspects: 'Lantern 4, Heart 4, Asset, Connection, Assists Deception. Operation: Faith Healing Cult (+ 2 Space, Stolen Year consumed). Defends Assets against theft',
   },
   'Import Licence?': {
     result: 'Import Licence',
-    aspects: 'Worth 1, Proof, Asset',
+    aspects: 'Worth 1, Proof, Asset. Only valid in the city where acquired. Combine with 2 Space + 1 Sea opportunity to start an Import Business operation',
   },
   'Medical Credentials?': {
     result: 'Medical Credentials',
-    aspects: 'Worth 1, Proof, Portable, Asset',
+    aspects: 'Worth 1, Proof, Portable, Asset. Combine with Space + a Stolen Year to run a Doctor\'s Practice (1 Comfort) or a Sanatorium (2 Space, 4 Comfort). Stolen Year is consumed; Credentials and Space are returned',
   },
 
   // --- Property ---
@@ -218,19 +218,24 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   },
   'Official Connection': {
     result: 'Official Connection',
-    aspects: 'Grail 6, Lantern 6, Asset, Connection, Assists Deception',
+    aspects: 'Grail 6, Lantern 6, Asset, Connection, Assists Deception. Consumed to obtain an Import Licence or Medical Credentials. Defends Assets against theft',
   },
   'Connection: Underworld': {
     result: 'Connection: Underworld',
-    aspects: 'Moth 8, Knock 6, Edge 8, Asset, Connection, Assists Deception',
+    aspects: 'Moth 8, Knock 6, Edge 8, Asset, Connection, Assists Deception. Operations: Illegal Fights (+ Stolen Year), Counterfeiting (+ 6 Forge, 2 Space), Smuggling (+ Sea, 2 Space). Can relinquish Traces for Obscurity. Defends Assets against theft',
   },
   'Connection: Holy Man': {
     result: 'Connection: Holy Man',
-    aspects: 'Lantern 4, Heart 4, Asset, Connection, Assists Deception',
+    aspects: 'Lantern 4, Heart 4, Asset, Connection, Assists Deception. Operation: Faith Healing Cult (+ 2 Space, Stolen Year consumed). Defends Assets against theft',
   },
   'Connection: Radicals': {
     result: 'Connection: Radicals',
-    aspects: 'Moth 8, Forge 6, Edge 8, Asset, Connection, Assists Deception',
+    aspects: 'Moth 8, Forge 6, Edge 8, Asset, Connection, Assists Deception. Operation: Uprising in troubled residences (+ Temptation: Defiance). Defends Assets against theft',
+  },
+
+  'Obscurity': {
+    result: 'Obscurity',
+    aspects: 'Moth 2, Winter 2, Supplies. Prevents Reckoner attacks while present; Reckoners destroy Obscurity instead. Decays in 300s. Send 7 with Temptation: Escape to win an Obscurity victory',
   },
 
   // --- Pentiment & Reward Items ---

@@ -536,10 +536,10 @@ export const locations: Location[] = [
     specialEvent: {
       name: 'Wolf Divided Uprising',
       description: 'One of only two locations that is both Troubled (enabling Uprisings) and has The Wolf Divided\'s Shadow. Using the Shadow in an Uprising advances the Defiance ascension path.',
-      trigger: 'Reconnoitre to find The Wolf Divided\'s Shadow, then launch an Uprising',
+      trigger: 'Reconnoitre to find The Wolf Divided\'s Shadow, then [[Assist an Uprising]]',
       steps: [
         'Reconnoitre to find The Wolf Divided\'s Shadow',
-        'Launch a non-betrayed Uprising',
+        '[[Assist an Uprising]] (non-betrayed)',
         'Use The Wolf Divided\'s Shadow in the Uprising to throw it into chaos',
       ],
       reward: '2 marks of Temptation: Defiance (works regardless of consecration)',
@@ -797,10 +797,10 @@ export const locations: Location[] = [
     specialEvent: {
       name: 'Wolf Divided Uprising',
       description: 'One of only two locations that is both Troubled (enabling Uprisings) and has The Wolf Divided\'s Shadow. Using the Shadow in an Uprising advances the Defiance ascension path.',
-      trigger: 'Reconnoitre to find The Wolf Divided\'s Shadow, then launch an Uprising',
+      trigger: 'Reconnoitre to find The Wolf Divided\'s Shadow, then [[Assist an Uprising]]',
       steps: [
         'Reconnoitre to find The Wolf Divided\'s Shadow',
-        'Launch a non-betrayed Uprising',
+        '[[Assist an Uprising]] (non-betrayed)',
         'Use The Wolf Divided\'s Shadow in the Uprising to throw it into chaos',
       ],
       reward: '2 marks of Temptation: Defiance (works regardless of consecration)',

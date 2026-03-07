@@ -1,0 +1,27 @@
+name: Data Error
+description: Report incorrect or missing location data, opportunities, operations, or other game info
+labels: ["data"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Location (if applicable)
+      placeholder: e.g. London, Paris, Constantinople
+    validations:
+      required: false
+  - type: textarea
+    id: whats-wrong
+    attributes:
+      label: What's wrong?
+      description: Describe what's incorrect and what it should be, if you know.
+      placeholder: "e.g. London is missing Connection: Underworld, or the Patronage operation shows the wrong aspect requirement"
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: How did you verify this?
+      description: In-game testing, wiki, Frangiclave, etc.
+      placeholder: "e.g. Checked in-game, the wiki says X"
+    validations:
+      required: false

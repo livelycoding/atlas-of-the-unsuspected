@@ -1,0 +1,36 @@
+name: Bug Report
+description: Something isn't working right in the app
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe what went wrong.
+      placeholder: "e.g. Clicking a city on the map doesn't open the detail panel"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      placeholder: "e.g. The detail panel should open showing city info"
+    validations:
+      required: false
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device
+      options:
+        - Desktop
+        - Mobile
+        - Tablet
+    validations:
+      required: false
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      placeholder: e.g. Chrome 120, Safari on iOS 17
+    validations:
+      required: false

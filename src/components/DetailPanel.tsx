@@ -253,6 +253,24 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
             <p className={styles.description}>{location.pentiment.howToObtain}</p>
           </Section>
         )}
+        {!location.pentiment && (() => {
+          const pentimentOpps = location.opportunities.items.filter(item => {
+            const d = opportunityDetails[item];
+            return d && d.aspects.split(/,\s*/).includes('Pentiment');
+          });
+          if (pentimentOpps.length === 0) return null;
+          const costs = pentimentOpps.map(item => {
+            const d = opportunityDetails[item];
+            const match = d.aspects.match(/Worth (\d+)/);
+            return match ? `${match[1]} Worth` : 'Worth';
+          });
+          return (
+            <Section title="Pentiment">
+              <ExpandableList items={pentimentOpps} onOpenOperation={onOpenOperation} />
+              <p className={styles.description}>Reconnoitre, then purchase for {costs.join(' / ')}</p>
+            </Section>
+          );
+        })()}
 
         {/* Ligeian */}
         {location.ligeian && (

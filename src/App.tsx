@@ -274,6 +274,13 @@ export default function App() {
       <div className={styles.content}>
         <div className={styles.mapArea}>
           <p className={styles.hint}>Right-click or long-press a city to remove it from the pool.</p>
+          <button
+            className={`${styles.filterWarning} ${activeFilters.size > 0 || opportunityTerms.length > 0 ? styles.filterWarningVisible : ''}`}
+            onClick={() => { setActiveFilters(new Set()); setOpportunityTerms([]); }}
+            tabIndex={activeFilters.size > 0 || opportunityTerms.length > 0 ? 0 : -1}
+          >
+            You have filters on. Reset all filters
+          </button>
           <MapGrid
             selectedId={selectedId}
             filteredIds={filteredIds}

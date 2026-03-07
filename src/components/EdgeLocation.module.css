@@ -69,6 +69,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 0;
+  padding: 0 0 1px 0;
   box-shadow: 0 0 6px rgba(201, 168, 48, 0.7);
   z-index: 2;
 }
@@ -77,3 +79,10 @@
   background: #8899aa;
   box-shadow: 0 0 6px rgba(137, 153, 170, 0.5);
 }
+
+.weaknessZeroCertain {
+  background: #4a3a2a;
+  box-shadow: 0 0 4px rgba(74, 58, 42, 0.5);
+  color: #c0a878;
+}
+

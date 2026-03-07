@@ -15,6 +15,7 @@ interface Props {
   mapMode: boolean;
   locationWeaknessCount: Map<string, number>;
   locationWeaknessCertain: Map<string, boolean>;
+  weaknessActive: boolean;
 }
 
 const GRID_ROWS = 6;
@@ -32,6 +33,7 @@ function renderEdge(
   onToggleRemoved: (id: string) => void,
   locationWeaknessCount: Map<string, number>,
   locationWeaknessCertain: Map<string, boolean>,
+  weaknessActive: boolean,
 ) {
   const loc = locations.find(l => l.id === id);
   if (!loc) return null;
@@ -46,11 +48,12 @@ function renderEdge(
       onToggleRemoved={onToggleRemoved}
       weaknessCount={locationWeaknessCount.get(loc.id) ?? 0}
       weaknessCertain={locationWeaknessCertain.get(loc.id) ?? false}
+      weaknessActive={weaknessActive}
     />
   );
 }
 
-export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggleRemoved, mapMode, locationWeaknessCount, locationWeaknessCertain }: Props) {
+export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggleRemoved, mapMode, locationWeaknessCount, locationWeaknessCertain, weaknessActive }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [cellPositions, setCellPositions] = useState<Map<string, { x: number; y: number }>>(new Map());
 
@@ -105,6 +108,7 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
                 onToggleRemoved={onToggleRemoved}
                 weaknessCount={locationWeaknessCount.get(loc.id) ?? 0}
                 weaknessCertain={locationWeaknessCertain.get(loc.id) ?? false}
+                weaknessActive={weaknessActive}
               />
             </div>
           );
@@ -129,6 +133,7 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
                 onToggleRemoved={onToggleRemoved}
                 weaknessCount={locationWeaknessCount.get(loc.id) ?? 0}
                 weaknessCertain={locationWeaknessCertain.get(loc.id) ?? false}
+                weaknessActive={weaknessActive}
               />
             </div>
           );
@@ -150,7 +155,7 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
     }
   }
 
-  const e = (id: string) => renderEdge(id, selectedId, filteredIds, removedIds, onSelect, onToggleRemoved, locationWeaknessCount, locationWeaknessCertain);
+  const e = (id: string) => renderEdge(id, selectedId, filteredIds, removedIds, onSelect, onToggleRemoved, locationWeaknessCount, locationWeaknessCertain, weaknessActive);
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
@@ -182,6 +187,7 @@ export function MapGrid({ selectedId, filteredIds, removedIds, onSelect, onToggl
                       onToggleRemoved={onToggleRemoved}
                       weaknessCount={locationWeaknessCount.get(loc.id) ?? 0}
                       weaknessCertain={locationWeaknessCertain.get(loc.id) ?? false}
+                      weaknessActive={weaknessActive}
                     />
                   ) : (
                     <div className={styles.emptyCell} />

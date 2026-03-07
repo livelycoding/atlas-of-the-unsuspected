@@ -187,19 +187,37 @@ export default function App() {
   const locationWeaknessCertain = useMemo(() => {
     const map = new Map<string, boolean>();
     for (const loc of locations) {
-      let hasAnyPoolDistraction = false;
       let uncertain = false;
       for (const d of loc.opportunities.distractions) {
         const normalized = nameNormalization[d] ?? d;
         const pool = weaknessToPool[normalized];
         if (!pool) continue;
-        hasAnyPoolDistraction = true;
         if (!resolvedPools.has(pool) && !eliminatedWeaknesses.has(normalized)) {
           uncertain = true;
           break;
         }
       }
-      map.set(loc.id, hasAnyPoolDistraction && !uncertain);
+      map.set(loc.id, !uncertain);
+    }
+    return map;
+  }, [resolvedPools, weaknessToPool, eliminatedWeaknesses]);
+
+  // Per-location: list of possible (not yet eliminated) weaknesses from unresolved pools
+  const locationPossibleWeaknesses = useMemo(() => {
+    const map = new Map<string, string[]>();
+    for (const loc of locations) {
+      const possible: string[] = [];
+      for (const d of loc.opportunities.distractions) {
+        const normalized = nameNormalization[d] ?? d;
+        const pool = weaknessToPool[normalized];
+        if (!pool) continue;
+        if (!resolvedPools.has(pool) && !eliminatedWeaknesses.has(normalized)) {
+          possible.push(normalized);
+        }
+      }
+      if (possible.length > 0) {
+        map.set(loc.id, possible);
+      }
     }
     return map;
   }, [resolvedPools, weaknessToPool, eliminatedWeaknesses]);
@@ -332,6 +350,7 @@ export default function App() {
             mapMode={mapMode}
             locationWeaknessCount={new Map([...locationWeaknessMap].map(([id, ws]) => [id, ws.length]))}
             locationWeaknessCertain={locationWeaknessCertain}
+            weaknessActive={eliminatedWeaknesses.size > 0}
           />
           <Legend
             activeFilters={activeFilters}
@@ -368,6 +387,8 @@ export default function App() {
             removedIds={removedIds}
             foeWeaknesses={locationWeaknessMap.get(selectedLocation.id) ?? []}
             foeWeaknessesCertain={locationWeaknessCertain.get(selectedLocation.id) ?? false}
+            weaknessActive={eliminatedWeaknesses.size > 0}
+            possibleWeaknesses={locationPossibleWeaknesses.get(selectedLocation.id) ?? []}
             onOpenOperation={(name) => {
               setOperationSourceId(selectedLocation.id);
               setSelectedId(null);

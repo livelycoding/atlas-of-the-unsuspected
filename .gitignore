@@ -3,3 +3,5 @@ dist
 wiki-cache
 .claude
 *.png
+!README_IMAGES/*.png
+!public/*.png

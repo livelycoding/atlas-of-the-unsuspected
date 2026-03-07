@@ -130,12 +130,25 @@
   height: 14px;
   border-radius: 50%;
   border: 1px solid;
+  background: none;
   color: inherit;
   font-size: 0.6rem;
   font-weight: 700;
   margin-left: 3px;
-  cursor: help;
+  cursor: pointer;
   vertical-align: middle;
+  padding: 0;
+  font-family: inherit;
+}
+
+.helpText {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: #8899aa;
+  margin-top: 4px;
+  line-height: 1.4;
+  font-style: italic;
 }
 
 .sections {

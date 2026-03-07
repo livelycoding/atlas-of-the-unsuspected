@@ -62,15 +62,15 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
 
       {foeWeaknesses.length > 0 && (
         <div className={styles.weaknessCallout}>
-          {foeWeaknessesCertain ? <>Confirmed<span className={styles.uncertainHelp} title="All weakness pools with distractions at this location have been fully narrowed down, so this count is confirmed.">?</span>: {foeWeaknesses.length}</> : <>{foeWeaknesses.length}{' known'}<span className={styles.uncertainHelp} title="This location has at least one possible distraction from a weakness pool you haven't fully narrowed down yet. There may be additional foe weaknesses here.">?</span></>} foe weakness{foeWeaknesses.length !== 1 ? 'es' : ''} here: {foeWeaknesses.join(', ')}
+          {foeWeaknessesCertain ? <>Confirmed<HelpBubble text="All weakness pools with distractions at this location have been fully narrowed down, so this count is confirmed." />: {foeWeaknesses.length}</> : <>{foeWeaknesses.length}{' known'}<HelpBubble text="This location has at least one possible distraction from a weakness pool you haven't fully narrowed down yet. There may be additional foe weaknesses here." /></>} foe weakness{foeWeaknesses.length !== 1 ? 'es' : ''} here: {foeWeaknesses.join(', ')}
         </div>
       )}
       {weaknessActive && foeWeaknesses.length === 0 && (
         <div className={`${styles.weaknessCallout} ${styles.weaknessCalloutZero}`}>
-          {foeWeaknessesCertain ? <>Confirmed<span className={styles.uncertainHelp} title="All weakness pools with distractions at this location have been fully narrowed down, so this count is confirmed.">?</span>: no</> : <>No{' known'}<span className={styles.uncertainHelp} title="This location has at least one possible distraction from a weakness pool you haven't fully narrowed down yet. There may be foe weaknesses here.">?</span></>} foe weaknesses here
+          {foeWeaknessesCertain ? <>Confirmed<HelpBubble text="All weakness pools with distractions at this location have been fully narrowed down, so this count is confirmed." />: no</> : <>No{' known'}<HelpBubble text="This location has at least one possible distraction from a weakness pool you haven't fully narrowed down yet. There may be foe weaknesses here." /></>} foe weaknesses here
         </div>
       )}
-      {possibleWeaknesses.length > 0 && (
+      {weaknessActive && possibleWeaknesses.length > 0 && (
         <div className={styles.possibleWeaknesses}>
           Possible: {possibleWeaknesses.join(', ')}
         </div>
@@ -323,6 +323,20 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
         )}
       </div>
     </div>
+  );
+}
+
+function HelpBubble({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button
+        className={styles.uncertainHelp}
+        onClick={() => setOpen(v => !v)}
+        aria-label="More info"
+      >?</button>
+      {open && <span className={styles.helpText}>{text}</span>}
+    </>
   );
 }
 

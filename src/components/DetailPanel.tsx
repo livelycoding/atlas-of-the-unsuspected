@@ -13,10 +13,11 @@ interface Props {
   onToggleRemoved: (id: string) => void;
   removedIds: Set<string>;
   foeWeaknesses: string[];
+  foeWeaknessesCertain: boolean;
   onOpenOperation?: (name: string) => void;
 }
 
-export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds, foeWeaknesses, onOpenOperation }: Props) {
+export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds, foeWeaknesses, foeWeaknessesCertain, onOpenOperation }: Props) {
   const outgoingDirectedIds = location.isMapEdge ? [] : directedConnections
     .filter(c => c.from === location.id)
     .map(c => c.to);
@@ -59,7 +60,7 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
 
       {foeWeaknesses.length > 0 && (
         <div className={styles.weaknessCallout}>
-          {foeWeaknesses.length} foe weakness{foeWeaknesses.length !== 1 ? 'es' : ''} here: {foeWeaknesses.join(', ')}
+          {foeWeaknesses.length}{!foeWeaknessesCertain ? ' known' : ''} foe weakness{foeWeaknesses.length !== 1 ? 'es' : ''} here: {foeWeaknesses.join(', ')}
         </div>
       )}
 

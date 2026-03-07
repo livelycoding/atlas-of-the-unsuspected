@@ -144,6 +144,27 @@ export default function App() {
 
   // Map location id → list of final weakness names found in that location's distractions
   const nameNormalization: Record<string, string> = { 'Sea': 'The Sea' };
+
+  // Build reverse lookup: weakness name → pool name
+  const weaknessToPool = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const [pool, members] of Object.entries(weaknessPools)) {
+      for (const m of members) map[m] = pool;
+    }
+    return map;
+  }, []);
+
+  // Which pools are fully resolved (2 of 3 eliminated)
+  const resolvedPools = useMemo(() => {
+    const resolved = new Set<string>();
+    for (const [pool, members] of Object.entries(weaknessPools)) {
+      if (members.filter(w => eliminatedWeaknesses.has(w)).length === 2) {
+        resolved.add(pool);
+      }
+    }
+    return resolved;
+  }, [eliminatedWeaknesses]);
+
   const locationWeaknessMap = useMemo(() => {
     const map = new Map<string, string[]>();
     if (finalWeaknesses.size === 0) return map;
@@ -161,6 +182,27 @@ export default function App() {
     }
     return map;
   }, [finalWeaknesses]);
+
+  // Per-location: certain if no distraction from an unresolved pool remains non-eliminated
+  const locationWeaknessCertain = useMemo(() => {
+    const map = new Map<string, boolean>();
+    for (const loc of locations) {
+      let hasAnyPoolDistraction = false;
+      let uncertain = false;
+      for (const d of loc.opportunities.distractions) {
+        const normalized = nameNormalization[d] ?? d;
+        const pool = weaknessToPool[normalized];
+        if (!pool) continue;
+        hasAnyPoolDistraction = true;
+        if (!resolvedPools.has(pool) && !eliminatedWeaknesses.has(normalized)) {
+          uncertain = true;
+          break;
+        }
+      }
+      map.set(loc.id, hasAnyPoolDistraction && !uncertain);
+    }
+    return map;
+  }, [resolvedPools, weaknessToPool, eliminatedWeaknesses]);
 
   // Determine which locations pass the active legend filters
   const legendFilteredIds = activeFilters.size === 0
@@ -324,6 +366,7 @@ export default function App() {
             onToggleRemoved={handleToggleRemoved}
             removedIds={removedIds}
             foeWeaknesses={locationWeaknessMap.get(selectedLocation.id) ?? []}
+            foeWeaknessesCertain={locationWeaknessCertain.get(selectedLocation.id) ?? false}
             onOpenOperation={(name) => {
               setOperationSourceId(selectedLocation.id);
               setSelectedId(null);

@@ -44,10 +44,6 @@ export interface Caper {
   reward: string;
 }
 
-export interface Rarity {
-  name: string;
-  aspect: string;
-}
 
 export interface SpecialEvent {
   name: string;
@@ -88,7 +84,6 @@ export interface Location {
   ligeian: Ligeian | null;
   ally: Ally | null;
   weapons: string[];
-  rarities: Rarity[];
   bookOfSunsPage: number | null;
   onArrival: string[];
   opportunities: Opportunities;

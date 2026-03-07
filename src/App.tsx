@@ -5,6 +5,7 @@ import { Legend } from './components/Legend';
 import { OperationsPanel } from './components/OperationsPanel';
 import { HelpPanel } from './components/HelpPanel';
 import { locations, locationsById } from './data/locations';
+import { opportunityDetails } from './data/opportunities';
 import { RegionColor } from './data/types';
 import styles from './App.module.css';
 
@@ -170,7 +171,10 @@ export default function App() {
             for (const f of activeFilters) {
               if (f === 'shrine-colonel' && loc.shrine?.deity === 'The Colonel') return true;
               if (f === 'shrine-lionsmith' && loc.shrine?.deity === 'The Lionsmith') return true;
-              if (f === 'pentiment' && loc.pentiment) return true;
+              if (f === 'pentiment' && (loc.pentiment || loc.opportunities.items.some(item => {
+                const detail = opportunityDetails[item];
+                return detail && detail.aspects.split(/,\s*/).includes('Pentiment');
+              }))) return true;
               if (f === 'ligeian' && loc.ligeian) return true;
               if (f === 'ally' && loc.ally) return true;
               if (f === 'troubled' && loc.isTroubled) return true;

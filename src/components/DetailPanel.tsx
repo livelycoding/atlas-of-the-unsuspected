@@ -284,18 +284,6 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
           </Section>
         )}
 
-        {/* Rarities */}
-        {location.rarities.length > 0 && (
-          <Section title="Rarities">
-            {location.rarities.map((r, i) => (
-              <div key={i} className={styles.detail}>
-                <strong>{r.name}</strong>
-                <span className={styles.meta}>{r.aspect}</span>
-              </div>
-            ))}
-          </Section>
-        )}
-
         {/* Book of Suns */}
         {location.bookOfSunsPage !== null && (
           <Section title="Book of Suns">

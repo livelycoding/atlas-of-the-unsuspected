@@ -18,7 +18,6 @@ export const locations: Location[] = [
     ligeian: { name: 'Sulochana', howToObtain: 'Reconnoitre to find', abilities: ['In good mood: reveals a Foe Weakness if provided unknown weakness, eliminates a Reckoner if on board (no Trace), else grants 3 Connections (Radicals, Holy Man, Official)', 'Safe gifts to guarantee good mood: corpse, ally, Stolen Decades', 'Without a gift: 70% bad mood → Unstanchable Wound, permanently unresponsive', 'Can block attacks: vs Foe, produces Foe\'s Wound; vs Reckoners no wound. Consumed on use'] },
     ally: null,
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: 2,
     onArrival: ['Connection: Underworld'],
     opportunities: {
@@ -50,7 +49,6 @@ export const locations: Location[] = [
     ligeian: { name: 'Mme Matutine (Morgen)', howToObtain: 'Reconnoitre to find', abilities: ['Feed 7 Pentiments → black jewel (Kinship ending); fewer returns them + Bone Flute (use by the Sea to call her again)', 'Safe gifts to guarantee good mood: corpse, ally, Stolen Decades, or Pentiments (to start Special Event ending chain)', 'Without a gift: 70% bad mood → Unstanchable Wound, permanently unresponsive', 'Can block attacks: vs Foe, produces Foe\'s Wound; vs Reckoners no wound. Consumed on use'] },
     ally: null,
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Official Connection'],
     opportunities: {
@@ -95,7 +93,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [{ name: 'Green as Remembered Rain', aspect: 'Moth 8 (also a Pentiment)' }],
     bookOfSunsPage: null,
     onArrival: ['Jannings\' Townhouse'],
     opportunities: {
@@ -129,7 +126,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [{ name: 'Case of 1865 Domaine Raveline', aspect: 'Grail 12' }],
     bookOfSunsPage: null,
     onArrival: ['Connection: Underworld'],
     opportunities: {
@@ -161,7 +157,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: { name: 'Lalla Chaima, the Huntress', aspect: 'Edge 6, Mortal, Respects the Colonel', caperChecks: ['Edge'] },
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Lalla Chaima, the Huntress'],
     opportunities: {
@@ -201,7 +196,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Connection: Underworld'],
     opportunities: {
@@ -233,7 +227,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: { name: 'Dominykas, the Baker', aspect: 'Winter 6, Mortal', caperChecks: ['Winter'] },
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Dominykas, the Baker'],
     opportunities: {
@@ -286,7 +279,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Connection: Underworld'],
     opportunities: {
@@ -318,7 +310,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Connection: Underworld'],
     opportunities: {
@@ -352,7 +343,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [{ name: 'Atlas of the Unsuspected', aspect: 'Knock 8' }],
     bookOfSunsPage: null,
     onArrival: ['Obscurity'],
     opportunities: {
@@ -384,7 +374,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: { name: 'Jannings, the Vivisectionist', aspect: 'Heart 6, Mortal, Unique', caperChecks: ['Heart'] },
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Jannings, the Vivisectionist'],
     opportunities: {
@@ -424,7 +413,6 @@ export const locations: Location[] = [
     ligeian: { name: 'Frau Schlüssel (Kleidouchos)', howToObtain: 'Appears on arrival', abilities: ['In good mood: reveals a Foe Weakness if provided unknown weakness, eliminates a Reckoner if on board (no Trace), else grants Stranger\'s Water', 'Safe gifts to guarantee good mood: corpse, ally, Stolen Decades', 'Without a gift: 70% bad mood → Unstanchable Wound, permanently unresponsive', 'Can block attacks: vs Foe, produces Foe\'s Wound; vs Reckoners no wound. Consumed on use'] },
     ally: null,
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [{ name: 'Odd Little Bone', aspect: 'Forge 8' }],
     bookOfSunsPage: null,
     onArrival: ['Frau Schlüssel'],
     opportunities: {
@@ -456,7 +444,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Ebrehel, the Ragged Sword'],
-    rarities: [],
     bookOfSunsPage: 2,
     onArrival: ['Church of St Marzanna the White'],
     opportunities: {
@@ -496,7 +483,6 @@ export const locations: Location[] = [
     ligeian: { name: 'Marinette (Our Lady of Wires)', howToObtain: 'Appears on arrival', abilities: ['In good mood: reveals a Foe Weakness if provided unknown weakness, eliminates a Reckoner if on board (no Trace), else grants Stained Gloves (Pentiment)', 'Safe gifts to guarantee good mood: corpse, ally, Stolen Decades', 'Without a gift: 70% bad mood → Unstanchable Wound, permanently unresponsive', 'Can block attacks: vs Foe, produces Foe\'s Wound; vs Reckoners no wound. Consumed on use'] },
     ally: null,
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Our Lady of Wires'],
     opportunities: {
@@ -528,7 +514,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: { name: 'Zulfiya, the Barber', aspect: 'Moth 6, Mortal', caperChecks: ['Moth'] },
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Zulfiya, the Barber'],
     opportunities: {
@@ -578,7 +563,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Opportunity: An Official Connection?'],
     opportunities: {
@@ -612,7 +596,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: { name: 'Mireya, the Visionary', aspect: 'Lantern 6, Mortal', caperChecks: ['Lantern'] },
     weapons: ['Profane Weapon', 'Biedde\'s Blade'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Mireya, the Visionary'],
     opportunities: {
@@ -652,7 +635,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: { name: 'Giorgiou, the Smuggler', aspect: 'Knock 6, Mortal', caperChecks: ['Knock'] },
     weapons: ['Profane Weapon'],
-    rarities: [{ name: 'Grese Guitar', aspect: 'Heart 8 (also a Pentiment)' }],
     bookOfSunsPage: null,
     onArrival: ['Giorgiou, the Smuggler'],
     opportunities: {
@@ -692,7 +674,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: { name: 'Orsolina, the Delver', aspect: 'Forge 6, Mortal', caperChecks: ['Forge'] },
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Orsolina, the Delver'],
     opportunities: {
@@ -732,7 +713,6 @@ export const locations: Location[] = [
     ligeian: { name: 'Medusa (What-Is-Not-Seen)', howToObtain: 'Reconnoitre to find', abilities: ['Requires a Moth aspect card to communicate; without one, produces Dread', 'Provide any Moth card → My Unhealing Wound (Pentiment); Moth card is consumed', 'Can block attacks: vs Foe, produces Foe\'s Wound; vs Reckoners no wound. Consumed on use'] },
     ally: null,
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Connection: Underworld'],
     opportunities: {
@@ -764,7 +744,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [{ name: 'Abydos Unveiled', aspect: 'Winter 8' }],
     bookOfSunsPage: null,
     onArrival: ['Connection: Underworld'],
     opportunities: {
@@ -796,7 +775,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: { name: 'Vasil, the Fivegoer', aspect: 'Grail 6, Mortal', caperChecks: ['Grail'] },
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
-    rarities: [],
     bookOfSunsPage: 2,
     onArrival: ['Vasil, the Fivegoer'],
     opportunities: {
@@ -846,7 +824,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Biedde\'s Blade'],
-    rarities: [],
     bookOfSunsPage: 1,
     onArrival: ['Connection: Holy Man', 'Obscurity'],
     opportunities: {
@@ -880,7 +857,6 @@ export const locations: Location[] = [
     ligeian: { name: 'Echidna', howToObtain: 'Reconnoitre to encounter', abilities: ['In good mood: reveals a Foe Weakness if provided unknown weakness, eliminates a Reckoner if on board (no Trace), else grants Labhitic Memento (Pentiment)', 'If Lalla Chaima is present: yields Fallen Labhite instead, consuming the encounter', 'Safe gifts to guarantee good mood: corpse, ally, Stolen Decades', 'Without a gift: 70% bad mood → Unstanchable Wound, permanently unresponsive', 'Can block attacks: vs Foe, produces Foe\'s Wound; vs Reckoners no wound. Consumed on use'] },
     ally: null,
     weapons: ['Profane Weapon', 'Biedde\'s Blade'],
-    rarities: [],
     bookOfSunsPage: 3,
     onArrival: ['Connection: Holy Man'],
     opportunities: {
@@ -912,7 +888,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Biedde\'s Blade'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Connection: Underworld'],
     opportunities: {
@@ -944,7 +919,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Opportunity: a Connection with a Ruler?'],
     opportunities: {
@@ -976,7 +950,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Opportunity: a Connection with a Ruler?'],
     opportunities: {
@@ -1008,7 +981,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Biedde\'s Blade'],
-    rarities: [],
     bookOfSunsPage: 1,
     onArrival: ['Connection: Radicals'],
     opportunities: {
@@ -1040,7 +1012,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Imhullune Tectrix'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Official Connection', 'Althiban Abyss'],
     opportunities: {
@@ -1080,7 +1051,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Biedde\'s Blade'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Grief', 'Obscurity'],
     opportunities: {
@@ -1114,7 +1084,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Biedde\'s Blade'],
-    rarities: [],
     bookOfSunsPage: 3,
     onArrival: [],
     opportunities: {
@@ -1146,7 +1115,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon'],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['The Horned Axe\'s Shadow', 'Obscurity'],
     opportunities: {
@@ -1190,7 +1158,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: ['Profane Weapon', 'Biedde\'s Blade'],
-    rarities: [],
     bookOfSunsPage: 1,
     onArrival: ['The Invisible Serapeum'],
     opportunities: {
@@ -1232,7 +1199,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: [],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
@@ -1264,7 +1230,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: [],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
@@ -1296,7 +1261,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: [],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
@@ -1328,7 +1292,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: [],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
@@ -1360,7 +1323,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: [],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
@@ -1392,7 +1354,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: [],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {
@@ -1424,7 +1385,6 @@ export const locations: Location[] = [
     ligeian: null,
     ally: null,
     weapons: [],
-    rarities: [],
     bookOfSunsPage: null,
     onArrival: ['Obscurity', 'Safety from pursuit by Non-Foe Reckoners', 'Allies are removed'],
     opportunities: {

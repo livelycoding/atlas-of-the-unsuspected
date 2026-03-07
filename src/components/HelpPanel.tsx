@@ -33,7 +33,7 @@ export function HelpPanel({ onClose }: Props) {
             Click any city to open the <strong>Detail Panel</strong> on the right.
             It shows everything about that location: connections, on-arrival events,
             opportunities, shrines, pentiments, ligeians, allies, capers, special events,
-            weapons, rarities, and Book of Suns pages.
+            weapons, and Book of Suns pages.
           </p>
           <p>
             In the Reconnoitre Opportunities section, click any item to expand a

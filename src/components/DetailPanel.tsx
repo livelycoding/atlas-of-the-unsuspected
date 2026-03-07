@@ -125,9 +125,11 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
                 const isLigeian = location.ligeian && location.ligeian.name.includes(f);
                 const isAlly = location.ally && location.ally.name === f;
                 const isCaper = location.caper && location.caper.name === f;
+                const isSpecial = isLigeian || isAlly || isCaper;
+                if (!isSpecial) return null;
                 return (
                   <li key={i}>
-                    {isLigeian ? `Ligeian: ${location.ligeian!.name}` : isAlly ? `Ally: ${f}` : isCaper ? `Caper: ${f}` : f}
+                    {isLigeian ? `Ligeian: ${location.ligeian!.name}` : isAlly ? `Ally: ${f}` : `Caper: ${f}`}
                     {isAlly && (
                       <div className={styles.detail}>
                         <span className={styles.meta}>Aspect: {location.ally!.aspect}</span>
@@ -145,6 +147,12 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
                 );
               })}
             </ul>
+            <ExpandableList items={location.onArrival.filter(f => {
+              const isLigeian = location.ligeian && location.ligeian.name.includes(f);
+              const isAlly = location.ally && location.ally.name === f;
+              const isCaper = location.caper && location.caper.name === f;
+              return !isLigeian && !isAlly && !isCaper;
+            })} />
           </Section>
         )}
 

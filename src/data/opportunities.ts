@@ -211,6 +211,28 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
     aspects: 'Comfort 1, Worth 2, Lantern 4, Grail 2, Portable, Asset. Collect all 3 pages + 1 Cash to reassemble into the Book of Suns (Lantern 8, Grail 4, Pentiment)',
   },
 
+  // --- On-Arrival Items ---
+  "Jannings' Townhouse": {
+    result: "Jannings' Townhouse",
+    aspects: 'Comfort 4, Space 2, Heart 4, Grail 4, Asset, Assists Deception. Cannot be sold',
+  },
+  'Official Connection': {
+    result: 'Official Connection',
+    aspects: 'Grail 6, Lantern 6, Asset, Connection, Assists Deception',
+  },
+  'Connection: Underworld': {
+    result: 'Connection: Underworld',
+    aspects: 'Moth 8, Knock 6, Edge 8, Asset, Connection, Assists Deception',
+  },
+  'Connection: Holy Man': {
+    result: 'Connection: Holy Man',
+    aspects: 'Lantern 4, Heart 4, Asset, Connection, Assists Deception',
+  },
+  'Connection: Radicals': {
+    result: 'Connection: Radicals',
+    aspects: 'Moth 8, Forge 6, Edge 8, Asset, Connection, Assists Deception',
+  },
+
   // --- Pentiment & Reward Items ---
   'Stained Gloves': {
     result: 'Stained Gloves',

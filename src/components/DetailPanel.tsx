@@ -133,7 +133,7 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
                     {isLigeian ? `Ligeian: ${location.ligeian!.name}` : isAlly ? `Ally: ${f}` : `Caper: ${f}`}
                     {isAlly && (
                       <div className={styles.detail}>
-                        <span className={styles.meta}>Aspect: {location.ally!.aspect}</span>
+                        <span className={styles.meta}>{location.ally!.aspect}</span>
                       </div>
                     )}
                     {isLigeian && (

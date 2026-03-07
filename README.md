@@ -1,11 +1,15 @@
 # Atlas of the Unsuspected
 
 An interactive map explorer for Weather Factory's **Cultist Simulator: Exile** DLC.
+<p align="center"><a href="https://livelycoding.github.io/atlas-of-the-unsuspected/"><strong>Try it live on GitHub Pages</strong></a></p>
+
+<p align="center"><img src="README_IMAGES/1-map-view.png" alt="Map-style interface" width="800" /></p>
 
 > *"This began life as an atlas of the cities of Europe. Over decades it's been extended and annotated by a dozen hands — adepts, burglars, soldiers, spies — to show secret routes and hiding-nooks."*
+
 > ~ Atlas of the Unsuspected, in-game item
 
-## Disclaimer
+## Disclaimers
 
 **This is an unofficial fan project.** It is not made by, endorsed by, or affiliated with [Weather Factory](https://www.weatherfactory.biz). All game content, names, and concepts belong to Weather Factory. If you haven't played Cultist Simulator and its Exile DLC (Or Book of Hours!), go buy them, they're wonderful.
 
@@ -55,9 +59,10 @@ Atlas of the Unsuspected is a companion tool you keep open alongside your Exile 
 
 ## Getting Started
 
-### Use it online
+### Use it online                                                                                                                                                                                           
+<p align="center"><a href="https://livelycoding.github.io/atlas-of-the-unsuspected/"><strong>Try it live on GitHub Pages</strong></a></p>
 
-Visit the hosted version at GitHub Pages. If needed, there is a how-to guide in the top right corner for all major subsystems.
+You can visit the hosted version at [GitHub Pages](https://livelycoding.github.io/atlas-of-the-unsuspected/). If needed, there is a how-to guide in the top right corner for all major subsystems. 
 
 ### Run locally
 
@@ -80,7 +85,7 @@ docker compose up -d --build
 
 ## Data Accuracy
 
-Location data, opportunities, operations, special events, and anything in the data I thought looked weird have been cross-referenced against [Frangiclave](https://uadaf.theevilroot.xyz/frangiclave/), the [Cultist Simulator Wiki](https://cultistsimulator.fandom.com/) and in-game testing. If you find an error, please [open an issue](../../issues).
+Location data, opportunities, operations, special events, and anything in the data I thought looked weird was cross-referenced against [Frangiclave](https://uadaf.theevilroot.xyz/frangiclave/), the [Cultist Simulator Wiki](https://cultistsimulator.fandom.com/) and in-game testing. If you find an error, please [open an issue](../../issues).
 
 ## License
 

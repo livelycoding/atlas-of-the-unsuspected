@@ -13,9 +13,10 @@ interface Props {
   onToggleRemoved: (id: string) => void;
   removedIds: Set<string>;
   foeWeaknesses: string[];
+  onOpenOperation?: (name: string) => void;
 }
 
-export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds, foeWeaknesses }: Props) {
+export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds, foeWeaknesses, onOpenOperation }: Props) {
   const outgoingDirectedIds = location.isMapEdge ? [] : directedConnections
     .filter(c => c.from === location.id)
     .map(c => c.to);
@@ -152,7 +153,7 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
               const isAlly = location.ally && location.ally.name === f;
               const isCaper = location.caper && location.caper.name === f;
               return !isLigeian && !isAlly && !isCaper;
-            })} />
+            })} onOpenOperation={onOpenOperation} />
           </Section>
         )}
 
@@ -172,10 +173,10 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
             <span className={styles.description}>{location.specialEvent.description}</span>
             <div className={styles.eventTrigger}>
               <span className={styles.eventTriggerLabel}>How to start:</span>
-              <span className={styles.eventTriggerValue}>{location.specialEvent.trigger}</span>
+              <span className={styles.eventTriggerValue}>{renderAspects(location.specialEvent.trigger, onOpenOperation)}</span>
             </div>
             <ol className={styles.eventSteps}>
-              {location.specialEvent.steps.map((s, i) => <li key={i}>{s}</li>)}
+              {location.specialEvent.steps.map((s, i) => <li key={i}>{renderAspects(s, onOpenOperation)}</li>)}
             </ol>
             <div className={styles.eventRewards}>
               <div className={styles.eventReward}>
@@ -214,19 +215,19 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
         {hasOpportunities && (
           <Section title="Reconnoitre Opportunities">
             {ops.connections.length > 0 && (
-              <OpSubsection label="Connections & Licenses" items={ops.connections} />
+              <OpSubsection label="Connections & Licenses" items={ops.connections} onOpenOperation={onOpenOperation} />
             )}
             {ops.property.length > 0 && (
-              <OpSubsection label="Property" items={ops.property} />
+              <OpSubsection label="Property" items={ops.property} onOpenOperation={onOpenOperation} />
             )}
             {ops.items.length > 0 && (
-              <OpSubsection label="Items" items={ops.items} />
+              <OpSubsection label="Items" items={ops.items} onOpenOperation={onOpenOperation} />
             )}
             {ops.times.length > 0 && (
-              <OpSubsection label="Times" items={ops.times} />
+              <OpSubsection label="Times" items={ops.times} onOpenOperation={onOpenOperation} />
             )}
             {ops.distractions.length > 0 && (
-              <OpSubsection label="Distractions" items={ops.distractions} />
+              <OpSubsection label="Distractions" items={ops.distractions} onOpenOperation={onOpenOperation} />
             )}
           </Section>
         )}
@@ -315,7 +316,21 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function ExpandableList({ items }: { items: string[] }) {
+function renderAspects(text: string, onOpenOperation?: (name: string) => void): React.ReactNode {
+  if (!onOpenOperation || !text.includes('[[')) return text;
+  const parts = text.split(/\[\[([^\]]+)\]\]/g);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <button key={i} className={styles.opLink} onClick={() => onOpenOperation(part)}>
+        {part}
+      </button>
+    ) : (
+      part
+    )
+  );
+}
+
+function ExpandableList({ items, onOpenOperation }: { items: string[]; onOpenOperation?: (name: string) => void }) {
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
 
   const toggle = (i: number) => {
@@ -343,7 +358,7 @@ function ExpandableList({ items }: { items: string[] }) {
                 {isOpen && (
                   <div className={styles.opDetail}>
                     <strong>{detail.result}</strong>
-                    <span className={styles.meta}>{detail.aspects}</span>
+                    <span className={styles.meta}>{renderAspects(detail.aspects, onOpenOperation)}</span>
                     {detail.weaknessPool && (
                       <span className={styles.meta}>
                         Part of the {detail.weaknessPool.name} weakness pool: {detail.weaknessPool.others.join(', ')}
@@ -362,11 +377,11 @@ function ExpandableList({ items }: { items: string[] }) {
   );
 }
 
-function OpSubsection({ label, items }: { label: string; items: string[] }) {
+function OpSubsection({ label, items, onOpenOperation }: { label: string; items: string[]; onOpenOperation?: (name: string) => void }) {
   return (
     <div className={styles.opGroup}>
       <span className={styles.opLabel}>{label}</span>
-      <ExpandableList items={items} />
+      <ExpandableList items={items} onOpenOperation={onOpenOperation} />
     </div>
   );
 }

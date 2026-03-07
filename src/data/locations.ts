@@ -256,10 +256,10 @@ export const locations: Location[] = [
     specialEvent: {
       name: 'Esoteric Cult of the Wolf Divided',
       description: 'The only location where you can found a Wolf Divided cult. Requires both The Wolf Divided\'s Shadow and Connection: Holy Man, which only co-occur here.',
-      trigger: 'Run a Faith-Healing Cult first (Connection: Holy Man + 1 Space + 1 Stolen Year) to earn "A New Faith?"',
+      trigger: '[[Run a Faith-Healing Cult]] first (Connection: Holy Man + 1 Space + 1 Stolen Year) to earn "A New Faith?"',
       steps: [
         'Reconnoitre for Connection: Holy Man and The Wolf Divided\'s Shadow',
-        'Run a Faith-Healing Cult (Holy Man + 1 Space + 1 Stolen Year) to earn "A New Faith?"',
+        '[[Run a Faith-Healing Cult]] (Holy Man + 1 Space + 1 Stolen Year) to earn "A New Faith?"',
         'Employ "A New Faith?" with 1 Space + 1 Stolen Year + The Wolf Divided\'s Shadow',
         'Pass "Agony, or ice?" - Edge 4 / Winter 4',
         'Pass "Agony, or blindness?" - Edge 8 / Lantern 8',

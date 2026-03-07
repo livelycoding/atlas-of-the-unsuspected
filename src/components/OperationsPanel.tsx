@@ -1,22 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { operations } from '../data/operations';
 import styles from './OperationsPanel.module.css';
 
 interface Props {
   onClose: () => void;
+  initialOperation?: string | null;
+  onClearInitial?: () => void;
 }
 
-export function OperationsPanel({ onClose }: Props) {
+export function OperationsPanel({ onClose, initialOperation, onClearInitial }: Props) {
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
+  const opRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const toggle = (i: number) => {
+  const toggle = useCallback((i: number) => {
     setExpanded(prev => {
       const next = new Set(prev);
       if (next.has(i)) next.delete(i);
       else next.add(i);
       return next;
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!initialOperation) return;
+    const idx = operations.findIndex(op => op.name === initialOperation);
+    if (idx === -1) return;
+    setExpanded(prev => new Set(prev).add(idx));
+    requestAnimationFrame(() => {
+      opRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    onClearInitial?.();
+  }, [initialOperation, onClearInitial]);
 
   return (
     <div className={styles.panel}>
@@ -28,7 +42,7 @@ export function OperationsPanel({ onClose }: Props) {
         {operations.map((op, i) => {
           const isOpen = expanded.has(i);
           return (
-            <div key={i} className={styles.operation}>
+            <div key={i} className={styles.operation} ref={el => { opRefs.current[i] = el; }}>
               <button className={styles.opHeader} onClick={() => toggle(i)}>
                 <span className={styles.chevron}>{isOpen ? '\u25BE' : '\u25B8'}</span>
                 {op.name}

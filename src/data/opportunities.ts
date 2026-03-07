@@ -197,6 +197,54 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
     aspects: 'Ligeian Presence, Unique',
   },
 
+  // --- Book of Suns ---
+  'Book of Suns: Page 1': {
+    result: 'Curio: Pages from the Book of Suns',
+    aspects: 'Comfort 1, Worth 2, Lantern 4, Grail 2, Portable, Asset. Collect all 3 pages + 1 Cash to reassemble into the Book of Suns (Lantern 8, Grail 4, Pentiment)',
+  },
+  'Book of Suns: Page 2': {
+    result: 'Curio: Pages from the Book of Suns',
+    aspects: 'Comfort 1, Worth 2, Lantern 4, Grail 2, Portable, Asset. Collect all 3 pages + 1 Cash to reassemble into the Book of Suns (Lantern 8, Grail 4, Pentiment)',
+  },
+  'Book of Suns: Page 3': {
+    result: 'Curio: Pages from the Book of Suns',
+    aspects: 'Comfort 1, Worth 2, Lantern 4, Grail 2, Portable, Asset. Collect all 3 pages + 1 Cash to reassemble into the Book of Suns (Lantern 8, Grail 4, Pentiment)',
+  },
+
+  // --- Pentiment & Reward Items ---
+  'Stained Gloves': {
+    result: 'Stained Gloves',
+    aspects: 'Worth 1, Grail 4, Pentiment, Portable, Asset',
+  },
+  'My Unhealing Wound': {
+    result: 'My Unhealing Wound',
+    aspects: 'Winter 4, Knock 4, Pentiment',
+  },
+  'Labhitic Memento': {
+    result: 'Labhitic Memento',
+    aspects: 'Comfort 1, Edge 8, Pentiment, Supplies, Portable, Asset',
+  },
+  'Sun-Kissed Stone': {
+    result: 'Sun-Kissed Stone',
+    aspects: 'Comfort 1, Lantern 4, Pentiment, Portable, Asset',
+  },
+  'Kirqa-Caul': {
+    result: 'Kirqa-Caul',
+    aspects: 'Grail 2, Lantern 2, Pentiment, Portable, Asset',
+  },
+  'Half-Smoked Cigarette': {
+    result: 'Half-Smoked Cigarette',
+    aspects: 'Heart 2, Knock 2, Pentiment',
+  },
+  "Stranger's Water": {
+    result: "Stranger's Water",
+    aspects: 'Worth 1, Knock 8, Edge 8, Supplies, Portable, Asset',
+  },
+  'Flûte Matutine': {
+    result: 'Curio: Flûte Matutine',
+    aspects: 'Winter 4. Single use: employ with a Sea opportunity to summon Mme Matutine. Can also address Winter needs in Operations or Capers',
+  },
+
   // --- Weapons ---
   'Profane Weapon': {
     result: 'Profane Weapon',
@@ -204,7 +252,7 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   },
   "Lionhunter's Rifle": {
     result: "Lionhunter's Rifle",
-    aspects: 'Worth 2, Edge 4, Weapon, Portable, Asset',
+    aspects: 'Worth 2, Edge 4, Weapon, Portable, Asset, Uses Remaining 3',
   },
   'Ebrehel, the Ragged Sword': {
     result: 'Ebrehel, the Ragged Sword',

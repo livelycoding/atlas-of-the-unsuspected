@@ -132,6 +132,16 @@ PAGES=(
   "What-Is-Not-Seen|op-what-is-not-seen"
   "Echidna|op-echidna"
 
+  # --- Item pages (Pentiments & Rewards) ---
+  "Stained_Gloves_(Exile)|item-stained-gloves"
+  "My_Unhealing_Wound|item-my-unhealing-wound"
+  "Labhitic_Memento|item-labhitic-memento"
+  "Sun-Kissed_Stone|item-sun-kissed-stone"
+  "Kirqa-Caul|item-kirqa-caul"
+  "Half-Smoked_Cigarette|item-half-smoked-cigarette"
+  "Stranger%27s_Water|item-strangers-water"
+  "Curio:_Fl%C3%BBte_Matutine|item-flute-matutine"
+
   # --- Other reference pages ---
   "Weapon|weapons"
 )

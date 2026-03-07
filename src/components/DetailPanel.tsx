@@ -172,12 +172,12 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
             <div className={styles.eventRewards}>
               <div className={styles.eventReward}>
                 <span className={styles.eventRewardLabel}>Reward</span>
-                <span className={styles.eventRewardValue}>{location.specialEvent.reward}</span>
+                <ExpandableList items={[location.specialEvent.reward]} />
               </div>
               {location.specialEvent.rewardAlt && (
                 <div className={styles.eventReward}>
                   <span className={styles.eventRewardLabel}>Alt</span>
-                  <span className={styles.eventRewardValue}>{location.specialEvent.rewardAlt}</span>
+                  <ExpandableList items={[location.specialEvent.rewardAlt]} />
                 </div>
               )}
             </div>
@@ -236,11 +236,12 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
         {/* Pentiment */}
         {location.pentiment && (
           <Section title="Pentiment">
-            <div className={styles.detail}>
-              <strong>{location.pentiment.name}</strong>
-              <span className={styles.meta}>Aspect: {location.pentiment.aspect}</span>
-              <p className={styles.description}>{location.pentiment.howToObtain}</p>
-            </div>
+            <ExpandableList items={
+              location.pentiment.name.includes(' or ')
+                ? location.pentiment.name.split(' or ').map(s => s.trim())
+                : [location.pentiment.name]
+            } />
+            <p className={styles.description}>{location.pentiment.howToObtain}</p>
           </Section>
         )}
 
@@ -289,7 +290,7 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
         {/* Book of Suns */}
         {location.bookOfSunsPage !== null && (
           <Section title="Book of Suns">
-            <span>Page {location.bookOfSunsPage} available here</span>
+            <ExpandableList items={[`Book of Suns: Page ${location.bookOfSunsPage}`]} />
           </Section>
         )}
       </div>

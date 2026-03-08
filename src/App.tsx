@@ -399,6 +399,7 @@ export default function App() {
         )}
       </div>
       <footer className={styles.footer}>
+        <div><a href="https://github.com/livelycoding/atlas-of-the-unsuspected" target="_blank" rel="noopener noreferrer">Github page for this project</a></div>
         Unofficial fan tool, not associated with Weather Factory. For speedrunners and anyone who loves the Exile DLC. Learn more about the game and support the devs at <a href="https://www.weatherfactory.biz" target="_blank" rel="noopener noreferrer">weatherfactory.biz</a>.
       </footer>
     </div>

@@ -11,6 +11,7 @@ import styles from './App.module.css';
 
 export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [navHistory, setNavHistory] = useState<string[]>([]);
   const [activeFilters, setActiveFilters] = useState<Set<string>>(new Set());
   const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
   const [mapMode, setMapMode] = useState(true);
@@ -58,11 +59,25 @@ export default function App() {
   }, []);
 
   const handleSelect = useCallback((id: string) => {
-    setSelectedId(prev => (prev === id ? null : id));
+    setSelectedId(prev => {
+      if (prev === id) return null;
+      if (prev) setNavHistory(h => [...h.slice(-49), prev]);
+      return id;
+    });
+  }, []);
+
+  const handleBack = useCallback(() => {
+    setNavHistory(h => {
+      if (h.length === 0) return h;
+      const prev = h[h.length - 1];
+      setSelectedId(prev);
+      return h.slice(0, -1);
+    });
   }, []);
 
   const handleClose = useCallback(() => {
     setSelectedId(null);
+    setNavHistory([]);
   }, []);
 
   const handleToggleRemoved = useCallback((id: string) => {
@@ -382,6 +397,8 @@ export default function App() {
             location={selectedLocation}
             onClose={handleClose}
             onNavigate={handleSelect}
+            onBack={navHistory.length > 0 ? handleBack : undefined}
+            backName={navHistory.length > 0 ? locationsById.get(navHistory[navHistory.length - 1])?.name : undefined}
             isRemoved={removedIds.has(selectedLocation.id)}
             onToggleRemoved={handleToggleRemoved}
             removedIds={removedIds}

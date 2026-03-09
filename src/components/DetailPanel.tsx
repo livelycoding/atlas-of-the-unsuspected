@@ -17,9 +17,11 @@ interface Props {
   weaknessActive: boolean;
   possibleWeaknesses: string[];
   onOpenOperation?: (name: string) => void;
+  onBack?: () => void;
+  backName?: string;
 }
 
-export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds, foeWeaknesses, foeWeaknessesCertain, weaknessActive, possibleWeaknesses, onOpenOperation }: Props) {
+export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds, foeWeaknesses, foeWeaknessesCertain, weaknessActive, possibleWeaknesses, onOpenOperation, onBack, backName }: Props) {
   const outgoingDirectedIds = location.isMapEdge ? [] : directedConnections
     .filter(c => c.from === location.id)
     .map(c => c.to);
@@ -40,6 +42,7 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
         <div>
           <h2 className={styles.title}>{location.name}</h2>
           <span className={styles.country}>{location.country}</span>
+          {onBack && <button className={styles.backBtn} onClick={onBack}>{'\u2190'} Back to {backName}</button>}
           <label className={styles.removedCheckbox}>
             <input
               type="checkbox"

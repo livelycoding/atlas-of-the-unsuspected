@@ -25,6 +25,24 @@
   z-index: 1;
 }
 
+.backBtn {
+  display: block;
+  margin-top: 6px;
+  background: none;
+  border: 1px solid rgba(201, 168, 48, 0.4);
+  color: #c9a830;
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-family: inherit;
+  line-height: 1;
+}
+
+.backBtn:hover {
+  background: rgba(201, 168, 48, 0.2);
+}
+
 .title {
   font-size: 1.2rem;
   color: #c9a830;

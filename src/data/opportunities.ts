@@ -119,14 +119,26 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   'Dawn': {
     result: 'Dawn',
     aspects: 'Lantern 4, Knock 4',
+    subItems: [
+      { label: 'Rage (Work w/ Temptation: Defiance)', aspects: 'Edge 4, Heart 4. Decays in 300s. Prevents Travel preparation and Misty Nook visits while present' },
+      { label: 'Tranquillity (Work w/ Temptation: Escape)', aspects: 'Winter 4, Heart 4. Decays in 300s. Prevents Shrine use while present' },
+    ],
   },
   'Sunset': {
     result: 'Sunset',
     aspects: 'Winter 4, Forge 4',
+    subItems: [
+      { label: 'Rage (Work w/ Temptation: Defiance)', aspects: 'Edge 4, Heart 4. Decays in 300s. Prevents Travel preparation and Misty Nook visits while present' },
+      { label: 'Tranquillity (Work w/ Temptation: Escape)', aspects: 'Winter 4, Heart 4. Decays in 300s. Prevents Shrine use while present' },
+    ],
   },
   'Night': {
     result: 'Night',
     aspects: 'Winter 4, Moth 4, Assists Deception',
+    subItems: [
+      { label: 'Rage (Work w/ Temptation: Defiance)', aspects: 'Edge 4, Heart 4. Decays in 300s. Prevents Travel preparation and Misty Nook visits while present' },
+      { label: 'Tranquillity (Work w/ Temptation: Escape)', aspects: 'Winter 4, Heart 4. Decays in 300s. Prevents Shrine use while present' },
+    ],
   },
 
   // --- Distractions ---

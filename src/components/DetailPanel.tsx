@@ -365,12 +365,22 @@ function renderAspects(text: string, onOpenOperation?: (name: string) => void): 
 
 function ExpandableList({ items, onOpenOperation }: { items: string[]; onOpenOperation?: (name: string) => void }) {
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
+  const [expandedSub, setExpandedSub] = useState<Set<string>>(new Set());
 
   const toggle = (i: number) => {
     setExpanded(prev => {
       const next = new Set(prev);
       if (next.has(i)) next.delete(i);
       else next.add(i);
+      return next;
+    });
+  };
+
+  const toggleSub = (key: string) => {
+    setExpandedSub(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
       return next;
     });
   };
@@ -397,6 +407,23 @@ function ExpandableList({ items, onOpenOperation }: { items: string[]; onOpenOpe
                         Part of the {detail.weaknessPool.name} weakness pool: {detail.weaknessPool.others.join(', ')}
                       </span>
                     )}
+                    {detail.subItems && detail.subItems.map((sub, si) => {
+                      const subKey = `${i}-${si}`;
+                      const subOpen = expandedSub.has(subKey);
+                      return (
+                        <div key={subKey}>
+                          <button className={styles.opToggle} onClick={() => toggleSub(subKey)}>
+                            <span className={styles.opChevron}>{subOpen ? '\u25BE' : '\u25B8'}</span>
+                            {sub.label}
+                          </button>
+                          {subOpen && (
+                            <div className={styles.opSubItem}>
+                              <span className={styles.meta}>{sub.aspects}</span>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </>

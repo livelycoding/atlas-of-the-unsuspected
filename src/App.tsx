@@ -3,6 +3,7 @@ import { MapGrid } from './components/MapGrid';
 import { DetailPanel } from './components/DetailPanel';
 import { Legend } from './components/Legend';
 import { OperationsPanel } from './components/OperationsPanel';
+import { DefiancePanel } from './components/DefiancePanel';
 import { HelpPanel } from './components/HelpPanel';
 import { locations, locationsById } from './data/locations';
 import { opportunityDetails } from './data/opportunities';
@@ -21,6 +22,9 @@ export default function App() {
   const [showHelp, setShowHelp] = useState(false);
   const [initialOperation, setInitialOperation] = useState<string | null>(null);
   const [operationSourceId, setOperationSourceId] = useState<string | null>(null);
+  const [showDefiance, setShowDefiance] = useState(false);
+  const [initialDefiance, setInitialDefiance] = useState<string | null>(null);
+  const [defianceSourceId, setDefianceSourceId] = useState<string | null>(null);
   const [eliminatedWeaknesses, setEliminatedWeaknesses] = useState<Set<string>>(new Set());
 
   const weaknessPools: Record<string, string[]> = {
@@ -332,6 +336,12 @@ export default function App() {
         </button>
         <div className={styles.toolbarSpacer} />
         <button
+          className={`${styles.toolbarBtn} ${showDefiance ? styles.toolbarBtnActive : ''}`}
+          onClick={() => setShowDefiance(v => !v)}
+        >
+          Defiance Reference
+        </button>
+        <button
           className={`${styles.toolbarBtn} ${showOperations ? styles.toolbarBtnActive : ''}`}
           onClick={() => setShowOperations(v => !v)}
         >
@@ -377,10 +387,22 @@ export default function App() {
             onEliminateOthers={handleEliminateOthers}
           />
         </div>
-        {showHelp && !selectedLocation && !showOperations && (
+        {showHelp && !selectedLocation && !showOperations && !showDefiance && (
           <HelpPanel onClose={() => setShowHelp(false)} />
         )}
-        {showOperations && !selectedLocation && (
+        {showDefiance && !selectedLocation && (
+          <DefiancePanel
+            onClose={() => { setShowDefiance(false); setDefianceSourceId(null); }}
+            initialMethod={initialDefiance}
+            onClearInitial={() => setInitialDefiance(null)}
+            onBack={defianceSourceId ? () => {
+              setShowDefiance(false);
+              setSelectedId(defianceSourceId);
+              setDefianceSourceId(null);
+            } : undefined}
+          />
+        )}
+        {showOperations && !selectedLocation && !showDefiance && (
           <OperationsPanel
             onClose={() => { setShowOperations(false); setOperationSourceId(null); }}
             initialOperation={initialOperation}
@@ -411,6 +433,12 @@ export default function App() {
               setSelectedId(null);
               setInitialOperation(name);
               setShowOperations(true);
+            }}
+            onOpenDefiance={(name) => {
+              setDefianceSourceId(selectedLocation.id);
+              setSelectedId(null);
+              setInitialDefiance(name);
+              setShowDefiance(true);
             }}
           />
         )}

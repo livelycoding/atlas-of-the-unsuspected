@@ -16,7 +16,7 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   },
   'A Connection with Radicals?': {
     result: 'Connection: Radicals',
-    aspects: 'Moth 8, Forge 6, Edge 8, Asset, Connection, Assists Deception. Operations: [[Assist an Uprising]] or [[Betray an Uprising]] in troubled residences (+ Temptation: Defiance). Defends Assets against theft',
+    aspects: 'Moth 8, Forge 6, Edge 8, Asset, Connection, Assists Deception. Operations: [[Assist an Uprising]] or [[Betray an Uprising]] in troubled residences (+ <<Temptation: Defiance>>). Defends Assets against theft',
   },
   'a Connection with a Ruler?': {
     result: 'Connection: Ruler',
@@ -120,7 +120,7 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
     result: 'Dawn',
     aspects: 'Lantern 4, Knock 4',
     subItems: [
-      { label: 'Rage (Work w/ Temptation: Defiance)', aspects: 'Edge 4, Heart 4. Decays in 300s. Prevents Travel preparation and Misty Nook visits while present' },
+      { label: 'Rage (Work w/ <<Temptation: Defiance>>)', aspects: 'Edge 4, Heart 4. Decays in 300s. Prevents Travel preparation and Misty Nook visits while present' },
       { label: 'Tranquillity (Work w/ Temptation: Escape)', aspects: 'Winter 4, Heart 4. Decays in 300s. Prevents Shrine use while present' },
     ],
   },
@@ -128,7 +128,7 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
     result: 'Sunset',
     aspects: 'Winter 4, Forge 4',
     subItems: [
-      { label: 'Rage (Work w/ Temptation: Defiance)', aspects: 'Edge 4, Heart 4. Decays in 300s. Prevents Travel preparation and Misty Nook visits while present' },
+      { label: 'Rage (Work w/ <<Temptation: Defiance>>)', aspects: 'Edge 4, Heart 4. Decays in 300s. Prevents Travel preparation and Misty Nook visits while present' },
       { label: 'Tranquillity (Work w/ Temptation: Escape)', aspects: 'Winter 4, Heart 4. Decays in 300s. Prevents Shrine use while present' },
     ],
   },
@@ -136,7 +136,7 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
     result: 'Night',
     aspects: 'Winter 4, Moth 4, Assists Deception',
     subItems: [
-      { label: 'Rage (Work w/ Temptation: Defiance)', aspects: 'Edge 4, Heart 4. Decays in 300s. Prevents Travel preparation and Misty Nook visits while present' },
+      { label: 'Rage (Work w/ <<Temptation: Defiance>>)', aspects: 'Edge 4, Heart 4. Decays in 300s. Prevents Travel preparation and Misty Nook visits while present' },
       { label: 'Tranquillity (Work w/ Temptation: Escape)', aspects: 'Winter 4, Heart 4. Decays in 300s. Prevents Shrine use while present' },
     ],
   },
@@ -242,7 +242,7 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   },
   'Connection: Radicals': {
     result: 'Connection: Radicals',
-    aspects: 'Moth 8, Forge 6, Edge 8, Asset, Connection, Assists Deception. Operations: [[Assist an Uprising]] or [[Betray an Uprising]] in troubled residences (+ Temptation: Defiance). Defends Assets against theft',
+    aspects: 'Moth 8, Forge 6, Edge 8, Asset, Connection, Assists Deception. Operations: [[Assist an Uprising]] or [[Betray an Uprising]] in troubled residences (+ <<Temptation: Defiance>>). Defends Assets against theft',
   },
 
   'Obscurity': {

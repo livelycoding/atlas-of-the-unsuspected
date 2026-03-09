@@ -99,6 +99,16 @@ export function HelpPanel({ onClose }: Props) {
           </p>
         </Section>
 
+        <Section title="Defiance Reference">
+          <p>
+            The <strong>Defiance Reference</strong> button in the toolbar opens a quick-reference
+            panel for the Exercise of Defiance ascension path. It lists the Edge Victory condition
+            and all methods to gain marks of Defiance, including requirements, mark values, and
+            whether each method is repeatable. Clickable links in city details (e.g. on Connection:
+            Radicals, Rage sub-items, and Wolf Divided Uprising rewards) open this panel directly.
+          </p>
+        </Section>
+
         <Section title="Operations Reference">
           <p>
             The <strong>Operations Reference</strong> button in the toolbar opens a quick-reference

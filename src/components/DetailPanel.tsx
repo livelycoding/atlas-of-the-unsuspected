@@ -17,11 +17,12 @@ interface Props {
   weaknessActive: boolean;
   possibleWeaknesses: string[];
   onOpenOperation?: (name: string) => void;
+  onOpenDefiance?: (name: string) => void;
   onBack?: () => void;
   backName?: string;
 }
 
-export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds, foeWeaknesses, foeWeaknessesCertain, weaknessActive, possibleWeaknesses, onOpenOperation, onBack, backName }: Props) {
+export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggleRemoved, removedIds, foeWeaknesses, foeWeaknessesCertain, weaknessActive, possibleWeaknesses, onOpenOperation, onOpenDefiance, onBack, backName }: Props) {
   const outgoingDirectedIds = location.isMapEdge ? [] : directedConnections
     .filter(c => c.from === location.id)
     .map(c => c.to);
@@ -175,7 +176,7 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
               const isAlly = location.ally && location.ally.name === f;
               const isCaper = location.caper && location.caper.name === f;
               return !isLigeian && !isAlly && !isCaper;
-            })} onOpenOperation={onOpenOperation} />
+            })} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
           </Section>
         )}
 
@@ -195,10 +196,10 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
             <span className={styles.description}>{location.specialEvent.description}</span>
             <div className={styles.eventTrigger}>
               <span className={styles.eventTriggerLabel}>How to start:</span>
-              <span className={styles.eventTriggerValue}>{renderAspects(location.specialEvent.trigger, onOpenOperation)}</span>
+              <span className={styles.eventTriggerValue}>{renderAspects(location.specialEvent.trigger, onOpenOperation, onOpenDefiance)}</span>
             </div>
             <ol className={styles.eventSteps}>
-              {location.specialEvent.steps.map((s, i) => <li key={i}>{renderAspects(s, onOpenOperation)}</li>)}
+              {location.specialEvent.steps.map((s, i) => <li key={i}>{renderAspects(s, onOpenOperation, onOpenDefiance)}</li>)}
             </ol>
             <div className={styles.eventRewards}>
               <div className={styles.eventReward}>
@@ -237,19 +238,19 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
         {hasOpportunities && (
           <Section title="Reconnoitre Opportunities">
             {ops.connections.length > 0 && (
-              <OpSubsection label="Connections & Licenses" items={ops.connections} onOpenOperation={onOpenOperation} />
+              <OpSubsection label="Connections & Licenses" items={ops.connections} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
             )}
             {ops.property.length > 0 && (
-              <OpSubsection label="Property" items={ops.property} onOpenOperation={onOpenOperation} />
+              <OpSubsection label="Property" items={ops.property} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
             )}
             {ops.items.length > 0 && (
-              <OpSubsection label="Items" items={ops.items} onOpenOperation={onOpenOperation} />
+              <OpSubsection label="Items" items={ops.items} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
             )}
             {ops.times.length > 0 && (
-              <OpSubsection label="Times" items={ops.times} onOpenOperation={onOpenOperation} />
+              <OpSubsection label="Times" items={ops.times} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
             )}
             {ops.distractions.length > 0 && (
-              <OpSubsection label="Distractions" items={ops.distractions} onOpenOperation={onOpenOperation} />
+              <OpSubsection label="Distractions" items={ops.distractions} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
             )}
           </Section>
         )}
@@ -288,7 +289,7 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
           });
           return (
             <Section title="Pentiment">
-              <ExpandableList items={pentimentOpps} onOpenOperation={onOpenOperation} />
+              <ExpandableList items={pentimentOpps} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
               <p className={styles.description}>Reconnoitre, then purchase for {costs.join(' / ')}</p>
             </Section>
           );
@@ -375,21 +376,33 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function renderAspects(text: string, onOpenOperation?: (name: string) => void): React.ReactNode {
-  if (!onOpenOperation || !text.includes('[[')) return text;
-  const parts = text.split(/\[\[([^\]]+)\]\]/g);
-  return parts.map((part, i) =>
-    i % 2 === 1 ? (
-      <button key={i} className={styles.opLink} onClick={() => onOpenOperation(part)}>
-        {part}
-      </button>
-    ) : (
-      part
-    )
-  );
+function renderAspects(text: string, onOpenOperation?: (name: string) => void, onOpenDefiance?: (name: string) => void): React.ReactNode {
+  const hasOp = text.includes('[[');
+  const hasDef = text.includes('<<');
+  if ((!hasOp && !hasDef) || (!onOpenOperation && !onOpenDefiance)) return text;
+  const parts = text.split(/(\[\[[^\]]+\]\]|<<[^>]+>>)/g);
+  return parts.map((part, i) => {
+    const opMatch = part.match(/^\[\[([^\]]+)\]\]$/);
+    if (opMatch && onOpenOperation) {
+      return (
+        <button key={i} className={styles.opLink} onClick={() => onOpenOperation(opMatch[1])}>
+          {opMatch[1]}
+        </button>
+      );
+    }
+    const defMatch = part.match(/^<<([^>]+)>>$/);
+    if (defMatch && onOpenDefiance) {
+      return (
+        <button key={i} className={styles.opLink} onClick={() => onOpenDefiance(defMatch[1])}>
+          {defMatch[1]}
+        </button>
+      );
+    }
+    return part;
+  });
 }
 
-function ExpandableList({ items, onOpenOperation }: { items: string[]; onOpenOperation?: (name: string) => void }) {
+function ExpandableList({ items, onOpenOperation, onOpenDefiance }: { items: string[]; onOpenOperation?: (name: string) => void; onOpenDefiance?: (name: string) => void }) {
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
   const [expandedSub, setExpandedSub] = useState<Set<string>>(new Set());
 
@@ -428,7 +441,7 @@ function ExpandableList({ items, onOpenOperation }: { items: string[]; onOpenOpe
                 {isOpen && (
                   <div className={styles.opDetail}>
                     <strong>{detail.result}</strong>
-                    <span className={styles.meta}>{renderAspects(detail.aspects, onOpenOperation)}</span>
+                    <span className={styles.meta}>{renderAspects(detail.aspects, onOpenOperation, onOpenDefiance)}</span>
                     {detail.weaknessPool && (
                       <span className={styles.meta}>
                         Part of the {detail.weaknessPool.name} weakness pool: {detail.weaknessPool.others.join(', ')}
@@ -441,7 +454,7 @@ function ExpandableList({ items, onOpenOperation }: { items: string[]; onOpenOpe
                         <div key={subKey}>
                           <button className={styles.opToggle} onClick={() => toggleSub(subKey)}>
                             <span className={styles.opChevron}>{subOpen ? '\u25BE' : '\u25B8'}</span>
-                            {sub.label}
+                            <span>{renderAspects(sub.label, onOpenOperation, onOpenDefiance)}</span>
                           </button>
                           {subOpen && (
                             <div className={styles.opSubItem}>
@@ -455,7 +468,7 @@ function ExpandableList({ items, onOpenOperation }: { items: string[]; onOpenOpe
                 )}
               </>
             ) : (
-              <span>{item}</span>
+              <span>{renderAspects(item, onOpenOperation, onOpenDefiance)}</span>
             )}
           </li>
         );
@@ -464,11 +477,11 @@ function ExpandableList({ items, onOpenOperation }: { items: string[]; onOpenOpe
   );
 }
 
-function OpSubsection({ label, items, onOpenOperation }: { label: string; items: string[]; onOpenOperation?: (name: string) => void }) {
+function OpSubsection({ label, items, onOpenOperation, onOpenDefiance }: { label: string; items: string[]; onOpenOperation?: (name: string) => void; onOpenDefiance?: (name: string) => void }) {
   return (
     <div className={styles.opGroup}>
       <span className={styles.opLabel}>{label}</span>
-      <ExpandableList items={items} onOpenOperation={onOpenOperation} />
+      <ExpandableList items={items} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
     </div>
   );
 }

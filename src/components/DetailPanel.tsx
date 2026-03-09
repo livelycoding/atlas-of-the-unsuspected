@@ -125,7 +125,7 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
                         }
                       }}
                     >
-                      {conn.name}{isOneWay && <span className={styles.oneWayArrow}>{'\u2009\u2192'}</span>}
+                      {!conn.isMapEdge && <span className={styles.dirArrow}>{dirArrow(location, conn)}</span>}{conn.name}{isOneWay && <span className={styles.oneWayArrow}>{'\u2009\u2192'}</span>}
                     </button>
                   );
                 })}
@@ -339,6 +339,17 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
       </div>
     </div>
   );
+}
+
+function dirArrow(from: { gridRow: number; gridCol: number }, to: { gridRow: number; gridCol: number }): string {
+  const dr = Math.sign(to.gridRow - from.gridRow);
+  const dc = Math.sign(to.gridCol - from.gridCol);
+  const arrows: Record<string, string> = {
+    '-1,-1': '\u2196', '-1,0': '\u2191', '-1,1': '\u2197',
+    '0,-1': '\u2190',                     '0,1': '\u2192',
+    '1,-1': '\u2199',  '1,0': '\u2193',  '1,1': '\u2198',
+  };
+  return arrows[`${dr},${dc}`] ?? '';
 }
 
 function HelpBubble({ text }: { text: string }) {

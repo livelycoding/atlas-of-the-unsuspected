@@ -287,6 +287,12 @@
   font-style: italic;
 }
 
+.dirArrow {
+  font-size: 0.65rem;
+  opacity: 0.6;
+  margin-right: 2px;
+}
+
 .oneWayArrow {
   font-size: 0.65rem;
   opacity: 0.7;

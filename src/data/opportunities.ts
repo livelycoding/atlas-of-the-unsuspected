@@ -24,7 +24,7 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   },
   'A Connection with a Holy Man?': {
     result: 'Connection: Holy Man',
-    aspects: 'Lantern 4, Heart 4, Asset, Connection, Assists Deception. Operation: [[Run a Faith-Healing Cult]] (+ 2 Space, Stolen Year consumed). Defends Assets against theft',
+    aspects: 'Lantern 4, Heart 4, Asset, Connection, Assists Deception. Operation: [[Run a Faith-Healing Cult]] (+ 2 Space, Stolen Year consumed)',
   },
   'Import Licence?': {
     result: 'Import Licence',
@@ -226,7 +226,7 @@ export const opportunityDetails: Record<string, OpportunityDetail> = {
   },
   'Connection: Holy Man': {
     result: 'Connection: Holy Man',
-    aspects: 'Lantern 4, Heart 4, Asset, Connection, Assists Deception. Operation: [[Run a Faith-Healing Cult]] (+ 2 Space, Stolen Year consumed). Defends Assets against theft',
+    aspects: 'Lantern 4, Heart 4, Asset, Connection, Assists Deception. Operation: [[Run a Faith-Healing Cult]] (+ 2 Space, Stolen Year consumed)',
   },
   'Connection: Radicals': {
     result: 'Connection: Radicals',

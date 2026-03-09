@@ -158,6 +158,12 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
                         <ul className={styles.list}>
                           {location.ligeian!.abilities.map((a, j) => <li key={j}>{a}</li>)}
                         </ul>
+                        {location.ligeian!.grants && (
+                          <div className={styles.ligeianGrants}>
+                            <span className={styles.opLabel}>Grants</span>
+                            <ExpandableList items={location.ligeian!.grants} />
+                          </div>
+                        )}
                       </div>
                     )}
                   </li>
@@ -297,6 +303,12 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
               <ul className={styles.list}>
                 {location.ligeian.abilities.map((a, i) => <li key={i}>{a}</li>)}
               </ul>
+              {location.ligeian.grants && (
+                <div className={styles.ligeianGrants}>
+                  <span className={styles.opLabel}>Grants</span>
+                  <ExpandableList items={location.ligeian.grants} />
+                </div>
+              )}
             </div>
           </Section>
         )}

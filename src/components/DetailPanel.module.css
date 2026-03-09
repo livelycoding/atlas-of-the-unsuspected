@@ -400,6 +400,13 @@
   white-space: pre-line;
 }
 
+.ligeianGrants {
+  margin-top: 4px;
+  margin-left: 12px;
+  padding-left: 8px;
+  border-left: 1px solid rgba(201, 168, 48, 0.3);
+}
+
 .opSubItem {
   margin-left: 14px;
   padding: 3px 0 4px 8px;

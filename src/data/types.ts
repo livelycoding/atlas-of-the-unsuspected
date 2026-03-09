@@ -25,6 +25,7 @@ export interface Ligeian {
   name: string;
   howToObtain: string;
   abilities: string[];
+  grants?: string[];
 }
 
 export interface Ally {

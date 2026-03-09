@@ -46,7 +46,7 @@ export const locations: Location[] = [
     cult: null,
     shrine: null,
     pentiment: null,
-    ligeian: { name: 'Mme Matutine (Morgen)', howToObtain: 'Reconnoitre to find', abilities: ['Feed 7 Pentiments → black jewel (Kinship ending); fewer returns them + Bone Flute (use by the Sea to call her again)', 'Safe gifts to guarantee good mood: corpse, ally, Stolen Decades, or Pentiments (to start Special Event ending chain)', 'Without a gift: 70% bad mood → Unstanchable Wound, permanently unresponsive', 'Can block attacks: vs Foe, produces Foe\'s Wound; vs Reckoners no wound. Consumed on use'], grants: ['Flûte Matutine'] },
+    ligeian: { name: 'Mme Matutine (Morgen)', howToObtain: 'Reconnoitre to find', abilities: ['Feed 7 Pentiments → black jewel (Kinship ending); fewer returns them + Bone Flute (use by the Sea to call her again)', 'Only accepts Pentiments as gifts; non-Pentiment gifts and no gift result in no interaction', 'Can block attacks: vs Foe, produces Foe\'s Wound; vs Reckoners no wound. Consumed on use'], grants: ['Flûte Matutine'] },
     ally: null,
     weapons: ['Profane Weapon', 'Lionhunter\'s Rifle'],
     bookOfSunsPage: null,

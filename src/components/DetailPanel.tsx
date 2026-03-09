@@ -388,7 +388,8 @@ function ExpandableList({ items, onOpenOperation }: { items: string[]; onOpenOpe
   return (
     <ul className={styles.list}>
       {items.map((item, i) => {
-        const detail = opportunityDetails[item];
+        const lookupKey = item.startsWith('Opportunity: ') ? item.slice('Opportunity: '.length) : item;
+        const detail = opportunityDetails[lookupKey];
         const isOpen = expanded.has(i);
         return (
           <li key={i} className={styles.opItem}>

@@ -104,8 +104,7 @@ export function LocationCell({ location, isSelected, isDimmed, isRemoved, onSele
 
 function buildTooltip(loc: Location): string {
   const parts = [loc.name + ' — ' + loc.country];
-  if (loc.isTroubled) parts.push('Troubled');
-  if (loc.isRemote) parts.push('Remote');
+  // Follow badge order: Z/S, P, L, A, W1-W4, E, C, T, R, B
   if (loc.shrine) parts.push(`Shrine: ${loc.shrine.description} (${loc.shrine.deity})`);
   if (loc.pentiment) parts.push(`Pentiment: ${loc.pentiment.name}`);
   else {
@@ -116,8 +115,11 @@ function buildTooltip(loc: Location): string {
   }
   if (loc.ligeian) parts.push(`Ligeian: ${loc.ligeian.name}`);
   if (loc.ally) parts.push(`Ally: ${loc.ally.name} (${loc.ally.aspect})`);
+  if (loc.weapons.length > 0) parts.push(`Weapons: ${loc.weapons.join(', ')}`);
   if (loc.specialEvent) parts.push(`Special Event: ${loc.specialEvent.name}`);
   if (loc.caper) parts.push(`Caper: ${loc.caper.name}`);
+  if (loc.isTroubled) parts.push('Troubled');
+  if (loc.isRemote) parts.push('Remote');
   if (loc.bookOfSunsPage) parts.push(`Book of Suns: Page ${loc.bookOfSunsPage}`);
   return parts.join('\n');
 }

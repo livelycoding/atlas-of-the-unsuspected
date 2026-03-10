@@ -69,50 +69,87 @@
   color: #fff;
 }
 
-.tags {
+.badgeSummary {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px 12px;
   padding: 12px 16px;
 }
 
-.tag {
-  font-size: 0.65rem;
+.badgeRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.badgeLabel {
+  font-size: 0.72rem;
+  color: #b0b8c0;
+}
+
+.badgeDot {
+  font-size: 0.5rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 3px 8px;
-  border-radius: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
-.tagEdge {
-  background: rgba(201, 168, 48, 0.2);
-  color: #c9a830;
-  border: 1px solid rgba(201, 168, 48, 0.4);
+.badgeDotEdge {
+  background: #c9a830;
 }
 
-.tagTroubled {
-  background: rgba(255, 69, 0, 0.2);
-  color: #ff6347;
-  border: 1px solid rgba(255, 69, 0, 0.4);
+.badgeDotZ {
+  background: #8b0000;
 }
 
-.tagRemote {
-  background: rgba(106, 90, 205, 0.2);
-  color: #9b8ed4;
-  border: 1px solid rgba(106, 90, 205, 0.4);
+.badgeDotS {
+  background: #b8860b;
 }
 
-.tagColonel {
-  background: rgba(139, 0, 0, 0.2);
-  color: #e07070;
-  border: 1px solid rgba(139, 0, 0, 0.4);
+.badgeDotP {
+  background: #2e8b57;
 }
 
-.tagLionsmith {
-  background: rgba(184, 134, 11, 0.2);
-  color: #daa520;
-  border: 1px solid rgba(184, 134, 11, 0.4);
+.badgeDotL {
+  background: #4169e1;
+}
+
+.badgeDotA {
+  background: #ff6347;
+}
+
+.badgeDotW {
+  font-size: 0.38rem;
+  background: #708090;
+}
+
+.badgeDotE {
+  background: #20b2aa;
+}
+
+.badgeDotC {
+  background: #e06030;
+}
+
+.badgeDotT {
+  background: #ff4500;
+}
+
+.badgeDotR {
+  background: #6a5acd;
+}
+
+.badgeDotB {
+  font-size: 0.38rem;
+  background: #daa520;
 }
 
 .weaknessCallout {

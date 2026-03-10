@@ -56,12 +56,21 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
         <button className={styles.closeBtn} onClick={onClose}>&times;</button>
       </div>
 
-      <div className={styles.tags}>
-        {location.isMapEdge && <span className={`${styles.tag} ${styles.tagEdge}`}>Map's Edge</span>}
-        {location.isTroubled && <span className={`${styles.tag} ${styles.tagTroubled}`}>Troubled</span>}
-        {location.isRemote && !location.isMapEdge && <span className={`${styles.tag} ${styles.tagRemote}`}>Remote</span>}
-        {location.cult === 'colonel' && <span className={`${styles.tag} ${styles.tagColonel}`}>Colonel</span>}
-        {location.cult === 'lionsmith' && <span className={`${styles.tag} ${styles.tagLionsmith}`}>Lionsmith</span>}
+      <div className={styles.badgeSummary}>
+        {location.isMapEdge && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotEdge}`}>{'\u2606'}</span><span className={styles.badgeLabel}>Map's Edge</span></span>}
+        {location.shrine && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles[`badgeDot${location.shrine.deity === 'The Colonel' ? 'Z' : 'S'}`]}`}>{location.shrine.deity === 'The Colonel' ? 'Z' : 'S'}</span><span className={styles.badgeLabel}>{location.shrine.deity} Shrine</span></span>}
+        {(location.pentiment || location.opportunities.items.some(item => { const d = opportunityDetails[item]; return d && d.aspects.split(/,\s*/).includes('Pentiment'); })) && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotP}`}>P</span><span className={styles.badgeLabel}>Pentiment</span></span>}
+        {location.ligeian && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotL}`}>L</span><span className={styles.badgeLabel}>Ligeian</span></span>}
+        {location.ally && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotA}`}>A</span><span className={styles.badgeLabel}>Ally</span></span>}
+        {location.weapons.some(w => w.includes("Biedde")) && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotW}`}>W1</span><span className={styles.badgeLabel}>Biedde's Blade</span></span>}
+        {location.weapons.some(w => w.includes("Lionhunter")) && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotW}`}>W2</span><span className={styles.badgeLabel}>Lionhunter's Rifle</span></span>}
+        {location.weapons.some(w => w.includes("Ebrehel")) && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotW}`}>W3</span><span className={styles.badgeLabel}>Ebrehel</span></span>}
+        {location.weapons.some(w => w.includes("Imhullune")) && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotW}`}>W4</span><span className={styles.badgeLabel}>Imhullune Tectrix</span></span>}
+        {location.specialEvent && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotE}`}>E</span><span className={styles.badgeLabel}>Special Event</span></span>}
+        {location.caper && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotC}`}>C</span><span className={styles.badgeLabel}>Caper</span></span>}
+        {location.isTroubled && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotT}`}>T</span><span className={styles.badgeLabel}>Troubled</span></span>}
+        {location.isRemote && !location.isMapEdge && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotR}`}>R</span><span className={styles.badgeLabel}>Remote</span></span>}
+        {location.bookOfSunsPage !== null && <span className={styles.badgeRow}><span className={`${styles.badgeDot} ${styles.badgeDotB}`}>B{location.bookOfSunsPage}</span><span className={styles.badgeLabel}>Book of Suns p.{location.bookOfSunsPage}</span></span>}
       </div>
 
       {foeWeaknesses.length > 0 && (
@@ -189,72 +198,6 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
           </Section>
         )}
 
-        {/* Special Event */}
-        {location.specialEvent && (
-          <Section title="Special Event">
-            <strong className={styles.eventName}>{location.specialEvent.name}</strong>
-            <span className={styles.description}>{location.specialEvent.description}</span>
-            <div className={styles.eventTrigger}>
-              <span className={styles.eventTriggerLabel}>How to start:</span>
-              <span className={styles.eventTriggerValue}>{renderAspects(location.specialEvent.trigger, onOpenOperation, onOpenDefiance)}</span>
-            </div>
-            <ol className={styles.eventSteps}>
-              {location.specialEvent.steps.map((s, i) => <li key={i}>{renderAspects(s, onOpenOperation, onOpenDefiance)}</li>)}
-            </ol>
-            <div className={styles.eventRewards}>
-              <div className={styles.eventReward}>
-                <span className={styles.eventRewardLabel}>Reward</span>
-                <ExpandableList items={[location.specialEvent.reward]} />
-              </div>
-              {location.specialEvent.rewardAlt && (
-                <div className={styles.eventReward}>
-                  <span className={styles.eventRewardLabel}>Alt</span>
-                  <ExpandableList items={[location.specialEvent.rewardAlt]} />
-                </div>
-              )}
-            </div>
-          </Section>
-        )}
-
-        {/* Caper */}
-        {location.caper && (
-          <Section title="Caper">
-            <div className={styles.detail}>
-              <strong>{location.caper.name}</strong>
-              {location.caper.complications.map((c, i) => (
-                <div key={i} className={styles.detail}>
-                  <span className={styles.meta}>{c.name}: {c.checks.join(', ')}</span>
-                </div>
-              ))}
-            </div>
-            <div className={styles.opGroup}>
-              <span className={styles.opLabel}>Reward</span>
-              <ExpandableList items={[location.caper.reward]} />
-            </div>
-          </Section>
-        )}
-
-        {/* Opportunities */}
-        {hasOpportunities && (
-          <Section title="Reconnoitre Opportunities">
-            {ops.connections.length > 0 && (
-              <OpSubsection label="Connections & Licenses" items={ops.connections} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
-            )}
-            {ops.property.length > 0 && (
-              <OpSubsection label="Property" items={ops.property} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
-            )}
-            {ops.items.length > 0 && (
-              <OpSubsection label="Items" items={ops.items} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
-            )}
-            {ops.times.length > 0 && (
-              <OpSubsection label="Times" items={ops.times} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
-            )}
-            {ops.distractions.length > 0 && (
-              <OpSubsection label="Distractions" items={ops.distractions} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
-            )}
-          </Section>
-        )}
-
         {/* Shrine */}
         {location.shrine && (
           <Section title="Shrine">
@@ -331,10 +274,76 @@ export function DetailPanel({ location, onClose, onNavigate, isRemoved, onToggle
           </Section>
         )}
 
+        {/* Special Event */}
+        {location.specialEvent && (
+          <Section title="Special Event">
+            <strong className={styles.eventName}>{location.specialEvent.name}</strong>
+            <span className={styles.description}>{location.specialEvent.description}</span>
+            <div className={styles.eventTrigger}>
+              <span className={styles.eventTriggerLabel}>How to start:</span>
+              <span className={styles.eventTriggerValue}>{renderAspects(location.specialEvent.trigger, onOpenOperation, onOpenDefiance)}</span>
+            </div>
+            <ol className={styles.eventSteps}>
+              {location.specialEvent.steps.map((s, i) => <li key={i}>{renderAspects(s, onOpenOperation, onOpenDefiance)}</li>)}
+            </ol>
+            <div className={styles.eventRewards}>
+              <div className={styles.eventReward}>
+                <span className={styles.eventRewardLabel}>Reward</span>
+                <ExpandableList items={[location.specialEvent.reward]} />
+              </div>
+              {location.specialEvent.rewardAlt && (
+                <div className={styles.eventReward}>
+                  <span className={styles.eventRewardLabel}>Alt</span>
+                  <ExpandableList items={[location.specialEvent.rewardAlt]} />
+                </div>
+              )}
+            </div>
+          </Section>
+        )}
+
+        {/* Caper */}
+        {location.caper && (
+          <Section title="Caper">
+            <div className={styles.detail}>
+              <strong>{location.caper.name}</strong>
+              {location.caper.complications.map((c, i) => (
+                <div key={i} className={styles.detail}>
+                  <span className={styles.meta}>{c.name}: {c.checks.join(', ')}</span>
+                </div>
+              ))}
+            </div>
+            <div className={styles.opGroup}>
+              <span className={styles.opLabel}>Reward</span>
+              <ExpandableList items={[location.caper.reward]} />
+            </div>
+          </Section>
+        )}
+
         {/* Book of Suns */}
         {location.bookOfSunsPage !== null && (
           <Section title="Book of Suns">
             <ExpandableList items={[`Book of Suns: Page ${location.bookOfSunsPage}`]} />
+          </Section>
+        )}
+
+        {/* Opportunities */}
+        {hasOpportunities && (
+          <Section title="Reconnoitre Opportunities">
+            {ops.connections.length > 0 && (
+              <OpSubsection label="Connections & Licenses" items={ops.connections} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
+            )}
+            {ops.property.length > 0 && (
+              <OpSubsection label="Property" items={ops.property} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
+            )}
+            {ops.items.length > 0 && (
+              <OpSubsection label="Items" items={ops.items} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
+            )}
+            {ops.times.length > 0 && (
+              <OpSubsection label="Times" items={ops.times} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
+            )}
+            {ops.distractions.length > 0 && (
+              <OpSubsection label="Distractions" items={ops.distractions} onOpenOperation={onOpenOperation} onOpenDefiance={onOpenDefiance} />
+            )}
           </Section>
         )}
       </div>

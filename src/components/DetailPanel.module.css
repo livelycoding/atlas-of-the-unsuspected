@@ -80,12 +80,88 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  padding: 3px 8px 3px 4px;
+  border-radius: 3px;
 }
 
 .badgeLabel {
-  font-size: 0.72rem;
-  color: #b0b8c0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
+
+.badgeRowEdge {
+  background: rgba(201, 168, 48, 0.2);
+  border: 1px solid rgba(201, 168, 48, 0.4);
+}
+.badgeRowEdge .badgeLabel { color: #c9a830; }
+
+.badgeRowZ {
+  background: rgba(139, 0, 0, 0.2);
+  border: 1px solid rgba(139, 0, 0, 0.4);
+}
+.badgeRowZ .badgeLabel { color: #e07070; }
+
+.badgeRowS {
+  background: rgba(184, 134, 11, 0.2);
+  border: 1px solid rgba(184, 134, 11, 0.4);
+}
+.badgeRowS .badgeLabel { color: #daa520; }
+
+.badgeRowP {
+  background: rgba(46, 139, 87, 0.2);
+  border: 1px solid rgba(46, 139, 87, 0.4);
+}
+.badgeRowP .badgeLabel { color: #5cb88a; }
+
+.badgeRowL {
+  background: rgba(65, 105, 225, 0.2);
+  border: 1px solid rgba(65, 105, 225, 0.4);
+}
+.badgeRowL .badgeLabel { color: #7b99e0; }
+
+.badgeRowA {
+  background: rgba(255, 99, 71, 0.2);
+  border: 1px solid rgba(255, 99, 71, 0.4);
+}
+.badgeRowA .badgeLabel { color: #ff8575; }
+
+.badgeRowW {
+  background: rgba(112, 128, 144, 0.2);
+  border: 1px solid rgba(112, 128, 144, 0.4);
+}
+.badgeRowW .badgeLabel { color: #a0b0c0; }
+
+.badgeRowE {
+  background: rgba(32, 178, 170, 0.2);
+  border: 1px solid rgba(32, 178, 170, 0.4);
+}
+.badgeRowE .badgeLabel { color: #50d0c8; }
+
+.badgeRowC {
+  background: rgba(224, 96, 48, 0.2);
+  border: 1px solid rgba(224, 96, 48, 0.4);
+}
+.badgeRowC .badgeLabel { color: #e88050; }
+
+.badgeRowT {
+  background: rgba(255, 69, 0, 0.2);
+  border: 1px solid rgba(255, 69, 0, 0.4);
+}
+.badgeRowT .badgeLabel { color: #ff6347; }
+
+.badgeRowR {
+  background: rgba(106, 90, 205, 0.2);
+  border: 1px solid rgba(106, 90, 205, 0.4);
+}
+.badgeRowR .badgeLabel { color: #9b8ed4; }
+
+.badgeRowB {
+  background: rgba(218, 165, 32, 0.2);
+  border: 1px solid rgba(218, 165, 32, 0.4);
+}
+.badgeRowB .badgeLabel { color: #e8c050; }
 
 .badgeDot {
   font-size: 0.5rem;
